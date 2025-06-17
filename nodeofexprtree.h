@@ -3,6 +3,15 @@
 
 #include <QObject>
 
+enum OperatorType{
+    UNDEFINED,
+    UN_MINUS,
+    MULTIPLICATION, DIVISION,
+    PLUS, BIN_MINUS,
+    EQUAL, NOT_EQUAL, GREATER, LESS, GREATER_OR_EQUAL, LESS_OR_EQUAL,
+    NUM, VAR
+};
+
 class NodeOfExprTree
 {
 private:
