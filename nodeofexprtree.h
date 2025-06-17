@@ -2,7 +2,7 @@
 #define NODEOFEXPRTREE_H
 
 #include <QObject>
-#include "function.cpp"
+#include "function.h"
 
 class NodeOfExprTree;
 
