@@ -20,6 +20,13 @@ struct OperandOfExpr
     NodeOfExprTree* parent;     // родитель операнда
     NodeOfExprTree* operand;    // операнд
     bool is_first_elem;         // флаг: true - операнд есть первый элемент выражения (нет знака перед собой), false - иначе
+
+    /*!
+     * \brief Определить правильность расстановки двух множителей по алфавиту
+     * \param [in] other - второй по порядку узел
+     * \return true, если порядок верный, false - иначе
+     */
+    bool isCurrentOrderOfMultipliers(const OperandOfExpr& other) const;
 };
 
 class NodeOfExprTree
