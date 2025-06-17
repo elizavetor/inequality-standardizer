@@ -1,3 +1,9 @@
 #include "nodeofexprtree.h"
 
-NodeOfExprTree::NodeOfExprTree() {}
+NodeOfExprTree::NodeOfExprTree()
+{
+    type = UNDEFINED;
+    value = "";
+    left_operand = nullptr;
+    right_operand = nullptr;
+}
