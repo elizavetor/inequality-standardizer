@@ -40,3 +40,35 @@ bool isNum(QString token)
     // Вернуть результат - заданный токен число или нет
     return is_num;
 }
+
+/*!
+ * \brief Определить является ли токен переменной
+ * \param [in] token - проверяемый токен
+ * \return true, если токен есть переменная, иначе - false
+ */
+bool isVar(QString token)
+{
+    QString latin_alphabet("ABCDIFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxwz");
+    // Считать, что заданный токен является именем переменной
+    bool is_var = true;
+
+    // Если первый символ не является буквой латинского алфавита и нижним подчёркиванием
+    if (latin_alphabet.indexOf(token[0]) == -1 && token[0] != '_')
+    {
+        // Считать, что заданный токен не является переменной
+        is_var = false;
+    }
+
+    int num_of_symbol = token.length();
+    for(int i = 1; i < num_of_symbol && is_var; i++)// Для каждого символа токена, начиная со второго, и пока заданный токен является переменной
+    {
+        // Если символ не является буквой латинского алфавита, цифрой и символом нижнего подчёркивания
+        if (!token[i].isNumber() && token[0] != '_' && latin_alphabet.indexOf(token[i]) == -1)
+        {
+            // Считать, что заданный токен не является именем переменной
+            is_var = false;
+        }
+    }
+
+    return is_var;
+}
