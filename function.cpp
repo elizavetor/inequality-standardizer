@@ -72,3 +72,20 @@ bool isVar(QString token)
 
     return is_var;
 }
+
+/*!
+ * \brief Определить является ли токен оператором
+ * \param [in] token - проверяемый токен
+ * \return true, если токен есть оператор, иначе - false
+ */
+bool isOperator(QString token)
+{
+    // Если токен является
+    if (token == "~" || token == "*" || token == "/"
+        || token == "+" || token == "-" || token == ">"
+        || token == "<" || token == ">=" || token == "<="
+        || token == "==" || token == "!=")
+        return true;
+
+    return false;
+}
