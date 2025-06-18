@@ -1,10 +1,14 @@
 #include <QCoreApplication>
 #include "nodeofexprtree.h"
 #include "function.h"
+#include "test_iscurrentorderofmultipliers.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
+    Test_isCurrentOrderOfMultipliers test;
+    QTest::qExec(&test);
 
     // Получить строку постфиксной записи выражения из исходного файла
     // Если найдена ошибка чтения
