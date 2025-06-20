@@ -48,6 +48,18 @@ public:
     QString getValue() const { return value; }
 
     /*!
+     * \brief Вернуть левый операнд
+     * \return указатель на левый операнд
+     */
+    NodeOfExprTree* getLeftOperand() const { return left_operand; }
+
+    /*!
+     * \brief Вернуть правый операнд
+     * \return указатель на правый операнд
+     */
+    NodeOfExprTree* getRightOperand() const { return right_operand; }
+
+    /*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
     bool operator==(const NodeOfExprTree& other) const;
