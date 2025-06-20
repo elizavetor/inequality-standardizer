@@ -19,8 +19,7 @@ private:
 
 public:
     Error();
-    Error(ErrorType type);
-    Error(ErrorType type, int pos, QString error_token);
+    Error(ErrorType _type, int _pos = -1, QStringList _error_strings = {});
 
     /*!
      * \brief Получить сообщение об ошибке известного типа
