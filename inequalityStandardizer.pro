@@ -10,7 +10,8 @@ SOURCES += \
         error.cpp \
         main.cpp \
         nodeofexprtree.cpp \
-        test_iscurrentorderofmultipliers.cpp
+        test_iscurrentorderofmultipliers.cpp \
+        test_postfixtotree.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,4 +22,5 @@ HEADERS += \
     error.h \
     function.h \
     nodeofexprtree.h \
-    test_iscurrentorderofmultipliers.h
+    test_iscurrentorderofmultipliers.h \
+    test_postfixtotree.h
