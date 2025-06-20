@@ -63,6 +63,12 @@ public:
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
     bool operator==(const NodeOfExprTree& other) const;
+
+    /*!
+     * \brief Перегрузка оператора неравенства для NodeOfExprTree
+     */
+    bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
+
 };
 
 /*!
