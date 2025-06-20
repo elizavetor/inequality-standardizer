@@ -40,6 +40,13 @@ private:
 public:
     NodeOfExprTree();
     NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand = nullptr, NodeOfExprTree* _right_operand = nullptr);
+
+    /*!
+     * \brief Вернуть значение узла
+     * \return значение узла
+     */
+    QString getValue() const { return value; }
+
     /*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
