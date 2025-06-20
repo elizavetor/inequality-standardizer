@@ -20,7 +20,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     error.h \
-    function.h \
     nodeofexprtree.h \
     test_iscurrentorderofmultipliers.h \
     test_postfixtotree.h

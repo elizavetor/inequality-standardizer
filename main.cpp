@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "function.h"
+#include "nodeofexprtree.h"
 #include "test_iscurrentorderofmultipliers.h"
 
 int main(int argc, char *argv[])
