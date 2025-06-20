@@ -3,3 +3,64 @@
 Test_postfixToTree::Test_postfixToTree(QObject *parent)
     : QObject{parent}
 {}
+/*!
+ * \brief Сравнивает ожидаемое дерево с полученным и формирует сообщение о различиях
+ * \param [in] exp_node - ожидаемое дерево
+ * \param [in] real_node - полученное дерево
+ * \param [in,out] path - путь проверки деревьев
+ * \param [out] error_message - сообщение об различиях
+ * \return равны ли два дерева
+ */
+bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_node, QStringList& path, QString& error_message)
+{
+    // Проверить текущие полученный и ожидаемый узлы...
+    // Если узлы пустые
+    if (real_node == nullptr && exp_node == nullptr)
+    {
+        // Считать, что узлы равны (вернут true)
+        return true;
+    }
+
+    // Добавить текущий узел получившегося дерева в путь
+    if (!path.isEmpty())
+        path.append("->");
+    if (exp_node != nullptr)
+        path.append(real_node->getValue());
+    else path.append("nullptr");
+
+    // Если один из узлов пустой
+    if (real_node == nullptr || exp_node == nullptr)
+    {
+        // Считать, что узлы неравны (вернут false)
+        if(exp_node == nullptr)
+        {
+            error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: nullptr";
+        }
+        else
+            error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue();
+
+        return false;
+    }
+
+    // Если узлы различны
+    if (*exp_node != *real_node)
+    {
+        // Считать, что узлы неравны (вернут false)
+        error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue();
+        return false;
+    }
+
+    // Считать, что ошибка найдена, если левые или правые операнды полученного и ожидаемого узлов различны
+    if (!compareTrees(exp_node->getLeftOperand(), real_node->getRightOperand(), path, error_message) ||
+        !compareTrees(exp_node->getRightOperand(), real_node->getRightOperand(), path, error_message))
+    {
+        return false;
+    }
+
+    // Удаление текущего узла из пути при отсутствии ошибок
+    path.removeLast();
+    if (!path.isEmpty())
+        path.removeLast();
+
+    return true;
+}
