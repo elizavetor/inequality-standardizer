@@ -13,9 +13,9 @@ enum ErrorType{
 class Error
 {
 private:
-    ErrorType type;         // тип ошибки
-    int pos;                // позиция ошибки
-    QString error_string;   // строка, содержащая ошибку
+    ErrorType type;              // тип ошибки
+    int pos;                     // позиция ошибки
+    QStringList error_strings;   // строка, содержащая ошибку
 
 public:
     Error();
