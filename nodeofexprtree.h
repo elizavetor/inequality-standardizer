@@ -40,6 +40,10 @@ private:
 public:
     NodeOfExprTree();
     NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand = nullptr, NodeOfExprTree* _right_operand = nullptr);
+    /*!
+     * \brief Перегрузка оператора равенства для NodeOfExprTree
+     */
+    bool operator==(const NodeOfExprTree& other) const;
 };
 
 /*!

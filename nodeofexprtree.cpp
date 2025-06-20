@@ -51,6 +51,17 @@ NodeOfExprTree::NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand, No
 }
 
 /*!
+     * \brief Перегрузка оператора равенства для NodeOfExprTree
+     */
+bool NodeOfExprTree::operator==(const NodeOfExprTree& other) const
+{
+    if (value == other.value && type == other.type)
+        return true;
+
+    return false;
+}
+
+/*!
  * \brief Определить правильность расстановки двух множителей по алфавиту
  * \param [in] other - второй по порядку элемент
  * \return true, если порядок верный, false - иначе
