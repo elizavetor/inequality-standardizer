@@ -41,4 +41,9 @@ public:
     QStringList getErrorStrings() const { return error_strings; }
 };
 
+/*!
+ * \brief Хэш-функция для класса Error
+ */
+uint qHash(const Error & item);
+
 #endif // ERROR_H

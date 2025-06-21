@@ -112,3 +112,14 @@ bool Error::operator==(const Error& other) const
     {
         return true;
     }
+
+    return false;
+}
+
+/*!
+ * \brief Хэш-функция для класса Error
+ */
+uint qHash(const Error & item)
+{
+    return qHash(item.getErrorStrings());
+}
