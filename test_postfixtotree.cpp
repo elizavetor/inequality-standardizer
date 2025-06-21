@@ -3,6 +3,29 @@
 Test_postfixToTree::Test_postfixToTree(QObject *parent)
     : QObject{parent}
 {}
+
+void Test_postfixToTree::testPostfixToTree()
+{
+    QFETCH(QString, postfix_notation);
+    QFETCH(QSet<Error>, starting_errors);
+    QFETCH(QSet<Error>, final_errors);
+    QFETCH(NodeOfExprTree*, exp_tree);
+
+    // Получить результат сравнения
+    QSet<Error> real_errors = starting_errors;
+    NodeOfExprTree* real_tree = postfixToTree(postfix_notation, real_errors);
+
+    // Сравнить полученное дерево с ожидаемым
+    QString error_message;
+    QStringList path;
+    QVERIFY2(compareTrees(exp_tree, real_tree, path, error_message), error_message.toUtf8());
+
+    // Сравнить полученные ошибки с ожидаемыми
+    QString differences_in_errors = compareErrorSets(real_errors, final_errors);
+    QVERIFY2(differences_in_errors.isEmpty(), qPrintable(differences_in_errors));
+
+}
+
 /*!
  * \brief Сравнивает ожидаемое дерево с полученным и формирует сообщение о различиях
  * \param [in] exp_node - ожидаемое дерево
