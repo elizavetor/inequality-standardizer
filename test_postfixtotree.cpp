@@ -68,20 +68,20 @@ bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_nod
     // Добавить текущий узел получившегося дерева в путь
     if (!path.isEmpty())
         path.append("->");
-    if (exp_node != nullptr)
+    if (real_node != nullptr)
         path.append(real_node->getValue());
     else path.append("nullptr");
 
     // Если один из узлов пустой
     if (real_node == nullptr || exp_node == nullptr)
     {
-        // Считать, что узлы неравны (вернут false)
+        // Считать, что узлы неравны и вернут false
         if(exp_node == nullptr)
         {
-            error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: nullptr";
+            error_message += "\nThe real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: nullptr\n";
         }
         else
-            error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue();
+            error_message += "\nThe real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue() + "\n";
 
         return false;
     }
@@ -89,13 +89,13 @@ bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_nod
     // Если узлы различны
     if (*exp_node != *real_node)
     {
-        // Считать, что узлы неравны (вернут false)
-        error_message += "The real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue();
+        // Считать, что узлы неравны и вернут false
+        error_message += "\nThe real node at the end of the path does not match the expected node.\nPath: " + path.join(' ') + "\nExpected node: " + exp_node->getValue() + "\n";
         return false;
     }
 
     // Считать, что ошибка найдена, если левые или правые операнды полученного и ожидаемого узлов различны
-    if (!compareTrees(exp_node->getLeftOperand(), real_node->getRightOperand(), path, error_message) ||
+    if (!compareTrees(exp_node->getLeftOperand(), real_node->getLeftOperand(), path, error_message) ||
         !compareTrees(exp_node->getRightOperand(), real_node->getRightOperand(), path, error_message))
     {
         return false;
