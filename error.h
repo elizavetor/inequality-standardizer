@@ -15,7 +15,7 @@ class Error
 private:
     ErrorType type;              // тип ошибки
     int pos;                     // позиция ошибки
-    QStringList error_strings;   // строка, содержащая ошибку
+    QStringList error_strings;   // строки, содержащие ошибку
 
 public:
     Error();
