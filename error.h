@@ -26,6 +26,12 @@ public:
      * \return строка, содержащая сообщение об ошибке
     */
     QString getErrorMessageFor();
+
+    /*!
+     * \brief Метод для вывода информации об ошибке (для тестирования)
+     * \return строка, содержащая информацию об объекте
+     */
+    QString toString() const;
 };
 
 #endif // ERROR_H

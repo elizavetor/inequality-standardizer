@@ -59,3 +59,47 @@ QString Error::getErrorMessageFor()
 
     return message;
 }
+
+/*!
+ * \brief Метод для вывода информации об ошибке (для тестирования)
+ * \return строка, содержащая информацию об объекте
+ */
+QString Error::toString() const
+{
+    QString strType;
+    switch(type)
+    {
+    case NO_INPUT_FILE:
+        strType = "NO_INPUT_FILE";
+        break;
+    case NO_OUTPUT_FILE:
+        strType = "NO_OUTPUT_FILE";
+        break;
+    case INCORRECT_DELIMITER:
+        strType = "INCORRECT_DELIMETER";
+        break;
+    case NOT_ENOUGH_OPERANDS:
+        strType = "NOT_ENOUGH_OPERANDS";
+        break;
+    case MISSING_OPERATOR:
+        strType = "MISSING_OPERATOR";
+        break;
+    case INVALID_SEQUENCE:
+        strType = "INVALID_SEQUENCE";
+        break;
+    case COMPARISON_OPERATOR_IN_PARENTHESES:
+        strType = "COMPARISON_OPERATOR_IN_PARENTHESES";
+        break;
+    case NO_COMPARISON_OPERATOR:
+        strType = "NO_COMPARISON_OPERATOR";
+        break;
+    case MULTIPLE_COMPARISON_OPERATORS:
+        strType = "MULTIPLE_COMPARISON_OPERATORS";
+        break;
+    case NO_DEFINED:
+        strType = "NO_DEFINED";
+    }
+
+    return strType + " position: " + QString::number(pos) + " tokens: " + error_strings.join("», ");
+}
+
