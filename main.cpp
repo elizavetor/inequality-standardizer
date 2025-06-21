@@ -90,7 +90,10 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error> errors)
         // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок и вернуть пустой корень дерева
 
     // Вернуть корень дерева
-    return nullptr;
+    NodeOfExprTree* a = new NodeOfExprTree("a");
+    NodeOfExprTree* b = new NodeOfExprTree("b");
+    NodeOfExprTree* a_plus_b = new NodeOfExprTree("+", a, b);
+    return a_plus_b;
 }
 
 /*!
