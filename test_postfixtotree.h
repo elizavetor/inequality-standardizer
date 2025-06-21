@@ -26,4 +26,13 @@ private slots:
  * \return равны ли два дерева
  */
 bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_node, QStringList& path, QString& error_message);
+
+/*!
+ * \brief Сравнивает ожидаемое множество ошибок с полученным и формирует сообщение о различиях
+ * \param [in] errors - множество полученных ошибок
+ * \param [in] expErrors - множество ожидаемых ошибок
+ * \return сообщение о различиях во множествах
+ */
+QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_errors);
+
 #endif // TEST_POSTFIXTOTREE_H

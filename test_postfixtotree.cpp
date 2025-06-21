@@ -108,3 +108,43 @@ bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_nod
 
     return true;
 }
+
+/*!
+ * \brief Сравнивает ожидаемое множество ошибок с полученным и формирует сообщение о различиях
+ * \param [in] errors - множество полученных ошибок
+ * \param [in] expErrors - множество ожидаемых ошибок
+ * \return сообщение о различиях во множествах
+ */
+QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_errors)
+{
+    // Получаем множества пропущенных и непредвиденных ошибок
+    QSet<Error> missingErrors = exp_errors - errors;
+    QSet<Error> unexpectedErrors = errors - exp_errors;
+
+    QString differencesInErrors; // Итоговая строка с отличиями во множествах ошибок
+
+    if (!missingErrors.isEmpty() || !unexpectedErrors.isEmpty())
+    {
+        // Записываем пропущенные ошибки
+        if (!missingErrors.isEmpty())
+        {
+            differencesInErrors += "Missing errors:\n";
+
+            QSet<Error>::const_iterator i1;
+            for (i1 = missingErrors.constBegin(); i1 != missingErrors.constEnd(); i1++)
+                differencesInErrors += i1->toString() + "\n";
+        }
+
+        // Записываем непредвиденные ошибки
+        if (!unexpectedErrors.isEmpty())
+        {
+            differencesInErrors += "Unexpected errors returned:\n";
+
+            QSet<Error>::const_iterator i2;
+            for (i2 = unexpectedErrors.constBegin(); i2 != unexpectedErrors.constEnd(); i2++)
+                differencesInErrors += i2->toString() + "\n";
+        }
+    }
+
+    return differencesInErrors;
+}
