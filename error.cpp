@@ -103,3 +103,12 @@ QString Error::toString() const
     return strType + " position: " + QString::number(pos) + " tokens: " + error_strings.join("», ");
 }
 
+/*!
+ * \brief Перегрузка оператора равенства для Error
+ */
+bool Error::operator==(const Error& other) const
+{
+    if (type == other.type && pos == other.pos && error_strings == other.error_strings)
+    {
+        return true;
+    }

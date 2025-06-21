@@ -32,6 +32,13 @@ public:
      * \return строка, содержащая информацию об объекте
      */
     QString toString() const;
+
+    /*!
+     * \brief Перегрузка оператора равенства для Error
+     */
+    bool operator==(const Error& other) const;
+
+    QStringList getErrorStrings() const { return error_strings; }
 };
 
 #endif // ERROR_H
