@@ -26,6 +26,27 @@ void Test_postfixToTree::testPostfixToTree()
 
 }
 
+void Test_postfixToTree::testPostfixToTree_data()
+{
+    // Добавить столбцы
+    QTest::addColumn<QString>("postfix_notation");
+    QTest::addColumn<QSet<Error>>("starting_errors");
+    QTest::addColumn<QSet<Error>>("final_errors");
+    QTest::addColumn<NodeOfExprTree*>("exp_tree");
+
+
+    // 1. Только переменные
+    QString postfix_notation = "a b +";
+
+    QSet<Error> errors = {};
+
+    NodeOfExprTree* a = new NodeOfExprTree("a");
+    NodeOfExprTree* b = new NodeOfExprTree("b");
+    NodeOfExprTree* a_plus_b = new NodeOfExprTree("+", a, b);
+
+    QTest::newRow("Operation + with 2 var operand: a + b") << postfix_notation << errors << errors << a_plus_b;
+}
+
 /*!
  * \brief Сравнивает ожидаемое дерево с полученным и формирует сообщение о различиях
  * \param [in] exp_node - ожидаемое дерево
