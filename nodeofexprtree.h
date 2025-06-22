@@ -87,7 +87,7 @@ public:
  * \param [out] errors － обнаруженные ошибки в постфиксной записи
  * \return указатель на корень построенного дерева
  */
-NodeOfExprTree* postfixToTree(QString expr, QSet<Error> errors);
+NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors);
 
 /*!
  * \brief Определить является ли строка числом
