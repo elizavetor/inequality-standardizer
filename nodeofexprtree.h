@@ -100,4 +100,11 @@ bool isVar(QString token);
  */
 bool isOperator(QString token);
 
+/*!
+ * \brief Определить является ли токен оператором сравнения
+ * \param [in] token - проверяемый токен
+ * \return true, если токен есть оператор, иначе - false
+ */
+bool isComparisonOperator(QString token);
+
 #endif // NODEOFEXPRTREE_H

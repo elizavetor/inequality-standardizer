@@ -185,3 +185,19 @@ bool isOperator(QString token)
 
     return false;
 }
+
+/*!
+ * \brief Определить является ли токен оператором сравнения
+ * \param [in] token - проверяемый токен
+ * \return true, если токен есть оператор, иначе - false
+ */
+bool isComparisonOperator(QString token)
+{
+    // Если токен является
+    if (token == ">" || token == "<"
+        || token == ">=" || token == "<="
+        || token == "==" || token == "!=")
+        return true;
+
+    return false;
+}
