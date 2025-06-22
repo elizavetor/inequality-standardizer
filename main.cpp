@@ -190,7 +190,7 @@ bool isOperator(QString token)
     if (token == "~" || token == "*" || token == "/"
         || token == "+" || token == "-" || token == ">"
         || token == "<" || token == ">=" || token == "<="
-        || token == "==" || token == "!=")
+        || token == "=" || token == "!=")
         return true;
 
     return false;
@@ -206,7 +206,7 @@ bool isComparisonOperator(QString token)
     // Если токен является
     if (token == ">" || token == "<"
         || token == ">=" || token == "<="
-        || token == "==" || token == "!=")
+        || token == "=" || token == "!=")
         return true;
 
     return false;
