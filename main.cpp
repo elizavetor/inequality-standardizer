@@ -94,6 +94,16 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error> errors)
     NodeOfExprTree* b = new NodeOfExprTree("b");
     NodeOfExprTree* a_plus_b = new NodeOfExprTree("+", a, b);
     return a_plus_b;
+/*!
+ * \brief Удалить узлы стека
+ * \param [in] stack - стек
+ */
+void clearStackNodes(QStack<NodeOfExprTree*>& stack)
+{
+    while(!stack.isEmpty())
+    {
+        NodeOfExprTree::delTree(stack.pop());
+    }
 }
 
 /*!

@@ -123,4 +123,10 @@ bool isOperator(QString token);
  */
 bool isComparisonOperator(QString token);
 
+/*!
+ * \brief Удалить узлы стека
+ * \param [in] stack - стек
+ */
+void clearStackNodes(QStack<NodeOfExprTree*>& stack);
+
 #endif // NODEOFEXPRTREE_H
