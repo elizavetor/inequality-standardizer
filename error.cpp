@@ -100,7 +100,7 @@ QString Error::toString() const
         strType = "NO_DEFINED";
     }
 
-    return strType + " position: " + QString::number(pos) + " tokens: " + error_strings.join("», ");
+    return strType + "; position: " + QString::number(pos) + "; tokens: " + error_strings.join(" ");
 }
 
 /*!
