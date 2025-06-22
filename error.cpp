@@ -33,22 +33,22 @@ QString Error::getErrorMessageFor()
         message = "Некорректные разделители. Программа принимает на вход файлы из одной строки, в которой операции и операнды разделены пробелами.";
         break;
     case NOT_ENOUGH_OPERANDS:
-        message = "Во входной строке пропущен операнд для операции «" + error_strings.join("», ") + "» (позиция " + QString::number(pos) + ").";
+        message = "Во входной строке пропущен операнд для операции «" + error_strings.join("», «") + "» (позиция " + QString::number(pos) + ").";
         break;
     case MISSING_OPERATOR:
-        message = "Во входной строке пропущен знак операции для операнда «" + error_strings.join("», ") + "» (позиция " + QString::number(pos) + ").";
+        message = "Во входной строке пропущен знак операции для операнда «" + error_strings.join("», «") + "» (позиция " + QString::number(pos) + ").";
         break;
     case INVALID_SEQUENCE:
-        message = "Некорректная последовательность постфиксной записи во входном файле: «" + error_strings.join("», ") + "» (позиция " + QString::number(pos) + ").";
+        message = "Некорректная последовательность постфиксной записи во входном файле: «" + error_strings.join("», «") + "» (позиция " + QString::number(pos) + ").";
         break;
     case COMPARISON_OPERATOR_IN_PARENTHESES:
-        message = "Операция «" + error_strings.join("», ") + "» (позиция " + QString::number(pos) + ") не должна предшествовать никаким операциям.";
+        message = "Операция «" + error_strings.join("», «") + "» (позиция " + QString::number(pos) + ") не должна предшествовать никаким операциям.";
         break;
     case NO_COMPARISON_OPERATOR:
         message = "Отсутствует одна из операций сравнения «==», «>=», «<=». «>», «<», «!=» во входном (не)равенстве.";
         break;
     case MULTIPLE_COMPARISON_OPERATORS:
-        message = "Найдено несколько операций сравнения: «" + error_strings.join("», ") + "». Во входном (не)равенстве должна быть только одна из операций сравнения «==», «>=», «<=». «>», «<», «!=».";
+        message = "Найдено несколько операций сравнения: «" + error_strings.join("», «") + "». Во входном (не)равенстве должна быть только одна из операций сравнения «==», «>=», «<=». «>», «<», «!=».";
         break;
     case NO_DEFINED:
         message = "";
