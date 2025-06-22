@@ -60,6 +60,16 @@ public:
     NodeOfExprTree* getRightOperand() const { return right_operand; }
 
     /*!
+     * \brief Установить левый операнд
+     */
+    void setLeftOperand(NodeOfExprTree* _left_operand) { left_operand = _left_operand; }
+
+    /*!
+     * \brief Установить правый операнд
+     */
+    void setRightOperand(NodeOfExprTree* _right_operand) { right_operand = _right_operand; }
+
+    /*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
     bool operator==(const NodeOfExprTree& other) const;
