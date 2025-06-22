@@ -42,6 +42,7 @@ void Test_postfixToTree::testPostfixToTree_data()
     NodeOfExprTree* _1 = new NodeOfExprTree("1");
     NodeOfExprTree* _2 = new NodeOfExprTree("2");
     NodeOfExprTree* _3 = new NodeOfExprTree("3");
+    NodeOfExprTree* equal_node = nullptr;
 
 
     // Пустой список ошибок
@@ -142,32 +143,32 @@ void Test_postfixToTree::testPostfixToTree_data()
     // 18. Отсутствует оператор
     QString postfix_notation_18 = "a b";
     QSet<Error> its_missing_operator = {{Error(MISSING_OPERATOR, 1, QStringList() = {"a"}) }};
-    QTest::newRow("18. The operator is missing: a b") << postfix_notation_18 << equal_list_of_errors << its_missing_operator << nullptr;
+    QTest::newRow("18. The operator is missing: a b") << postfix_notation_18 << equal_list_of_errors << its_missing_operator << equal_node;
 
     // 19. Отсутствует операнд
     QString postfix_notation_19 = "a +";
     QSet<Error> its_not_enough_operands = {{Error(NOT_ENOUGH_OPERANDS, 2, QStringList() = {"+"}) }};
-    QTest::newRow("19. An operand is missing: a +") << postfix_notation_19 << equal_list_of_errors << its_not_enough_operands << nullptr;
+    QTest::newRow("19. An operand is missing: a +") << postfix_notation_19 << equal_list_of_errors << its_not_enough_operands << equal_node;
 
     // 20. Наличие иных символов
     QString postfix_notation_20 = "a b ^";
     QSet<Error> its_invalid_operator = {{Error(INVALID_SEQUENCE, 3, QStringList() = {"^"}) }};
-    QTest::newRow("20. The presence of other symbols: a ^ b") << postfix_notation_20 << equal_list_of_errors << its_invalid_operator << nullptr;
+    QTest::newRow("20. The presence of other symbols: a ^ b") << postfix_notation_20 << equal_list_of_errors << its_invalid_operator << equal_node;
 
     // 21. Некорректно число
     QString postfix_notation_21 = "12,34,56";
     QSet<Error> its_invalid_num = {{Error(INVALID_SEQUENCE, 1, QStringList() = {"12,34,56"}) }};
-    QTest::newRow("21. The number is incorrect: 12,34,56") << postfix_notation_21 << equal_list_of_errors << its_invalid_num << nullptr;
+    QTest::newRow("21. The number is incorrect: 12,34,56") << postfix_notation_21 << equal_list_of_errors << its_invalid_num << equal_node;
 
     // 22. Некорректно имя переменной
     QString postfix_notation_22 = "ab-cd";
     QSet<Error> its_invalid_var_1 = {{Error(INVALID_SEQUENCE, 1, QStringList() = {"ab-cd"}) }};
-    QTest::newRow("22. The variable name is incorrect: ab-cd") << postfix_notation_22 << equal_list_of_errors << its_invalid_var_1 << nullptr;
+    QTest::newRow("22. The variable name is incorrect: ab-cd") << postfix_notation_22 << equal_list_of_errors << its_invalid_var_1 << equal_node;
 
     // 23. Цифра на первом месте у переменной
     QString postfix_notation_23 = "1abc";
     QSet<Error> its_invalid_var_2 = {{Error(INVALID_SEQUENCE, 1, QStringList() = {"1abc"}) }};
-    QTest::newRow("23. The number comes first for the variable: ab-cd") << postfix_notation_23 << equal_list_of_errors << its_invalid_var_2 << nullptr;
+    QTest::newRow("23. The number comes first for the variable: ab-cd") << postfix_notation_23 << equal_list_of_errors << its_invalid_var_2 << equal_node;
 
     // 24. Оператор сравнения не является корнем дерева
     QString postfix_notation_24 = "a b = 2 +";
@@ -178,21 +179,21 @@ void Test_postfixToTree::testPostfixToTree_data()
     // 25. Наличие табуляции
     QString postfix_notation_25 = "a\tb";
     QSet<Error> its_incorrect_delimiter = {{Error(INCORRECT_DELIMITER) }};
-    QTest::newRow("25. The presence of tabs: a[\t]b") << postfix_notation_25 << equal_list_of_errors << its_incorrect_delimiter << nullptr;
+    QTest::newRow("25. The presence of tabs: a[\t]b") << postfix_notation_25 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
 
     // 26. Наличие перевода строки
     QString postfix_notation_26 = "a\nb";
-    QTest::newRow("26. The presence of a newline: a[\n]b") << postfix_notation_26 << equal_list_of_errors << its_incorrect_delimiter << nullptr;
+    QTest::newRow("26. The presence of a newline: a[\n]b") << postfix_notation_26 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
 
     // 27. Несколько ошибок некорректного ввода данных: некорректные число и имя переменной
     QString postfix_notation_27 = "12,34,56 ab-cd";
     QSet<Error> its_incorrect_num_and_var = {{Error(INVALID_SEQUENCE, 1, QStringList() = {"12,34,56"}) }, {Error(INVALID_SEQUENCE, 2, QStringList() = {"ab-cd"}) }};
-    QTest::newRow("27. Several incorrect data entry errors: incorrect number and variable name: 12,34,56 ab-cd") << postfix_notation_27 << equal_list_of_errors << its_incorrect_num_and_var << nullptr;
+    QTest::newRow("27. Several incorrect data entry errors: incorrect number and variable name: 12,34,56 ab-cd") << postfix_notation_27 << equal_list_of_errors << its_incorrect_num_and_var << equal_node;
 
     // 28. Несколько ошибок некорректного ввода данных: оператор сравнения не является корнем дерева, отсутствует операнд для операции
     QString postfix_notation_28 = "a = b +";
     QSet<Error> its_incorrect_root_and_not_enough_operands = {{Error(COMPARISON_OPERATOR_IN_PARENTHESES, 2, QStringList() = {"="}) }, {Error(NOT_ENOUGH_OPERANDS, 2, QStringList() = {"="}) }};
-    QTest::newRow("28. There are several incorrect data entry errors: the comparison operator is not the root of the tree, and there is no operand for the operation: 12,34,56 ab-cd") << postfix_notation_28 << equal_list_of_errors << its_incorrect_root_and_not_enough_operands << nullptr;
+    QTest::newRow("28. There are several incorrect data entry errors: the comparison operator is not the root of the tree, and there is no operand for the operation: 12,34,56 ab-cd") << postfix_notation_28 << equal_list_of_errors << its_incorrect_root_and_not_enough_operands << equal_node;
 
     // 29. Уже есть ошибка, дерево построено
     QString postfix_notation_29 = "a b +";
@@ -201,7 +202,7 @@ void Test_postfixToTree::testPostfixToTree_data()
 
     // 30. Уже есть ошибка + возникла ошибка при построении деревa
     QString postfix_notation_30 = "ab-cd";
-    QTest::newRow("29. There is already an error + an error occurred when building the tree: ab-cd") << postfix_notation_30 << its_no_compsrison_operator << its_no_compsrison_operator + its_invalid_var_1 << nullptr;
+    QTest::newRow("29. There is already an error + an error occurred when building the tree: ab-cd") << postfix_notation_30 << its_no_compsrison_operator << its_no_compsrison_operator + its_invalid_var_1 << equal_node;
 
     // 31. Одна переменная
     QString postfix_notation_31 = "a";
@@ -209,7 +210,7 @@ void Test_postfixToTree::testPostfixToTree_data()
 
     // 32. Пустая строка
     QString postfix_notation_32 = "";
-    QTest::newRow("32. Equal str") << postfix_notation_32 << equal_list_of_errors << equal_list_of_errors << nullptr;
+    QTest::newRow("32. Equal str") << postfix_notation_32 << equal_list_of_errors << equal_list_of_errors << equal_node;
 
     // 33. Комплексный тест
     QString postfix_notation_33 = "a b + c * f / 1 2 3 + - <";
