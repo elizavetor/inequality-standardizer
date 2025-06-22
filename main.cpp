@@ -145,12 +145,6 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
         return nullptr;
     }
 
-    if(errors.size() > 0)
-    {
-        clearStackNodes(nodes);
-        return nullptr;
-    }
-
     return nodes.pop();
 }
 

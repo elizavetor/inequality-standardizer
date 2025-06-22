@@ -172,7 +172,8 @@ void Test_postfixToTree::testPostfixToTree_data()
     // 24. Оператор сравнения не является корнем дерева
     QString postfix_notation_24 = "a b = 2 +";
     QSet<Error> its_comparison_operator_in_parentheses = {{Error(COMPARISON_OPERATOR_IN_PARENTHESES, 3, QStringList() = {"="}) }};
-    QTest::newRow("24. The comparison operator is not the root of the tree: (a == b) + 2") << postfix_notation_24 << equal_list_of_errors << its_comparison_operator_in_parentheses << equal_node;
+    NodeOfExprTree* a_equal_b_plus_2 = new NodeOfExprTree("+", a_equal_b, _2);
+    QTest::newRow("24. The comparison operator is not the root of the tree: (a == b) + 2") << postfix_notation_24 << equal_list_of_errors << its_comparison_operator_in_parentheses << a_equal_b_plus_2;
 
     // 25. Наличие табуляции
     QString postfix_notation_25 = "a\tb";
@@ -196,7 +197,7 @@ void Test_postfixToTree::testPostfixToTree_data()
     // 29. Уже есть ошибка, дерево построено
     QString postfix_notation_29 = "a b +";
     QSet<Error> its_no_compasrison_operator = {{Error(NO_COMPARISON_OPERATOR) }};
-    QTest::newRow("29. There is already a mistake, the tree is built: a + b") << postfix_notation_29 << its_no_compasrison_operator << its_no_compasrison_operator << equal_node;
+    QTest::newRow("29. There is already a mistake, the tree is built: a + b") << postfix_notation_29 << its_no_compasrison_operator << its_no_compasrison_operator << a_plus_b;
 
     // 30. Уже есть ошибка + возникла ошибка при построении деревa
     QString postfix_notation_30 = "ab-cd";
@@ -216,8 +217,8 @@ void Test_postfixToTree::testPostfixToTree_data()
     NodeOfExprTree* a_plus_b_multiply_c_div_f = new NodeOfExprTree("/", a_plus_b_multiply_c, f);
     NodeOfExprTree* _2_plus_3 = new NodeOfExprTree("+", _2, _3);
     NodeOfExprTree* _1_minus_expr = new NodeOfExprTree("-", _1, _2_plus_3);
-    NodeOfExprTree* a_plus_b_multiply_c_div_f_less_1_minus_expr = new NodeOfExprTree("<", a_plus_b_multiply_c_div_f, _1_minus_expr);
-    QTest::newRow("33. Complex test: ((a + b) * c) / f < 1 - (2 + 3)") << postfix_notation_33 << equal_list_of_errors << equal_list_of_errors << a_plus_b_multiply_c_div_f_less_1_minus_expr;
+    NodeOfExprTree* expr_multiply_c_div_f_less_1_minus_expr = new NodeOfExprTree("<", a_plus_b_multiply_c_div_f, _1_minus_expr);
+    QTest::newRow("33. Complex test: ((a + b) * c) / f < 1 - (2 + 3)") << postfix_notation_33 << equal_list_of_errors << equal_list_of_errors << expr_multiply_c_div_f_less_1_minus_expr;
 }
 
 /*!
