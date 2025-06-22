@@ -292,33 +292,33 @@ bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_nod
 QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_errors)
 {
     // Получаем множества пропущенных и непредвиденных ошибок
-    QSet<Error> missingErrors = exp_errors - errors;
-    QSet<Error> unexpectedErrors = errors - exp_errors;
+    QSet<Error> missing_errors = exp_errors - errors;
+    QSet<Error> unexpected_errors = errors - exp_errors;
 
-    QString differencesInErrors; // Итоговая строка с отличиями во множествах ошибок
+    QString differences_in_errors; // Итоговая строка с отличиями во множествах ошибок
 
-    if (!missingErrors.isEmpty() || !unexpectedErrors.isEmpty())
+    if (!missing_errors.isEmpty() || !unexpected_errors.isEmpty())
     {
         // Записываем пропущенные ошибки
-        if (!missingErrors.isEmpty())
+        if (!missing_errors.isEmpty())
         {
-            differencesInErrors += "Missing errors:\n";
+            differences_in_errors += "\nMissing errors:\n";
 
             QSet<Error>::const_iterator i1;
-            for (i1 = missingErrors.constBegin(); i1 != missingErrors.constEnd(); i1++)
-                differencesInErrors += i1->toString() + "\n";
+            for (i1 = missing_errors.constBegin(); i1 != missing_errors.constEnd(); i1++)
+                differences_in_errors += i1->toString() + "\n";
         }
 
         // Записываем непредвиденные ошибки
-        if (!unexpectedErrors.isEmpty())
+        if (!unexpected_errors.isEmpty())
         {
-            differencesInErrors += "Unexpected errors returned:\n";
+            differences_in_errors += "\nUnexpected errors returned:\n";
 
             QSet<Error>::const_iterator i2;
-            for (i2 = unexpectedErrors.constBegin(); i2 != unexpectedErrors.constEnd(); i2++)
-                differencesInErrors += i2->toString() + "\n";
+            for (i2 = unexpected_errors.constBegin(); i2 != unexpected_errors.constEnd(); i2++)
+                differences_in_errors += i2->toString() + "\n";
         }
     }
 
-    return differencesInErrors;
+    return differences_in_errors;
 }
