@@ -15,15 +15,14 @@ void Test_postfixToTree::testPostfixToTree()
     QSet<Error> real_errors = starting_errors;
     NodeOfExprTree* real_tree = postfixToTree(postfix_notation, real_errors);
 
-    // Сравнить полученное дерево с ожидаемым
-    QString error_message;
-    QStringList path;
-    QVERIFY2(compareTrees(exp_tree, real_tree, path, error_message), error_message.toUtf8());
-
     // Сравнить полученные ошибки с ожидаемыми
     QString differences_in_errors = compareErrorSets(real_errors, final_errors);
     QVERIFY2(differences_in_errors.isEmpty(), qPrintable(differences_in_errors));
 
+    // Сравнить полученное дерево с ожидаемым
+    QString error_message;
+    QStringList path;
+    QVERIFY2(compareTrees(exp_tree, real_tree, path, error_message), error_message.toUtf8());
 }
 
 void Test_postfixToTree::testPostfixToTree_data()
@@ -179,11 +178,11 @@ void Test_postfixToTree::testPostfixToTree_data()
     // 25. Наличие табуляции
     QString postfix_notation_25 = "a\tb";
     QSet<Error> its_incorrect_delimiter = {{Error(INCORRECT_DELIMITER) }};
-    QTest::newRow("25. The presence of tabs: a[\t]b") << postfix_notation_25 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
+    QTest::newRow("25. The presence of tabs: a[\\t]b") << postfix_notation_25 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
 
     // 26. Наличие перевода строки
     QString postfix_notation_26 = "a\nb";
-    QTest::newRow("26. The presence of a newline: a[\n]b") << postfix_notation_26 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
+    QTest::newRow("26. The presence of a newline: a[\\n]b") << postfix_notation_26 << equal_list_of_errors << its_incorrect_delimiter << equal_node;
 
     // 27. Несколько ошибок некорректного ввода данных: некорректные число и имя переменной
     QString postfix_notation_27 = "12,34,56 ab-cd";
