@@ -79,6 +79,12 @@ public:
      */
     bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
 
+    /*!
+     * \brief Удалить дерево
+     * \param [in] root - корень дерева
+     */
+    static void delTree(NodeOfExprTree* root);
+
 };
 
 /*!

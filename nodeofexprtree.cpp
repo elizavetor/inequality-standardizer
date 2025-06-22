@@ -62,6 +62,19 @@ bool NodeOfExprTree::operator==(const NodeOfExprTree& other) const
 }
 
 /*!
+ * \brief Удалить дерево
+ * \param [in] root - корень дерева
+ */
+void NodeOfExprTree::delTree(NodeOfExprTree* root)
+{
+    if (root == nullptr) return;
+    if (root->left_operand != nullptr) delTree(root->left_operand);
+    if (root->right_operand != nullptr) delTree(root->right_operand);
+
+    delete root;
+}
+
+/*!
  * \brief Определить правильность расстановки двух множителей по алфавиту
  * \param [in] other - второй по порядку элемент
  * \return true, если порядок верный, false - иначе
