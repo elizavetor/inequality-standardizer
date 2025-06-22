@@ -51,49 +51,110 @@ int main(int argc, char *argv[])
  * \param [out] errors － обнаруженные ошибки в постфиксной записи
  * \return указатель на корень построенного дерева
  */
-NodeOfExprTree* postfixToTree(QString expr, QSet<Error> errors)
+NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
 {
+    if(expr.isEmpty()) { return nullptr; }
+
     // ...Считать стек узлов пустым
+    QStack<NodeOfExprTree*> nodes;
+    QStack<int> nodes_pos_in_expr;
+
+    // Проверяем наличие некорректных разделителей
+    if (expr.contains('\t') || expr.contains('\n'))
+    {
+        errors.insert(Error(INCORRECT_DELIMITER));
+    }
 
     // Разбить строку на токены
+    QStringList tokens = expr.split(QRegularExpression("[ \\n\\t]"), Qt::SkipEmptyParts);
 
     // ...Считать, что не было найдено ошибок
-    // Для каждого токена
+    bool errors_found = false;
+    for(int i = 0; i < tokens.size(); i++) // Для каждого токена
     {
-        // Если текущий токен имеет табуляцию или перевод строки
-            // Считать, что найдена ошибка UNCORRECT_DELIMITER для текущего токена, добавить её в список ошибок
-        // ИначеЕсли текущий токен некорректен
+        // Если текущий токен некорректен
+        if (!isVar(tokens[i]) && !isNum(tokens[i]) && !isOperator(tokens[i]))
+        {
             // Считать, что найдена ошибка INVALID_SEQUENCE для текущего токена, добавить её в список ошибок
+            errors.insert(Error(INVALID_SEQUENCE, i + 1, QStringList(tokens[i])));
+            errors_found = true;
+        }
     }
-    // Если были найдены ошибки
-    // Вернуть пустой корень дерева
 
-    // Для каждого токена
+    // Вернуть пустой корень дерева, eсли были найдены ошибки
+    if (errors_found) { return nullptr; }
+
+    int count_of_tokens = tokens.size();
+    for(int i = 0; i < count_of_tokens; i++) // Для каждого токена
     {
         // Создать узел для текущего токена
-        // Определить тип созданного узла
+        NodeOfExprTree* new_node = new NodeOfExprTree(tokens[i]);
 
-        // Если тип созданного узла есть переменная или число
-            // Добавить узел в стек узлов
+        // Добавить узел в стек узлов, eсли тип созданного узла есть переменная или число
+        if (isVar(tokens[i]) || isNum(tokens[i]))
+        {
+            nodes.push(new_node);
+            nodes_pos_in_expr.push(i + 1);
+        }
 
         // ИначеЕсли тип созданного узла есть оператор
+        else
+        {
             // Если созданный узел типа оператора сравнения и текущий токен не яляется последним
+            if (isComparisonOperator(tokens[i]) && i != count_of_tokens - 1)
+            {
                 // Считать, что найдена ошибка COMPARISON_OPERATOR_IN_PARENTHESES, добавить её в список ошибок
+                errors.insert(Error(COMPARISON_OPERATOR_IN_PARENTHESES, i + 1, QStringList(tokens[i])));
+            }
 
             // Если в стеке есть необходимое кол-во узлов для текущего типа узла
+            if(tokens[i] == "~" && nodes.size() >= 1 || tokens[i] != "~" && nodes.size() >= 2)
+            {
                 // Вытащить необходимое кол-во узлов из стека и считать их операндами созданного узла
+                new_node->setRightOperand(nodes.pop());
+                nodes_pos_in_expr.pop();
+                if(tokens[i] != "~")
+                {
+                    new_node->setLeftOperand(nodes.pop());
+                    nodes_pos_in_expr.pop();
+                }
                 // Добавить созданный узел в стек
+                nodes.push(new_node);
+                nodes_pos_in_expr.push(i + 1);
+            }
             // Иначе считать, что найдена ошибка NOT_ENOUGH_OPERANDS, добавить её в список ошибок и вернуть пустой корень дерева
+            else
+            {
+                errors.insert(Error(NOT_ENOUGH_OPERANDS, i + 1, QStringList(tokens[i])));
+                delete new_node;
+                clearStackNodes(nodes);
+                return nullptr;
+            }
+        }
     }
 
     // Если в стеке больше одного узла
-        // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок и вернуть пустой корень дерева
+    if(nodes.size() > 1)
+    {
+        for(int i = 0; i < nodes.size() - 1; i++)
+        {
+            // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок и вернуть пустой корень дерева
+            errors.insert(Error(MISSING_OPERATOR, nodes_pos_in_expr[i], QStringList(tokens[nodes_pos_in_expr[i] - 1])));
+        }
+        clearStackNodes(nodes);
+        return nullptr;
+    }
 
-    // Вернуть корень дерева
-    NodeOfExprTree* a = new NodeOfExprTree("a");
-    NodeOfExprTree* b = new NodeOfExprTree("b");
-    NodeOfExprTree* a_plus_b = new NodeOfExprTree("+", a, b);
-    return a_plus_b;
+    if(errors.size() > 0)
+    {
+        clearStackNodes(nodes);
+        return nullptr;
+    }
+
+    return nodes.pop();
+}
+
+
 /*!
  * \brief Удалить узлы стека
  * \param [in] stack - стек
