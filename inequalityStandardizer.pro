@@ -10,6 +10,7 @@ SOURCES += \
         error.cpp \
         main.cpp \
         nodeofexprtree.cpp \
+        test_getdegreeofexpr.cpp \
         test_iscurrentorderofmultipliers.cpp \
         test_postfixtotree.cpp
 
@@ -21,5 +22,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     error.h \
     nodeofexprtree.h \
+    test_getdegreeofexpr.h \
     test_iscurrentorderofmultipliers.h \
     test_postfixtotree.h
