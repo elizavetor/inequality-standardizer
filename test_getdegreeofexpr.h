@@ -10,7 +10,7 @@ class Test_getDegreeOfExpr : public QObject
 public:
     explicit Test_getDegreeOfExpr(QObject *parent = nullptr);
 
-public slots:
+private slots:
     void testGetDegreeOfExpr();
     void testGetDegreeOfExpr_data();
 };
