@@ -34,6 +34,13 @@ struct OperandOfExpr
      * \return true, если порядок верный, false - иначе
      */
     bool isCurrentOrderOfSummands(const OperandOfExpr& other) const;
+
+    /*!
+     * \brief Определить правильность расстановки двух выражений в скобках по алфавиту
+     * \param [in] other - второй по порядку узел
+     * \return true, если порядок верный, false - иначе
+     */
+    bool isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr& other) const;
 };
 
 class NodeOfExprTree
