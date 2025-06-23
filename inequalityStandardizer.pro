@@ -17,7 +17,8 @@ SOURCES += \
         test_iscurrentorderofparenthesisedexpressions.cpp \
         test_iscurrentorderofsummands.cpp \
         test_listtotree.cpp \
-        test_postfixtotree.cpp
+        test_postfixtotree.cpp \
+        test_treetoinfix.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -34,4 +35,5 @@ HEADERS += \
     test_iscurrentorderofparenthesisedexpressions.h \
     test_iscurrentorderofsummands.h \
     test_listtotree.h \
-    test_postfixtotree.h
+    test_postfixtotree.h \
+    test_treetoinfix.h
