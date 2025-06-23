@@ -119,6 +119,12 @@ public:
     NodeOfExprTree* listToTree(QList<OperandOfExpr>& list);
 
     /*!
+     * \brief Получить список элементов сортировки в дереве, начиная с заданного узла
+     * \return список элементов сортировки
+     */
+    QList<OperandOfExpr>& getSortedList();
+
+    /*!
      * \brief Получить инфиксную запись выражения из дерева этого выражения
      * \param [in] is_first_elem - флаг: true - указанный узел является первым операндом родителя, false - иначе
      * \return строка инфиксной записи выражения
