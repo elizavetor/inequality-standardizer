@@ -12,6 +12,7 @@ SOURCES += \
         nodeofexprtree.cpp \
         test_getdegreeofexpr.cpp \
         test_iscurrentorderofmultipliers.cpp \
+        test_iscurrentorderofsummands.cpp \
         test_postfixtotree.cpp
 
 # Default rules for deployment.
@@ -24,4 +25,5 @@ HEADERS += \
     nodeofexprtree.h \
     test_getdegreeofexpr.h \
     test_iscurrentorderofmultipliers.h \
+    test_iscurrentorderofsummands.h \
     test_postfixtotree.h
