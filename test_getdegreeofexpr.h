@@ -1,7 +1,8 @@
 #ifndef TEST_GETDEGREEOFEXPR_H
 #define TEST_GETDEGREEOFEXPR_H
-
+#include "nodeofexprtree.h"
 #include <QObject>
+#include <QtTest/QtTest>
 
 class Test_getDegreeOfExpr : public QObject
 {
