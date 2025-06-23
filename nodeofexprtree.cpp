@@ -174,7 +174,7 @@ bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr
  * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного корня
  * \return список операндов
  */
-QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
+QList<OperandOfExpr>& NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
 {
     // ...Считать список операндов пустым
     // ...Считать списки элементов левого и правого операндов пустыми
@@ -224,7 +224,7 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
  * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
  * \return список операндов
  */
-QList<OperandOfExpr> NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert)
+QList<OperandOfExpr>& NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert)
 {
     // ...Считать список операндов пустым
     // ...Считать списки элементов левого и правого операндов пустыми

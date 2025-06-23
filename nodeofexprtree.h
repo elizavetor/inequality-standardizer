@@ -102,14 +102,14 @@ public:
      * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного корня
      * \return список операндов
      */
-    QList<OperandOfExpr> getListOfNodesOfSamePrecedenceLevel();
+    QList<OperandOfExpr>& getListOfNodesOfSamePrecedenceLevel();
 
     /*!
      * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного узла, раскрывая скобки
      * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
      * \return список операндов
      */
-    QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
+    QList<OperandOfExpr>& getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
 
     /*!
      * \brief Построить дерево выражения по элементам в списке
