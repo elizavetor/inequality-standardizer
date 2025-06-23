@@ -17,6 +17,7 @@ SOURCES += \
         test_iscurrentorderofparenthesisedexpressions.cpp \
         test_iscurrentorderofsummands.cpp \
         test_listtotree.cpp \
+        test_operatorgt.cpp \
         test_postfixtotree.cpp \
         test_treetoinfix.cpp
 
@@ -35,5 +36,6 @@ HEADERS += \
     test_iscurrentorderofparenthesisedexpressions.h \
     test_iscurrentorderofsummands.h \
     test_listtotree.h \
+    test_operatorgt.h \
     test_postfixtotree.h \
     test_treetoinfix.h
