@@ -94,6 +94,12 @@ public:
     bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
 
     /*!
+     * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного корня
+     * \return список операндов
+     */
+    QList<OperandOfExpr> getListOfNodesOfSamePrecedenceLevel();
+
+    /*!
      * \brief Получить степень выражения
      * \return степень выражения
      */
