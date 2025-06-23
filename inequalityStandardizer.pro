@@ -12,6 +12,7 @@ SOURCES += \
         nodeofexprtree.cpp \
         test_getdegreeofexpr.cpp \
         test_iscurrentorderofmultipliers.cpp \
+        test_iscurrentorderofparenthesisedexpressions.cpp \
         test_iscurrentorderofsummands.cpp \
         test_postfixtotree.cpp
 
@@ -25,5 +26,6 @@ HEADERS += \
     nodeofexprtree.h \
     test_getdegreeofexpr.h \
     test_iscurrentorderofmultipliers.h \
+    test_iscurrentorderofparenthesisedexpressions.h \
     test_iscurrentorderofsummands.h \
     test_postfixtotree.h
