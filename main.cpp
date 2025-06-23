@@ -2,6 +2,7 @@
 #include "nodeofexprtree.h"
 #include "test_iscurrentorderofmultipliers.h"
 #include "test_postfixtotree.h"
+#include "test_getdegreeofexpr.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,9 @@ int main(int argc, char *argv[])
 
     Test_postfixToTree test2;
     QTest::qExec(&test2);
+
+    Test_getDegreeOfExpr test_3;
+    QTest::qExec(&test_3);
     // Получить строку постфиксной записи выражения из исходного файла
     // Если найдена ошибка чтения
         // Вывести сообщение об ошибке и завершить работу программы

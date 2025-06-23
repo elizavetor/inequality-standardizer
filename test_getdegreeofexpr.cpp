@@ -32,6 +32,6 @@ void Test_getDegreeOfExpr::testGetDegreeOfExpr_data()
     QTest::newRow("1.1 Only variable") << node_1_1 << 1;
 
     // 1.2 Число
-    NodeOfExprTree* node_1_2 = postfixToTree("a", errors);
+    NodeOfExprTree* node_1_2 = postfixToTree("1", errors);
     QTest::newRow("1.2 Only number") << node_1_2 << 0;
 }
