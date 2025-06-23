@@ -16,6 +16,7 @@ SOURCES += \
         test_iscurrentorderofmultipliers.cpp \
         test_iscurrentorderofparenthesisedexpressions.cpp \
         test_iscurrentorderofsummands.cpp \
+        test_listtotree.cpp \
         test_postfixtotree.cpp
 
 # Default rules for deployment.
@@ -32,4 +33,5 @@ HEADERS += \
     test_iscurrentorderofmultipliers.h \
     test_iscurrentorderofparenthesisedexpressions.h \
     test_iscurrentorderofsummands.h \
+    test_listtotree.h \
     test_postfixtotree.h
