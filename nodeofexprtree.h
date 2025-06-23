@@ -99,6 +99,12 @@ public:
     bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
 
     /*!
+     * \brief Расставить все элементы в дереве выражения по алфавиту, начиная с заданного узла
+     * \return указатель на корень отсортированного дерева
+     */
+    NodeOfExprTree* sortOperandsAlphabetically();
+
+    /*!
      * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного корня
      * \return список операндов
      */
