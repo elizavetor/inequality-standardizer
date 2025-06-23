@@ -19,6 +19,7 @@ SOURCES += \
         test_listtotree.cpp \
         test_operatorgt.cpp \
         test_postfixtotree.cpp \
+        test_sortoperandsalphabetically.cpp \
         test_treetoinfix.cpp
 
 # Default rules for deployment.
@@ -38,4 +39,5 @@ HEADERS += \
     test_listtotree.h \
     test_operatorgt.h \
     test_postfixtotree.h \
+    test_sortoperandsalphabetically.h \
     test_treetoinfix.h
