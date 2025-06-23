@@ -41,6 +41,11 @@ struct OperandOfExpr
      * \return true, если порядок верный, false - иначе
      */
     bool isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr& other) const;
+
+    /*!
+     * \brief Перегрузка оператора больше для OperandOfExpr
+     */
+    bool operator>(const OperandOfExpr& other) const;
 };
 
 class NodeOfExprTree

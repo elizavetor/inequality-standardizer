@@ -74,6 +74,15 @@ void NodeOfExprTree::delTree(NodeOfExprTree* root)
     delete root;
 }
 
+
+/*!
+ * \brief Перегрузка оператора больше для OperandOfExpr
+ */
+bool OperandOfExpr::operator>(const OperandOfExpr& other) const
+{
+    return false;
+}
+
 /*!
  * \brief Определить правильность расстановки двух множителей по алфавиту
  * \param [in] other - второй по порядку элемент
