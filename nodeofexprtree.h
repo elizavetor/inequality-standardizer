@@ -100,6 +100,13 @@ public:
     QList<OperandOfExpr> getListOfNodesOfSamePrecedenceLevel();
 
     /*!
+     * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного узла, раскрывая скобки
+     * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
+     * \return список операндов
+     */
+    QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
+
+    /*!
      * \brief Получить степень выражения
      * \return степень выражения
      */
