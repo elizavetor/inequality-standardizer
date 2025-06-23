@@ -27,6 +27,13 @@ struct OperandOfExpr
      * \return true, если порядок верный, false - иначе
      */
     bool isCurrentOrderOfMultipliers(const OperandOfExpr& other) const;
+
+    /*!
+     * \brief Определить правильность расстановки двух слагаемых по алфавиту
+     * \param [in] other - второй по порядку элемент
+     * \return true, если порядок верный, false - иначе
+     */
+    bool isCurrentOrderOfSummands(const OperandOfExpr& other) const;
 };
 
 class NodeOfExprTree
