@@ -80,6 +80,12 @@ public:
     bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
 
     /*!
+     * \brief Получить степень выражения
+     * \return степень выражения
+     */
+    int getDegreeOfExpr();
+
+    /*!
      * \brief Удалить дерево
      * \param [in] root - корень дерева
      */
