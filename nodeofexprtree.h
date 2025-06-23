@@ -107,6 +107,13 @@ public:
     QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
 
     /*!
+     * \brief Построить дерево выражения по элементам в списке
+     * \param [in] list - список
+     * \return указатель на корень дерева
+     */
+    NodeOfExprTree* listToTree(QList<OperandOfExpr>& list);
+
+    /*!
      * \brief Получить степень выражения
      * \return степень выражения
      */
