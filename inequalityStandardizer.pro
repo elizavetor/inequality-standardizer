@@ -21,7 +21,8 @@ SOURCES += \
         test_operatorgt.cpp \
         test_postfixtotree.cpp \
         test_sortoperandsalphabetically.cpp \
-        test_treetoinfix.cpp
+        test_treetoinfix.cpp \
+        testingfunctions.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -42,4 +43,5 @@ HEADERS += \
     test_operatorgt.h \
     test_postfixtotree.h \
     test_sortoperandsalphabetically.h \
-    test_treetoinfix.h
+    test_treetoinfix.h \
+    testingfunctions.h
