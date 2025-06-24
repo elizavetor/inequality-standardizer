@@ -101,3 +101,73 @@ QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_error
 
     return differences_in_errors;
 }
+
+/*!
+ * \brief Сравнивает ожидаемый список елементов с полученным и выводит сообщение об ошибке
+ * \param [in] expr_list - ожидаемый список
+ * \param [in] real_list - полученный список
+ * \return строку ошибки
+ */
+QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list)
+{
+    // Считать, что ошибок не найдено
+    QString error = "";
+    QStringList path = {};
+    QString error_message = "";
+
+    // Если кол-во элементов ожидаемого и полученного списков не совпадают
+    if(exp_list.size() != real_list.size())
+    {
+        // Считать, что ошибка найдена
+        error = "\nThe number of elements of the expected and received lists do not match\n";
+    }
+
+    for(int i = 0; i < real_list.size() && error == ""; i++) // Для каждой пары элементов спиской i-ого индекса и пока не найдена ошибка
+    {
+        // Если родители текущей пары не совпадают
+        if(real_list[i].parent && exp_list[i].parent)
+        {
+            if(*real_list[i].parent != *exp_list[i].parent)
+            {
+                // Считать, что ошибка найдена
+                error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
+                error += "Real parent: " + real_list[i].parent->getValue();
+                error += "Exp parent: " + exp_list[i].parent->getValue();
+            }
+        }
+        else if(real_list[i].parent == nullptr ||  exp_list[i].parent == nullptr)
+        {
+            error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
+            if(real_list[i].parent == nullptr)
+            {
+                error += "Real parent: nullptr\n";
+                error += "Exp parent: " + exp_list[i].parent->getValue() + "\n";
+            }
+            else
+            {
+                error += "Real parent: " + real_list[i].parent->getValue() + "\n";
+                error += "Exp parent: nullptr\n";
+            }
+
+        }
+        // ИначеЕсли операнд текущего элемента не равен ожидаемому
+        else if(compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
+        {
+            // Считать, что ошибка найдена
+            error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i) + ", the following error was found:" + error_message + "\n";
+        }
+        // ИначеЕсли значение флага первого элемента списка не равен ожидаемому
+        else if (real_list[i].is_first_elem != exp_list[i].is_first_elem)
+        {
+            // Считать, что ошибка найдена
+            error = "\nThe values of the flags of the first element of the received and expected element " + QString::number(i) + " do not match\n";
+            error += "Real flag: ";
+            real_list[i].is_first_elem == true ? error += "true\n" : error += "false\n";
+            error += "Exp flag: ";
+            exp_list[i].is_first_elem == true ? error += "true\n" : error += "false\n";
+        }
+    }
+
+    // Вернуть ошибку
+    return error;
+}

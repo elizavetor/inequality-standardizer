@@ -21,6 +21,8 @@ public:
     Error();
     Error(ErrorType _type, int _pos = -1, QStringList _error_strings = {});
 
+    friend uint qHash(const Error &item, uint seed);
+
     /*!
      * \brief Получить сообщение об ошибке известного типа
      * \return строка, содержащая сообщение об ошибке
@@ -44,6 +46,6 @@ public:
 /*!
  * \brief Хэш-функция для класса Error
  */
-uint qHash(const Error & item);
+uint qHash(const Error &item, uint seed = 0);
 
 #endif // ERROR_H

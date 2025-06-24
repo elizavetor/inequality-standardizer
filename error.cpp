@@ -119,7 +119,7 @@ bool Error::operator==(const Error& other) const
 /*!
  * \brief Хэш-функция для класса Error
  */
-uint qHash(const Error & item)
-{
-    return qHash(item.getErrorStrings());
+uint qHash(const Error &item, uint seed) {
+    return qHash(item.pos, seed) ^
+           qHash(item.error_strings, seed);
 }

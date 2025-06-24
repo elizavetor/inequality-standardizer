@@ -3,6 +3,9 @@
 #include "nodeofexprtree.h"
 #include "error.h"
 
+#include <QObject>
+#include <QtTest/QtTest>
+
 /*!
  * \brief Сравнивает ожидаемое дерево с полученным и формирует сообщение о различиях
  * \param [in] exp_node - ожидаемое дерево
@@ -21,6 +24,12 @@ bool compareTrees(const NodeOfExprTree* exp_node, const NodeOfExprTree* real_nod
  */
 QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_errors);
 
-
+/*!
+ * \brief Сравнивает ожидаемый список елементов с полученным и выводит сообщение об ошибке
+ * \param [in] expr_list - ожидаемый список
+ * \param [in] real_list - полученный список
+ * \return строку ошибки
+ */
+QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list);
 
 #endif // TESTINGFUNCTIONS_H
