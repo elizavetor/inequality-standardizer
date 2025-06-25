@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "error.h"
+#include <QSet>
 
 class NodeOfExprTree;
 

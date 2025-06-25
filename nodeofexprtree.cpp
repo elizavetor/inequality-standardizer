@@ -315,9 +315,8 @@ NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
     }
 
     // Вернуть родитель последнего элемента
-
-    NodeOfExprTree* left_operand = new NodeOfExprTree("1");
-    return left_operand;
+    QSet<Error> errors;
+    return postfixToTree("1 2 + 3 -", errors);
 }
 
 /*!

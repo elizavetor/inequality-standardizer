@@ -28,7 +28,7 @@ void Test_listToTree::testListToTree_data()
 {
     // Добавить столбцы
     QTest::addColumn<QList<OperandOfExpr>>("list");
-    QTest::addColumn<NodeOfExprTree*>("expr_tree");
+    QTest::addColumn<NodeOfExprTree*>("exp_tree");
 
     // Создать список ошибок для вызова функции создания дерева
     QSet<Error> errors;

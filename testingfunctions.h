@@ -4,7 +4,7 @@
 #include "error.h"
 
 #include <QObject>
-#include <QtTest/QtTest>
+#include <QSet>
 
 /*!
  * \brief Сравнивает ожидаемое дерево с полученным и формирует сообщение о различиях
