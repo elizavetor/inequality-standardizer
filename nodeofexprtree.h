@@ -108,14 +108,14 @@ public:
      * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного корня
      * \return список операндов
      */
-    QList<OperandOfExpr>& getListOfNodesOfSamePrecedenceLevel();
+    QList<OperandOfExpr> getListOfNodesOfSamePrecedenceLevel();
 
     /*!
      * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного узла, раскрывая скобки
      * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
      * \return список операндов
      */
-    QList<OperandOfExpr>& getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
+    QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
 
     /*!
      * \brief Построить дерево выражения по элементам в списке
@@ -128,14 +128,14 @@ public:
      * \brief Получить список элементов сортировки в дереве, начиная с заданного узла
      * \return список элементов сортировки
      */
-    QList<OperandOfExpr>& getSortedList();
+    QList<OperandOfExpr> getSortedList();
 
     /*!
      * \brief Получить инфиксную запись выражения из дерева этого выражения
      * \param [in] is_first_elem - флаг: true - указанный узел является первым операндом родителя, false - иначе
      * \return строка инфиксной записи выражения
      */
-    QString& treeToInfix(bool is_first_elem);
+    QString& treeToInfix(bool is_first_elem = true);
 
     /*!
      * \brief Получить степень выражения
