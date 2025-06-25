@@ -90,10 +90,22 @@ public:
     void setRightOperand(NodeOfExprTree* _right_operand) { right_operand = _right_operand; }
 
     /*!
+     * \brief Определить, является ли текущий оператор симметричным
+     * \return результат
+     */
+    bool isSymmetricOperator() {return (type == MULTIPLICATION || type == PLUS); }
+
+    /*!
      * \brief Вернуть приоритетность оператора
      * \return тип узла (0-5 в зависимости от приоритета), -1 - ошибка
      */
     int getPrecedenceType();
+
+    /*!
+     * \brief Получить строку значения узла для инфикной записи
+     * \return строка для инфикной записи
+     */
+    QString valueToStr();
 
     /*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree

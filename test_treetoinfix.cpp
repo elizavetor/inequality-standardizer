@@ -106,5 +106,5 @@ void Test_treeToInfix::testTreeToInfix_data()
     QTest::newRow("27. Nested brackets due to division.") << postfixToTree("1 2 3 4 + / /", errors) << "1 / (2 / (3 + 4))";
 
     // 28. Комплексный тест
-    QTest::newRow("28. Complex test.") << postfixToTree("1 3 4 * / 5 ~ * 6 ~ 7 8 * - <", errors) << "1 / (3 * 4) * (-5) < (-6) - 7 * 8";
+    QTest::newRow("28. Complex test.") << postfixToTree("1 3 4 * / 5 ~ * 6 ~ 7 8 * - <", errors) << "1 / (3 * 4) * (-5) < -6 - 7 * 8";
 }

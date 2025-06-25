@@ -32,7 +32,7 @@ NodeOfExprTree::NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand, No
         type = GREATER_OR_EQUAL;
     else if (value == "<=")
         type = LESS_OR_EQUAL;
-    else if (value == "==")
+    else if (value == "=")
         type = EQUAL;
     else if (value == "!=")
         type = NOT_EQUAL;
@@ -86,6 +86,20 @@ int NodeOfExprTree::getPrecedenceType()
         return -1;
         break;
     }
+}
+
+/*!
+ * \brief Получить строку значения узла для инфикной записи
+ * \return строка для инфикной записи
+ */
+QString NodeOfExprTree::valueToStr()
+{
+    if(type == UN_MINUS)
+        return "-";
+    if(type == EQUAL)
+        return "==";
+
+    return value;
 }
 
 /*!
@@ -390,6 +404,8 @@ QList<OperandOfExpr> NodeOfExprTree::getSortedList()
 QString NodeOfExprTree::treeToInfix(bool is_first_elem)
 {
     bool is_first_elem_for_operand = false;
+    bool is_expr_in_parentheses = false;
+
     // ...Считать строку инфиксной записи пустой
     QString infix;
     QString infix_of_left_operand;
@@ -399,16 +415,18 @@ QString NodeOfExprTree::treeToInfix(bool is_first_elem)
     if(left_operand != nullptr)
     {
         // Получить инфиксную запись левого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем левый операнд, или он уже установлен
-        if(getPrecedenceType() > left_operand->getPrecedenceType() || is_first_elem) is_first_elem_for_operand = true;
         infix_of_left_operand = left_operand->treeToInfix(is_first_elem_for_operand);
 
         /* Если левый операнд заданного узла типа оператора унарный минус и не является первым элементом выражения
          или является узлом типа оператора меньшего приоритета, чем приоритет типа оператора заданного узла*/
-        if(left_operand->type == UN_MINUS && !is_first_elem_for_operand
-            || getPrecedenceType() > left_operand->getPrecedenceType() && left_operand->type != NUM && left_operand->type != VAR)
+        is_expr_in_parentheses = (left_operand->type == UN_MINUS && !is_first_elem_for_operand)
+                                 || (getPrecedenceType() < left_operand->getPrecedenceType() && left_operand->type != NUM
+                                     && left_operand->type != VAR && !isComparisonOperator(value));
+        if(is_expr_in_parentheses)
         {
             // Взять полученную запись в скобки
             infix_of_left_operand = "(" + infix_of_left_operand + ")";
+            is_expr_in_parentheses = false;
         }
         // Добавить в инфиксную запись выражения получившуюся инфиксную запись левого операнда заданного узла
         infix += infix_of_left_operand + " ";
@@ -416,19 +434,22 @@ QString NodeOfExprTree::treeToInfix(bool is_first_elem)
     }
 
     // Добавить в инфиксную запись выражения значение заданного узла
-    infix += value;
+    infix += valueToStr();
     if(type != NUM && type != VAR && type != UN_MINUS) infix += " ";
 
     // Если у заданного узла есть правый операнд
     if(right_operand != nullptr)
     {
         // Получить инфиксную запись правого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем правый операнд
-        if(getPrecedenceType() > right_operand->getPrecedenceType()) is_first_elem_for_operand = true;
         infix_of_right_operand = right_operand->treeToInfix(is_first_elem_for_operand);
 
         /* Если правый операнд заданного узла типа унарный минус или
         заданный узел есть несимметричный узел, а правый операнд типа оператора приоритета не больше заданного узла */
-        if(right_operand->type == UN_MINUS || !isSymmetricOperator() && right_operand->getPrecedenceType() <= getPrecedenceType())
+        is_expr_in_parentheses = right_operand->type == UN_MINUS
+                                 || ((getPrecedenceType() < right_operand->getPrecedenceType()
+                                    || (!isSymmetricOperator() && right_operand->getPrecedenceType() == getPrecedenceType()))
+                                     && right_operand->type != NUM && right_operand->type != VAR && !isComparisonOperator(value));
+        if(is_expr_in_parentheses)
         {
             // Взять полученную запись в скобки
             infix_of_right_operand = "(" + infix_of_right_operand + ")";
