@@ -1,10 +1,9 @@
 #ifndef TEST_GETSORTEDLIST_H
 #define TEST_GETSORTEDLIST_H
 
-#include "nodeofexprtree.h"
-#include <QtTest/QtTest>
-
+#include "testingfunctions.h"
 #include <QObject>
+#include <QtTest/QtTest>
 
 class Test_getSortedList : public QObject
 {

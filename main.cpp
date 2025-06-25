@@ -9,6 +9,8 @@
 
 #include "test_listtotree.h"
 #include "test_treetoinfix.h"
+#include "test_operatorgt.h"
+#include "test_getsortedlist.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +32,8 @@ int main(int argc, char *argv[])
 
     Test_getDegreeOfExpr test_3;
     QTest::qExec(&test_3);
+    Test_getSortedList test_9;
+    QTest::qExec(&test_9);
     // Получить строку постфиксной записи выражения из исходного файла
     // Если найдена ошибка чтения
         // Вывести сообщение об ошибке и завершить работу программы
