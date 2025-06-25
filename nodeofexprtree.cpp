@@ -136,6 +136,30 @@ bool OperandOfExpr::operator>(const OperandOfExpr& other) const
 }
 
 /*!
+ * \brief Получить узел, пропустив все унарные минусы и посчитав их кол-во
+ * \param [in,out] node - искомый узел
+ * \return кол-во пропущенных унарных минусов
+ */
+int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree* node)
+{
+    // Считать, что не пропущен ни один узел типа оператора унарный минус
+    int count_of_un_minus = 0;
+
+    NodeOfExprTree* intended_desire_node = this;
+    while (intended_desire_node->type == UN_MINUS) // Пока предполагаемый искомый узел унарный минус
+    {
+        // Считать правый операнд предполагаемого искомого узла новым предполагаемым искомым узлом
+        intended_desire_node = intended_desire_node->right_operand;
+        // Увеличить кол-во пропущенных узлов типа оператора унарный минус на единицу
+        count_of_un_minus += 1;
+    }
+
+    // Вернуть кол-во пропущенных унарных минусов
+    node = intended_desire_node;
+    return count_of_un_minus;
+}
+
+/*!
  * \brief Расставить все элементы в дереве выражения по алфавиту, начиная с заданного узла
  * \return указатель на корень отсортированного дерева
  */

@@ -119,6 +119,13 @@ public:
     bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
 
     /*!
+     * \brief Получить узел, пропустив все унарные минусы и посчитав их кол-во
+     * \param [in,out] node - искомый узел
+     * \return кол-во пропущенных унарных минусов
+     */
+    int getNodeBySkippingUnaryMinus(NodeOfExprTree* node);
+
+    /*!
      * \brief Расставить все элементы в дереве выражения по алфавиту, начиная с заданного узла
      * \return указатель на корень отсортированного дерева
      */
