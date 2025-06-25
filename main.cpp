@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 
     Test_postfixToTree test2;
     QTest::qExec(&test2);
+    Test_getListOfNodesOfSamePrecedenceLevel test_4;
+    QTest::qExec(&test_4);
 
     Test_getDegreeOfExpr test_3;
     QTest::qExec(&test_3);
