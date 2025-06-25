@@ -1,7 +1,7 @@
 #ifndef TEST_GETNODESOFSAMEPRECEDENCEWITHPARENTHESESOPENING_H
 #define TEST_GETNODESOFSAMEPRECEDENCEWITHPARENTHESESOPENING_H
 
-#include "nodeofexprtree.h"
+#include "testingfunctions.h"
 #include <QtTest/QtTest>
 
 #include <QObject>
