@@ -1,8 +1,6 @@
 #ifndef TEST_SORTOPERANDSALPHABETICALLY_H
 #define TEST_SORTOPERANDSALPHABETICALLY_H
 
-#include "nodeofexprtree.h"
-
 #include "testingfunctions.h"
 #include <QObject>
 #include <QtTest/QtTest>
@@ -15,7 +13,7 @@ public:
 
 private slots:
     void testSortOperandsAlphabetically();
-    void testSortOperandsAlphabeticallyToInfix_data();
+    void testSortOperandsAlphabetically_data();
 };
 
 #endif // TEST_SORTOPERANDSALPHABETICALLY_H

@@ -18,7 +18,7 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically()
     QVERIFY2(compareTrees(exp_final_tree, real_final_tree, path, error_message), error_message.toUtf8());
 }
 
-void Test_sortOperandsAlphabetically::testSortOperandsAlphabeticallyToInfix_data()
+void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
 {
     // Добавить столбцы
     QTest::addColumn<NodeOfExprTree*>("start_tree");
@@ -189,7 +189,7 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabeticallyToInfix_data
     // 5.2 Одинаковые операторы «/»
     NodeOfExprTree* start_tree_5_2 = postfixToTree("a 1 / b 2 / /", errors);
     NodeOfExprTree* final_tree_5_2 = postfixToTree("a 1 / b 2 / /", errors);
-    QTest::newRow("2.2 The middle elements need to be changed") << start_tree_5_1 << start_tree_5_1;
+    QTest::newRow("2.2 The middle elements need to be changed") << start_tree_5_2 << final_tree_5_2;
 
     // 5.3 Одинаковые операторы «+»
     NodeOfExprTree* start_tree_5_3 = postfixToTree("a b + 1 2 + +", errors);
@@ -215,5 +215,4 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabeticallyToInfix_data
     NodeOfExprTree* start_tree_5_7 = postfixToTree("1 2 + b a + +", errors);
     NodeOfExprTree* final_tree_5_7 = postfixToTree("a b + 2 + 1 +", errors);
     QTest::newRow("5.7 The elements are in reverse order") << start_tree_5_7 << final_tree_5_7;
-
 }
