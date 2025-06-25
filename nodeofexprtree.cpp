@@ -415,6 +415,7 @@ QString NodeOfExprTree::treeToInfix(bool is_first_elem)
     if(left_operand != nullptr)
     {
         // Получить инфиксную запись левого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем левый операнд, или он уже установлен
+        if(getPrecedenceType() < left_operand->getPrecedenceType() || is_first_elem) is_first_elem_for_operand = true;
         infix_of_left_operand = left_operand->treeToInfix(is_first_elem_for_operand);
 
         /* Если левый операнд заданного узла типа оператора унарный минус и не является первым элементом выражения
@@ -441,6 +442,7 @@ QString NodeOfExprTree::treeToInfix(bool is_first_elem)
     if(right_operand != nullptr)
     {
         // Получить инфиксную запись правого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем правый операнд
+        if(getPrecedenceType() < right_operand->getPrecedenceType() || isComparisonOperator(value)) is_first_elem_for_operand = true;
         infix_of_right_operand = right_operand->treeToInfix(is_first_elem_for_operand);
 
         /* Если правый операнд заданного узла типа унарный минус или
