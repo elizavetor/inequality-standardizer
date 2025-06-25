@@ -3,6 +3,7 @@
 
 #include "nodeofexprtree.h"
 
+#include "testingfunctions.h"
 #include <QObject>
 #include <QtTest/QtTest>
 
