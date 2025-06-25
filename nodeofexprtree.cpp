@@ -262,40 +262,75 @@ bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr
 QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
 {
     // ...Считать список операндов пустым
-    // ...Считать списки элементов левого и правого операндов пустыми
+    QList<OperandOfExpr> list;
 
     // Если заданный узел есть унарная операция
+    if (type == UN_MINUS)
+    {
         // Добавить в список операндов заданный узел и его операнд как родитель и операнд элемента соответственно
+        list += OperandOfExpr{this, right_operand, false};
         // Вернуть список
+        return list;
+    }
 
     // Если заданный узел лист дерева
+    if (type == NUM || type == VAR)
+    {
         // Добавить в список узлов заданный узел
+        list += OperandOfExpr{nullptr, this, true};
         // Вернуть список
+        return list;
+    }
+
+    // ...Считать списки элементов левого и правого операндов пустыми
+    QList<OperandOfExpr> list_of_left_operand;
+    QList<OperandOfExpr> list_of_right_operand;
 
     // Если левый операнд заданного узла того же приоритета, что и заданный узел
-        // Получить список элементов операторов одного приоритета, начиная с левого операнда заданного узла, без родителя у первого элемента
-        // Добавить полученный список в список элементов левого операнда
-    // Иначе добавить левый операнд в список элементов левого операнда
+    if(left_operand->type == type)
+    {
+        /* Получить список элементов операторов одного приоритета, начиная с левого операнда заданного узла, без родителя у первого элемента
+         * Добавить полученный список в список элементов левого операнда */
+        list_of_left_operand += left_operand->getListOfNodesOfSamePrecedenceLevel();
+    }
+    else
+    {
+        // Добавить левый операнд в список элементов левого операнда
+        list_of_left_operand.append(OperandOfExpr{nullptr, left_operand, true});
+    }
 
-    // Если правый операнд заданного узла того же приоритета, что и заданный узел, несимметричный
-        // Получить список элементов операторов одного приоритета, начиная с левого операнда заданного узла, без родителя у первого элемента
-        // Добавить полученный список в список элементов правого операнда
-    // Иначе добавить правый операнд в список правого операнда  элементов
+    // Если правый операнд заданного узла того же приоритета, что и заданный узел, и заданный узел - симметричный
+    if(right_operand->type == type && isSymmetricOperator())
+    {
+        /* Получить список элементов операторов одного приоритета, начиная с правого операнда заданного узла, без родителя у первого элемента
+         * Добавить полученный список в список элементов правого операнда */
+        list_of_right_operand += right_operand->getListOfNodesOfSamePrecedenceLevel();
+    }
+    else
+    {
+        // Добавить правый операнд в список правого операнда элементов
+        list_of_right_operand.append(OperandOfExpr{nullptr, right_operand, true});
+    }
 
     // Считать заданный узел родителем первого элемента списка элементов правого операнда
+    list_of_right_operand[0].parent = this;
+    list_of_right_operand[0].is_first_elem = false;
+    list_of_right_operand[0].parent->right_operand = list_of_right_operand[0].operand;
 
     // Добавить в список операндов списки левого и правого операндов заданного узла
+    list += list_of_left_operand + list_of_right_operand;
 
     // Вернуть список операндов
-
-
-    // Создать общего родителя для множителя : "*"
-    QList<OperandOfExpr> list = {OperandOfExpr{nullptr, new NodeOfExprTree("1"), true},
-                                   OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("a"), false},
-                                   OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("2"), false},
-                                   OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("b"), false}};
-
     return list;
+
+
+//     // Создать общего родителя для множителя : "*"
+//     QList<OperandOfExpr> list_1 = {OperandOfExpr{nullptr, new NodeOfExprTree("1"), true},
+//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("a"), false},
+//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("2"), false},
+//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("b"), false}};
+
+//     return list_1;
 }
 
 /*!
