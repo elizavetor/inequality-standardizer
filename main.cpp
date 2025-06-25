@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     QTest::qExec(&test_4);
     Test_getNodesOfSamePrecedenceWithParenthesesOpening test_5;
     QTest::qExec(&test_5);
+    Test_listToTree test_6;
+    QTest::qExec(&test_6);
 
     Test_getDegreeOfExpr test_3;
     QTest::qExec(&test_3);
