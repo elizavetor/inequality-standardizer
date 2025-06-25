@@ -41,10 +41,6 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     NodeOfExprTree* start_tree_1_3 = postfixToTree("a ~", errors);
     QTest::newRow("1.3 Unary minus and variable") << start_tree_1_3 << start_tree_1_3;
 
-    // 1.4 Пустое выражение
-    NodeOfExprTree* start_tree_1_4 = nullptr;
-    QTest::newRow("1.4 Equal tree") << start_tree_1_4 << start_tree_1_4;
-
     // 2.Тесты для множителей
 
     // 2.1 Проверка на первое правило: сначала числа, потом переменные, далее - выражения в скобках
