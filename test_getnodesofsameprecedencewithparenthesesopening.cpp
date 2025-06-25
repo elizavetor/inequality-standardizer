@@ -8,8 +8,8 @@ Test_getNodesOfSamePrecedenceWithParenthesesOpening::
 void Test_getNodesOfSamePrecedenceWithParenthesesOpening::testGetNodesOfSamePrecedenceWithParenthesesOpening()
 {
     QFETCH(NodeOfExprTree*, root);
-    QFETCH(bool, is_invert);
     QFETCH(QList<OperandOfExpr>, exp_list);
+    QFETCH(bool, is_invert);
 
     // Получить результат
     QList<OperandOfExpr> real_list = root->getNodesOfSamePrecedenceWithParenthesesOpening(is_invert);
@@ -24,8 +24,8 @@ void Test_getNodesOfSamePrecedenceWithParenthesesOpening::testGetNodesOfSamePrec
 {
     // Добавить столбцы
     QTest::addColumn<NodeOfExprTree*>("root");
+    QTest::addColumn<QList<OperandOfExpr>>("exp_list");
     QTest::addColumn<bool>("is_invert");
-    QTest::addColumn<QList<OperandOfExpr>>("exp_degree");
 
     // Создать список ошибок для вызова функции создания дерева
     QSet<Error> errors;
@@ -161,7 +161,7 @@ void Test_getNodesOfSamePrecedenceWithParenthesesOpening::testGetNodesOfSamePrec
     QTest::newRow("20. Nested brackets due to division, is_inver = 1 ") << postfixToTree("1 2 3 * 4 5 * / /", errors) << list_20 << true;
 
     // 21. Комплексный текст
-    QList<OperandOfExpr> list_21 = {OperandOfExpr{nullptr, new NodeOfExprTree("a ~"), true},
+    QList<OperandOfExpr> list_21 = {OperandOfExpr{nullptr, postfixToTree("a ~", errors), true},
                                     OperandOfExpr{new NodeOfExprTree("+"), new NodeOfExprTree("b"), false},
                                     OperandOfExpr{new NodeOfExprTree("-"), new NodeOfExprTree("c"), false},
                                     OperandOfExpr{new NodeOfExprTree("+"), new NodeOfExprTree("d"), false},
