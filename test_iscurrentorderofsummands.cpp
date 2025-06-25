@@ -11,7 +11,7 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands()
     QFETCH(bool, exp_result);
 
     // Получить результат сравнения
-    bool real_result = elem_1.isCurrentOrderOfMultipliers(elem_2);
+    bool real_result = elem_1.isCurrentOrderOfSummands(elem_2);
 
     // Сравнить полученный результат с ожидаемым
     QCOMPARE(real_result, exp_result);
