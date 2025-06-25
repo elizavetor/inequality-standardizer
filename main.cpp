@@ -11,6 +11,8 @@
 #include "test_getsortedlist.h"
 #include "test_sortoperandsalphabetically.h"
 #include "test_iscurrentorderofsummands.h"
+#include "test_iscurrentorderofparenthesisedexpressions.h"
+
 
 
 int main(int argc, char *argv[])
@@ -88,6 +90,9 @@ void runTests()
 
     Test_isCurrentOrderOfSummands test_11;
     QTest::qExec(&test_11);
+
+    Test_isCurrentOrderOfParenthesisedExpressions test_12;
+    QTest::qExec(&test_12);
 }
 
 /*!
