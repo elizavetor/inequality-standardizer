@@ -59,8 +59,8 @@ void Test_getListOfNodesOfSamePrecedenceLevel::testGetListOfNodesOfSamePrecedenc
     QTest::newRow("5. Operators: \"+\", \"*\"") << postfixToTree("1 a * 2 b * +", errors) << list_5;
 
     // 6. Операторы «*» и «+»
-    QList<OperandOfExpr> list_6 = {OperandOfExpr{nullptr, postfixToTree("1 a *", errors), true},
-                                   OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("2 b *", errors), false}};
+    QList<OperandOfExpr> list_6 = {OperandOfExpr{nullptr, postfixToTree("1 a +", errors), true},
+                                   OperandOfExpr{new NodeOfExprTree("*"), postfixToTree("2 b +", errors), false}};
     QTest::newRow("6. Operators: \"*\", \"+\"") << postfixToTree("1 a + 2 b + *", errors) << list_6;
 
     // 7. Операторы «-» и «/»

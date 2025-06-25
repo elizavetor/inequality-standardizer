@@ -287,7 +287,7 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
     QList<OperandOfExpr> list_of_right_operand;
 
     // Если левый операнд заданного узла того же приоритета, что и заданный узел
-    if(left_operand->type == type)
+    if(left_operand->getPrecedenceType() == getPrecedenceType())
     {
         /* Получить список элементов операторов одного приоритета, начиная с левого операнда заданного узла, без родителя у первого элемента
          * Добавить полученный список в список элементов левого операнда */
@@ -300,7 +300,7 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
     }
 
     // Если правый операнд заданного узла того же приоритета, что и заданный узел, и заданный узел - симметричный
-    if(right_operand->type == type && isSymmetricOperator())
+    if(right_operand->getPrecedenceType() == getPrecedenceType() && isSymmetricOperator())
     {
         /* Получить список элементов операторов одного приоритета, начиная с правого операнда заданного узла, без родителя у первого элемента
          * Добавить полученный список в список элементов правого операнда */
@@ -322,15 +322,6 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
 
     // Вернуть список операндов
     return list;
-
-
-//     // Создать общего родителя для множителя : "*"
-//     QList<OperandOfExpr> list_1 = {OperandOfExpr{nullptr, new NodeOfExprTree("1"), true},
-//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("a"), false},
-//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("2"), false},
-//                                    OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("b"), false}};
-
-//     return list_1;
 }
 
 /*!
