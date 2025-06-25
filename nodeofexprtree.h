@@ -90,6 +90,12 @@ public:
     void setRightOperand(NodeOfExprTree* _right_operand) { right_operand = _right_operand; }
 
     /*!
+     * \brief Вернуть приоритетность оператора
+     * \return тип узла (0-5 в зависимости от приоритета), -1 - ошибка
+     */
+    int getPrecedenceType();
+
+    /*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
     bool operator==(const NodeOfExprTree& other) const;

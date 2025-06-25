@@ -51,6 +51,44 @@ NodeOfExprTree::NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand, No
 }
 
 /*!
+ * \brief Вернуть тип узла
+ * \return тип узла (0-5 в зависимости от приоритета), -1 - ошибка
+ */
+int NodeOfExprTree::getPrecedenceType()
+{
+    switch (type) {
+    case NUM:
+    case VAR:
+        return 0;
+        break;
+    case UN_MINUS:
+        return 1;
+        break;
+    case MULTIPLICATION:
+    case DIVISION:
+        return 2;
+        break;
+    case PLUS:
+    case BIN_MINUS:
+        return 3;
+        break;
+    case GREATER:
+    case LESS:
+    case GREATER_OR_EQUAL:
+    case LESS_OR_EQUAL:
+        return 4;
+        break;
+    case EQUAL:
+    case NOT_EQUAL:
+        return 5;
+        break;
+    default:
+        return -1;
+        break;
+    }
+}
+
+/*!
      * \brief Перегрузка оператора равенства для NodeOfExprTree
      */
 bool NodeOfExprTree::operator==(const NodeOfExprTree& other) const
