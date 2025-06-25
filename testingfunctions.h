@@ -30,6 +30,6 @@ QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_error
  * \param [in] real_list - полученный список
  * \return строку ошибки
  */
-QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list);
+QString compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list);
 
 #endif // TESTINGFUNCTIONS_H

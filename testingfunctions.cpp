@@ -108,7 +108,7 @@ QString compareErrorSets(const QSet<Error>& errors, const QSet<Error>& exp_error
  * \param [in] real_list - полученный список
  * \return строку ошибки
  */
-QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list)
+QString compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>& real_list)
 {
     // Считать, что ошибок не найдено
     QString error = "";
@@ -131,11 +131,11 @@ QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr
             {
                 // Считать, что ошибка найдена
                 error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
-                error += "Real parent: " + real_list[i].parent->getValue();
-                error += "Exp parent: " + exp_list[i].parent->getValue();
+                error += "Real parent: " + real_list[i].parent->getValue() + "\n";
+                error += "Exp parent: " + exp_list[i].parent->getValue() + "\n";
             }
         }
-        else if(real_list[i].parent == nullptr ||  exp_list[i].parent == nullptr)
+        else if((real_list[i].parent == nullptr || exp_list[i].parent == nullptr) && !(real_list[i].parent == nullptr && exp_list[i].parent == nullptr))
         {
             error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
             if(real_list[i].parent == nullptr)
@@ -151,10 +151,10 @@ QString& compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr
 
         }
         // ИначеЕсли операнд текущего элемента не равен ожидаемому
-        else if(compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
+        else if(!compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
         {
             // Считать, что ошибка найдена
-            error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i) + ", the following error was found:" + error_message + "\n";
+            error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i) + ", the following error was found:" + error_message;
         }
         // ИначеЕсли значение флага первого элемента списка не равен ожидаемому
         else if (real_list[i].is_first_elem != exp_list[i].is_first_elem)
