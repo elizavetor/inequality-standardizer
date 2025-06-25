@@ -389,31 +389,56 @@ QList<OperandOfExpr> NodeOfExprTree::getSortedList()
  */
 QString NodeOfExprTree::treeToInfix(bool is_first_elem)
 {
+    bool is_first_elem_for_operand = false;
     // ...Считать строку инфиксной записи пустой
-
-    // Если заданный узел пустой
-        // Вернуть пустую строку
+    QString infix;
+    QString infix_of_left_operand;
+    QString infix_of_right_operand;
 
     // Если у заданного узла есть левый операнд
+    if(left_operand != nullptr)
+    {
         // Получить инфиксную запись левого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем левый операнд, или он уже установлен
-    /* Если левый операнд заданного узла типа оператора унарный минус и не является первым элементом выражения
+        if(getPrecedenceType() > left_operand->getPrecedenceType() || is_first_elem) is_first_elem_for_operand = true;
+        infix_of_left_operand = left_operand->treeToInfix(is_first_elem_for_operand);
+
+        /* Если левый операнд заданного узла типа оператора унарный минус и не является первым элементом выражения
          или является узлом типа оператора меньшего приоритета, чем приоритет типа оператора заданного узла*/
-        // Взять полученную запись в скобки
-    // Добавить в инфиксную запись выражения получившуюся инфиксную запись левого операнда заданного узла
+        if(left_operand->type == UN_MINUS && !is_first_elem_for_operand
+            || getPrecedenceType() > left_operand->getPrecedenceType() && left_operand->type != NUM && left_operand->type != VAR)
+        {
+            // Взять полученную запись в скобки
+            infix_of_left_operand = "(" + infix_of_left_operand + ")";
+        }
+        // Добавить в инфиксную запись выражения получившуюся инфиксную запись левого операнда заданного узла
+        infix += infix_of_left_operand + " ";
+        is_first_elem_for_operand = false;
+    }
 
     // Добавить в инфиксную запись выражения значение заданного узла
+    infix += value;
+    if(type != NUM && type != VAR && type != UN_MINUS) infix += " ";
 
     // Если у заданного узла есть правый операнд
+    if(right_operand != nullptr)
+    {
         // Получить инфиксную запись правого операнда заданного узла, установив флаг первого элемента, если заданный оператор большего приоритета, чем правый операнд
-    /* Если правый операнд заданного узла типа унарный минус или
+        if(getPrecedenceType() > right_operand->getPrecedenceType()) is_first_elem_for_operand = true;
+        infix_of_right_operand = right_operand->treeToInfix(is_first_elem_for_operand);
+
+        /* Если правый операнд заданного узла типа унарный минус или
         заданный узел есть несимметричный узел, а правый операнд типа оператора приоритета не больше заданного узла */
-        // Взять полученную запись в скобки
-    // Добавить в инфиксную запись выражения получившуюся инфиксную запись правого операнда заданного узла
+        if(right_operand->type == UN_MINUS || !isSymmetricOperator() && right_operand->getPrecedenceType() <= getPrecedenceType())
+        {
+            // Взять полученную запись в скобки
+            infix_of_right_operand = "(" + infix_of_right_operand + ")";
+        }
+        // Добавить в инфиксную запись выражения получившуюся инфиксную запись правого операнда заданного узла
+        infix += infix_of_right_operand;
+    }
 
     // Вернуть инфиксную запись выражения
-
-    QString str("1");
-    return str;
+    return infix;
 }
 
 /*!
