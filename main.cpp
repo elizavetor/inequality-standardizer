@@ -7,6 +7,8 @@
 #include "test_getnodesofsameprecedencewithparenthesesopening.h"
 
 
+#include "test_listtotree.h"
+#include "test_treetoinfix.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +25,8 @@ int main(int argc, char *argv[])
     QTest::qExec(&test_5);
     Test_listToTree test_6;
     QTest::qExec(&test_6);
+    Test_treeToInfix test_7;
+    QTest::qExec(&test_7);
 
     Test_getDegreeOfExpr test_3;
     QTest::qExec(&test_3);
