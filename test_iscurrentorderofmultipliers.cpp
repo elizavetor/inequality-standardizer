@@ -205,7 +205,7 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
     // 4. Проверка на правило: верный порядок выражений в скобках
 
     // 4.1 От большей степени переменной n-ого слагаемого к меньшей, порядок верный
-    OperandOfExpr expr_4_1_1 = OperandOfExpr{parent, postfixToTree("a x * с d + +", errors), false};
+    OperandOfExpr expr_4_1_1 = OperandOfExpr{parent, postfixToTree("a x * c d + +", errors), false};
     OperandOfExpr expr_4_1_2 = OperandOfExpr{parent, postfixToTree("a b + c d + +", errors), false};
     QTest::newRow("4.1 From a higher degree of the nth term variable to a lower one, the order is correct: (a * x + с + d), (a + b + c + d)") << expr_4_1_1 << expr_4_1_2 << true;
 
