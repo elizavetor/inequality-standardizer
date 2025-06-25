@@ -354,21 +354,54 @@ QList<OperandOfExpr> NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpen
  */
 NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
 {
-    // Если первый элемент списка не является первым элементом дерева
-    // Сделать первый элемент списка первым элементом дерева
+    if(list.size() == 0) return nullptr;
 
-    // Считать операнд первого элемента списка left_operand
-    // Для каждого элемента списка кроме первого
+    // Если первый элемент списка не является первым элементом дерева
+    if (!list[0].is_first_elem)
     {
-        // Если текущий элемент является первым элементом дерева
-        // Создать симметричный узел того же приоритета и считать его родителем текущего узла
-        // Установить left_operand как левый операнд родителя текущего элемента списка
-        // Считать родитель текущего элемента списка left_operand
+        // Сделать первый элемент списка первым элементом дерева
+        if(list[0].parent->type == BIN_MINUS)
+        {
+            list[0].parent = nullptr;
+            list[0].operand = new NodeOfExprTree("~", nullptr, list[0].operand);
+            list[0].is_first_elem = true;
+        }
+        else if(list[0].parent->type == DIVISION)
+        {
+            list.prepend(OperandOfExpr{nullptr, new NodeOfExprTree("1"), true});
+        }
     }
 
-    // Вернуть родитель последнего элемента
-    QSet<Error> errors;
-    return postfixToTree("1 2 + 3 -", errors);
+    // Считать операнд первого элемента списка left_operand
+    NodeOfExprTree* _left_operand = list[0].operand;
+    int list_len = list.size();
+    for (int i = 1; i < list_len; i++)// Для каждого элемента списка кроме первого
+    {
+        // Если текущий элемент является первым элементом дерева
+        if (list[i].is_first_elem)
+        {
+            // Создать симметричный узел того же приоритета и считать его родителем текущего узла
+            if(type == PLUS || type == BIN_MINUS)
+            {
+                NodeOfExprTree* plus = new NodeOfExprTree("+", nullptr, list[i].operand);
+                list[i].parent = plus;
+            }
+            else if(type == DIVISION || type == MULTIPLICATION)
+            {
+                NodeOfExprTree* multiply = new NodeOfExprTree("*", nullptr, list[i].operand);
+                list[i].parent = multiply;
+            }
+        }
+
+        // Установить left_operand как левый операнд родителя текущего элемента списка
+        list[i].parent->left_operand = _left_operand;
+
+        // Считать родителя текущего элемента списка left_operand
+        _left_operand = list[i].parent;
+    }
+
+    // Вернуть родителя последнего элемента
+    return list.last().parent;
 }
 
 /*!
