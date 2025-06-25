@@ -492,21 +492,21 @@ NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
 QList<OperandOfExpr> NodeOfExprTree::getSortedList()
 {
     //... Считать список узлов одного уровня приоритета пустым
+    QList<OperandOfExpr> list;
 
     // Если заданный узел есть узел типа оператора слагаемаго
+    if(type == PLUS || type == BIN_MINUS)
+    {
         // Получить список слагаемых и добавить его в список узлов одного уровня приоритета
-    // ИначеЕсли заданный узел типа оператора множителя
-        // Получить список множителей и добавить его в список узлов одного уровня приоритета
-    // ИначеЕсли заданный узел есть унарный оператор
-        // Считать родителя и операнд единственного элемента в списке узлов заданным узлом и его непустым операндом соответственно
+        list += getNodesOfSamePrecedenceWithParenthesesOpening();
+    }
+    else
+    {
+        // Получить список и добавить его в список узлов одного уровня приоритета
+        list += getListOfNodesOfSamePrecedenceLevel();
+    }
 
     // Вернуть список узлов одного уровня приоритета
-
-    QList<OperandOfExpr> list = {OperandOfExpr{nullptr, new NodeOfExprTree("1"), true},
-                                 OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("a"), false},
-                                 OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("2"), false},
-                                 OperandOfExpr{new NodeOfExprTree("*"), new NodeOfExprTree("b"), false}};
-
     return list;
 }
 

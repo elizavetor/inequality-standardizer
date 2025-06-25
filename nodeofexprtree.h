@@ -135,7 +135,7 @@ public:
      * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
      * \return список операндов
      */
-    QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert);
+    QList<OperandOfExpr> getNodesOfSamePrecedenceWithParenthesesOpening(bool is_invert = false);
 
     /*!
      * \brief Построить дерево выражения по элементам в списке
