@@ -77,5 +77,5 @@ void Test_getSortedList::testGetSortedList_data()
                                     OperandOfExpr{plus, new NodeOfExprTree("d"), false},
                                     OperandOfExpr{minus, new NodeOfExprTree("e"), false},
                                     OperandOfExpr{plus, postfixToTree("1 2 + 3 *", errors), false}};
-    QTest::newRow("7. Complex text") << postfixToTree("a ~ b + c d - - 1 2 + 3 * +", errors) << list_7;
+    QTest::newRow("7. Complex text") << postfixToTree("a ~ b + c d e - - - 1 2 + 3 * +", errors) << list_7;
 }
