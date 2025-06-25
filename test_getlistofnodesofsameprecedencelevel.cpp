@@ -22,7 +22,7 @@ void Test_getListOfNodesOfSamePrecedenceLevel::testGetListOfNodesOfSamePrecedenc
 {
     // Добавить столбцы
     QTest::addColumn<NodeOfExprTree*>("root");
-    QTest::addColumn<QList<OperandOfExpr>>("exp_degree");
+    QTest::addColumn<QList<OperandOfExpr>>("exp_list");
 
     // Создать список ошибок для вызова функции создания дерева
     QSet<Error> errors;
@@ -105,7 +105,7 @@ void Test_getListOfNodesOfSamePrecedenceLevel::testGetListOfNodesOfSamePrecedenc
     QTest::newRow("13. Unary cons of \"outside\"") << postfixToTree("1 a + ~ 2 b + ~ +", errors) << list_13;
 
     // 14. Унарные минусы «внутри»
-    QList<OperandOfExpr> list_14 = {OperandOfExpr{nullptr, new NodeOfExprTree("1 ~"), true},
+    QList<OperandOfExpr> list_14 = {OperandOfExpr{nullptr, postfixToTree("1 ~", errors), true},
                                     OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("a ~", errors), false},
                                     OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("2 ~", errors), false},
                                     OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("b ~", errors), false}};
