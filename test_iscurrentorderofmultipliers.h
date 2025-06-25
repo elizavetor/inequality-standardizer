@@ -10,6 +10,9 @@ class Test_isCurrentOrderOfMultipliers : public QObject
 {
     Q_OBJECT
 
+public:
+    explicit Test_isCurrentOrderOfMultipliers(QObject *parent = nullptr);
+
 private slots:
     void testIsCurrentOrderOfMultipliers();
     void testIsCurrentOrderOfMultipliers_data();
