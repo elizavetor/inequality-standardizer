@@ -4,6 +4,7 @@
 #include <QObject>
 #include "error.h"
 #include <QSet>
+#include <QList>
 
 class NodeOfExprTree;
 
@@ -211,5 +212,10 @@ bool isComparisonOperator(QString token);
  * \param [in] stack - стек
  */
 void clearStackNodes(QStack<NodeOfExprTree*>& stack);
+
+/*!
+ * \brief Запустить все тесты
+ */
+void runTests();
 
 #endif // NODEOFEXPRTREE_H

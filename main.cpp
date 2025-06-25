@@ -5,37 +5,20 @@
 #include "test_getdegreeofexpr.h"
 #include "test_getlistofnodesofsameprecedencelevel.h"
 #include "test_getnodesofsameprecedencewithparenthesesopening.h"
-
-
 #include "test_listtotree.h"
 #include "test_treetoinfix.h"
 #include "test_operatorgt.h"
 #include "test_getsortedlist.h"
+#include "test_sortoperandsalphabetically.h"
+#include "test_iscurrentorderofsummands.h"
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Test_isCurrentOrderOfMultipliers test1;
-    QTest::qExec(&test1);
+    runTests();
 
-    Test_postfixToTree test2;
-    QTest::qExec(&test2);
-    Test_getListOfNodesOfSamePrecedenceLevel test_4;
-    QTest::qExec(&test_4);
-    Test_getNodesOfSamePrecedenceWithParenthesesOpening test_5;
-    QTest::qExec(&test_5);
-    Test_listToTree test_6;
-    QTest::qExec(&test_6);
-    Test_treeToInfix test_7;
-    QTest::qExec(&test_7);
-
-    Test_getDegreeOfExpr test_3;
-    QTest::qExec(&test_3);
-    Test_getSortedList test_9;
-    QTest::qExec(&test_9);
-    Test_sortOperandsAlphabetically test_10;
-    QTest::qExec(&test_10);
     // Получить строку постфиксной записи выражения из исходного файла
     // Если найдена ошибка чтения
         // Вывести сообщение об ошибке и завершить работу программы
@@ -68,6 +51,44 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
+/*!
+ * \brief Запустить все тесты
+ */
+void runTests()
+{
+    Test_isCurrentOrderOfMultipliers test1;
+    QTest::qExec(&test1);
+
+    Test_postfixToTree test2;
+    QTest::qExec(&test2);
+
+    Test_getDegreeOfExpr test_3;
+    QTest::qExec(&test_3);
+
+    Test_getListOfNodesOfSamePrecedenceLevel test_4;
+    QTest::qExec(&test_4);
+
+    Test_getNodesOfSamePrecedenceWithParenthesesOpening test_5;
+    QTest::qExec(&test_5);
+
+    Test_listToTree test_6;
+    QTest::qExec(&test_6);
+
+    Test_treeToInfix test_7;
+    QTest::qExec(&test_7);
+
+    Test_operatorGt test_8;
+    QTest::qExec(&test_8);
+
+    Test_getSortedList test_9;
+    QTest::qExec(&test_9);
+
+    Test_sortOperandsAlphabetically test_10;
+    QTest::qExec(&test_10);
+
+    Test_isCurrentOrderOfSummands test_11;
+    QTest::qExec(&test_11);
+}
 
 /*!
  * \brief Из постфиксной записи выражения получить дерево этого выражения
