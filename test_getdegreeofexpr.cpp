@@ -144,5 +144,5 @@ void Test_getDegreeOfExpr::testGetDegreeOfExpr_data()
 
 
     // 6. Комплексный тест
-    QTest::newRow("6 Complex test") << postfixToTree("a 1 b 2 с + * + ~ * 3 d e + * -", errors) << 3;
+    QTest::newRow("6 Complex test") << postfixToTree("a 1 b 2 c + * + ~ * 3 d e + * -", errors) << 3;
 }
