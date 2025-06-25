@@ -130,14 +130,14 @@ QString compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>
             if(*real_list[i].parent != *exp_list[i].parent)
             {
                 // Считать, что ошибка найдена
-                error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
+                error = "\nThe parents of the expected and received elements " + QString::number(i + 1) + " do not match\n";
                 error += "Real parent: " + real_list[i].parent->getValue() + "\n";
                 error += "Exp parent: " + exp_list[i].parent->getValue() + "\n";
             }
         }
         else if((real_list[i].parent == nullptr || exp_list[i].parent == nullptr) && !(real_list[i].parent == nullptr && exp_list[i].parent == nullptr))
         {
-            error = "\nThe parents of the expected and received elements " + QString::number(i) + " do not match\n";
+            error = "\nThe parents of the expected and received elements " + QString::number(i + 1) + " do not match\n";
             if(real_list[i].parent == nullptr)
             {
                 error += "Real parent: nullptr\n";
@@ -154,13 +154,13 @@ QString compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>
         else if(!compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
         {
             // Считать, что ошибка найдена
-            error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i) + ", the following error was found:" + error_message;
+            error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i + 1) + ", the following error was found:" + error_message;
         }
         // ИначеЕсли значение флага первого элемента списка не равен ожидаемому
         else if (real_list[i].is_first_elem != exp_list[i].is_first_elem)
         {
             // Считать, что ошибка найдена
-            error = "\nThe values of the flags of the first element of the received and expected element " + QString::number(i) + " do not match\n";
+            error = "\nThe values of the flags of the first element of the received and expected element " + QString::number(i + 1) + " do not match\n";
             error += "Real flag: ";
             real_list[i].is_first_elem == true ? error += "true\n" : error += "false\n";
             error += "Exp flag: ";
