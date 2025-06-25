@@ -174,11 +174,6 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     NodeOfExprTree* final_tree_4_10= postfixToTree("a ~ b ~ + 1 ~ + 2 ~ +", errors);
     QTest::newRow("4.10 Unary cons of \"outside\"") << start_tree_4_10 << final_tree_4_10;
 
-    // 4.11 Унарные минусы «внутри»
-    NodeOfExprTree* start_tree_4_11 = postfixToTree("c b +3 + 2 a 1 * + - -", errors);
-    NodeOfExprTree* final_tree_4_11= postfixToTree("1 a * b - c + 2 + 3 -", errors);
-    QTest::newRow("4.11 Nested parentheses due to binary minus") << start_tree_4_11 << final_tree_4_11;
-
     // 5. Тесты на сортировку дерева
 
     // 5.1 Одинаковые операторы «*»
@@ -215,4 +210,26 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     NodeOfExprTree* start_tree_5_7 = postfixToTree("1 2 + b a + +", errors);
     NodeOfExprTree* final_tree_5_7 = postfixToTree("a b + 2 + 1 +", errors);
     QTest::newRow("5.7 The elements are in reverse order") << start_tree_5_7 << final_tree_5_7;
+
+    // 6. Тесты на вложенность
+
+    // 6.1 Вложенные скобки среди слагаемых
+    NodeOfExprTree* start_tree_6_1 = postfixToTree("c b 3 + 2 a + - -", errors);
+    NodeOfExprTree* final_tree_6_1= postfixToTree("a b - c + 2 + 3 -", errors);
+    QTest::newRow("6.1 Nested parentheses among the terms") << start_tree_6_1 << final_tree_6_1;
+
+    // 6.2 Вложенные скобки среди слагаемых
+    NodeOfExprTree* start_tree_6_2 = postfixToTree("c 3 a 2 * / b * /", errors);
+    NodeOfExprTree* final_tree_6_2= postfixToTree("c 3 b * 2 a * / /", errors);
+    QTest::newRow("6.2 Nested brackets among multipliers") << start_tree_6_2 << final_tree_6_2;
+
+    // 6.3 Вложенные скобки среди слагаемых
+    NodeOfExprTree* start_tree_6_3 = postfixToTree("c b 2 a + / 3 * -", errors);
+    NodeOfExprTree* final_tree_6_3 = postfixToTree("3 b * a 2 + / ~ c +", errors);
+    QTest::newRow("6.3 Terms -> multipliers -> terms") << start_tree_6_3 << final_tree_6_3;
+
+    // 6.4 Вложенные скобки среди слагаемых
+    NodeOfExprTree* start_tree_6_4 = postfixToTree("b 3 a 2 * + *", errors);
+    NodeOfExprTree* final_tree_6_4 = postfixToTree("b 2 a * 3 + *", errors);
+    QTest::newRow("6.4 Multipliers -> terms -> multipliers") << start_tree_6_4 << final_tree_6_4;
 }
