@@ -3,6 +3,10 @@
 #include "test_iscurrentorderofmultipliers.h"
 #include "test_postfixtotree.h"
 #include "test_getdegreeofexpr.h"
+#include "test_getlistofnodesofsameprecedencelevel.h"
+#include "test_getnodesofsameprecedencewithparenthesesopening.h"
+
+
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +19,8 @@ int main(int argc, char *argv[])
     QTest::qExec(&test2);
     Test_getListOfNodesOfSamePrecedenceLevel test_4;
     QTest::qExec(&test_4);
+    Test_getNodesOfSamePrecedenceWithParenthesesOpening test_5;
+    QTest::qExec(&test_5);
 
     Test_getDegreeOfExpr test_3;
     QTest::qExec(&test_3);
