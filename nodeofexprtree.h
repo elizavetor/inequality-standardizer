@@ -62,6 +62,8 @@ public:
     NodeOfExprTree();
     NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand = nullptr, NodeOfExprTree* _right_operand = nullptr);
 
+    friend struct OperandOfExpr;
+
     /*!
      * \brief Вернуть значение узла
      * \return значение узла

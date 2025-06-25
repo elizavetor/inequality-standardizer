@@ -215,12 +215,12 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
     // 4.3 Отличны средние переменные, порядок верный
     OperandOfExpr expr_4_3_1 = OperandOfExpr{parent, postfixToTree("a b + c a + +", errors), false};
     OperandOfExpr expr_4_3_2 = OperandOfExpr{parent, postfixToTree("a x + c +", errors), false};
-    QTest::newRow("4.3 The average variables are excellent, the order is correct: (a + b + c + a), (a + x + c)") << expr_4_3_1 << expr_4_3_2 << true;
+    QTest::newRow("4.3 The average variables are different, the order is correct: (a + b + c + a), (a + x + c)") << expr_4_3_1 << expr_4_3_2 << true;
 
     // 4.4 Отличны средние переменные, порядок неверный
     OperandOfExpr expr_4_4_1 = OperandOfExpr{parent, postfixToTree("a x + c a + +", errors), false};
     OperandOfExpr expr_4_4_2 = OperandOfExpr{parent, postfixToTree("a b + c +", errors), false};
-    QTest::newRow("4.4 The average variables are excellent, the order is uncorrect: (a + x + c + a), (a + b + c)") << expr_4_4_1 << expr_4_4_2 << false;
+    QTest::newRow("4.4 The average variables are different, the order is uncorrect: (a + x + c + a), (a + b + c)") << expr_4_4_1 << expr_4_4_2 << false;
 
     // 4.5 В первом выражении больше переменных, чем во втором
     OperandOfExpr expr_4_5_1 = OperandOfExpr{parent, postfixToTree("a b + c x + +", errors), false};
