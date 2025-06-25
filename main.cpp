@@ -34,6 +34,8 @@ int main(int argc, char *argv[])
     QTest::qExec(&test_3);
     Test_getSortedList test_9;
     QTest::qExec(&test_9);
+    Test_sortOperandsAlphabetically test_10;
+    QTest::qExec(&test_10);
     // Получить строку постфиксной записи выражения из исходного файла
     // Если найдена ошибка чтения
         // Вывести сообщение об ошибке и завершить работу программы
