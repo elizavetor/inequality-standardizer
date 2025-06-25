@@ -349,7 +349,7 @@ QList<OperandOfExpr> NodeOfExprTree::getSortedList()
  * \param [in] is_first_elem - флаг: true - указанный узел является первым операндом родителя, false - иначе
  * \return строка инфиксной записи выражения
  */
-QString& NodeOfExprTree::treeToInfix(bool is_first_elem)
+QString NodeOfExprTree::treeToInfix(bool is_first_elem)
 {
     // ...Считать строку инфиксной записи пустой
 

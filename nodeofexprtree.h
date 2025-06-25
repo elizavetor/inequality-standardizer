@@ -136,7 +136,7 @@ public:
      * \param [in] is_first_elem - флаг: true - указанный узел является первым операндом родителя, false - иначе
      * \return строка инфиксной записи выражения
      */
-    QString& treeToInfix(bool is_first_elem = true);
+    QString treeToInfix(bool is_first_elem = true);
 
     /*!
      * \brief Получить степень выражения
