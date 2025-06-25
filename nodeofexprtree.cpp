@@ -469,23 +469,46 @@ QString NodeOfExprTree::treeToInfix(bool is_first_elem)
 int NodeOfExprTree::getDegreeOfExpr()
 {
     // Считать степень выражения нулевой
+    int degree = 0;
     // Считать степень левого и правого операндов заданного узла нулевой
+    int degree_of_left_operand = 0;
+    int degree_of_right_operand = 0;
 
     // Считать степень равную единице, если заданный узел есть узел типа переменная, и вернуть её
-    // Считать степень равную нулю, если заданный узел пустой или есть узел типа число, и вернуть её
+    if(type == VAR) return 1;
+    // Считать степень равную нулю, если заданный узел есть узел типа число, и вернуть её
+    if(type == NUM) return 0;
 
     // Получить степени левого и правого операндов заданного узла
+    if(left_operand) degree_of_left_operand = left_operand->getDegreeOfExpr();
+    if(right_operand) degree_of_right_operand = right_operand->getDegreeOfExpr();
 
     // Если заданный узел есть типа оператора сложения или сравнения
+    if(type == PLUS || type == BIN_MINUS || isComparisonOperator(value))
+    {
         // Считать степень выражения максимальной среди степеней левого и правого операндов заданного узла
-    // Иначе
+        if(degree_of_left_operand >= degree_of_right_operand)
+            degree += degree_of_left_operand;
+        else
+            degree += degree_of_right_operand;
+    }
+    else
+    {
         // Прибавить к степени выражения степень левого операнда заданного узла
-    // Если заданный узел типа оператора деление
-        // Отнять от степени выражения степень правого операнда заданного узла
-    // Иначе
-        // Прибавить от степени выражения степень правого операнда заданного узла
+        degree += degree_of_left_operand;
+        // Если заданный узел типа оператора деление
+        if(type == DIVISION)
+        {
+            // Отнять от степени выражения степень правого операнда заданного узла
+            degree -= degree_of_right_operand;
+        }
+        else
+        {
+            // Прибавить от степени выражения степень правого операнда заданного узла
+            degree += degree_of_right_operand;
+        }
+    }
 
     // Вернуть степень выражения
-
-    return 0;
+    return degree;
 }
