@@ -11,7 +11,7 @@ void Test_postfixToTree::testPostfixToTree()
     QFETCH(QSet<Error>, final_errors);
     QFETCH(NodeOfExprTree*, exp_tree);
 
-    // Получить результат сравнения
+    // Получить дерево
     QSet<Error> real_errors = starting_errors;
     NodeOfExprTree* real_tree = postfixToTree(postfix_notation, real_errors);
 
