@@ -64,8 +64,8 @@ void Test_getNodesOfSamePrecedenceWithParenthesesOpening::testGetNodesOfSamePrec
     QTest::newRow("5. Operators: \"+\", \"*\"") << postfixToTree("1 a * 2 b * +", errors) << list_5 << false;
 
     // 6. Операторы «*» и «+»
-    QList<OperandOfExpr> list_6 = {OperandOfExpr{nullptr, postfixToTree("1 a *", errors), true},
-                                   OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("2 b *", errors), false}};
+    QList<OperandOfExpr> list_6 = {OperandOfExpr{nullptr, postfixToTree("1 a +", errors), true},
+                                   OperandOfExpr{new NodeOfExprTree("*"), postfixToTree("2 b +", errors), false}};
     QTest::newRow("6. Operators: \"*\", \"+\"") << postfixToTree("1 a + 2 b + *", errors) << list_6 << false;
 
     // 7. Операторы «-» и «/»
@@ -167,5 +167,5 @@ void Test_getNodesOfSamePrecedenceWithParenthesesOpening::testGetNodesOfSamePrec
                                     OperandOfExpr{new NodeOfExprTree("+"), new NodeOfExprTree("d"), false},
                                     OperandOfExpr{new NodeOfExprTree("-"), new NodeOfExprTree("e"), false},
                                     OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("1 2 + 3 *", errors), false}};
-    QTest::newRow("21. Complex text") << postfixToTree("a ~ b + c d - - 1 2 + 3 * +", errors) << list_21 << false;
+    QTest::newRow("21. Complex text") << postfixToTree("a ~ b + c d e - - - 1 2 + 3 * +", errors) << list_21 << false;
 }
