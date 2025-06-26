@@ -5,6 +5,34 @@
  */
 bool OperandOfExpr::operator>(const OperandOfExpr& other) const
 {
+    // Если сравниваются слагаемые
+    if((parent != nullptr && (parent->type == PLUS || parent->type == BIN_MINUS))
+        || (other.parent != nullptr && (other.parent->type == PLUS || other.parent->type == BIN_MINUS)))
+    {
+        // Получить результат сравнения слагаемых
+        return !isCurrentOrderOfSummands(other);
+    }
+    // ИначеЕсли сравниваются множители
+    else if((parent != nullptr && parent->type == MULTIPLICATION)
+             || (other.parent != nullptr && other.parent->type == MULTIPLICATION))
+    {
+        // Получить список множителей
+        return !isCurrentOrderOfMultipliers(other);
+    }
+    // ИначеЕсли сравниваются элементы с делителями
+    else if((parent != nullptr && parent->type == DIVISION)
+             || (other.parent != nullptr && other.parent->type == DIVISION))
+    {
+        if (parent != nullptr)
+        {
+            if (parent->type == DIVISION && (other.parent != nullptr && other.parent->type != DIVISION))
+            {
+                return true;
+            }
+        }
+        else return false;
+    }
+
     return false;
 }
 
