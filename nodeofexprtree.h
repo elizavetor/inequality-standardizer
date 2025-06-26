@@ -125,7 +125,7 @@ public:
      * \param [in,out] node - искомый узел
      * \return кол-во пропущенных унарных минусов
      */
-    int getNodeBySkippingUnaryMinus(NodeOfExprTree* node);
+    int getNodeBySkippingUnaryMinus(NodeOfExprTree** node);
 
     /*!
      * \brief Расставить все элементы в дереве выражения по алфавиту, начиная с заданного узла

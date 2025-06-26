@@ -100,65 +100,65 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
     QTest::newRow("2.2 Correct order: number_1 < namber_2. Order check: 3, 1") << _3 << _1 << false;
 
     // 2.3 Первое число отрицательное, второе - положительное
-    QTest::newRow("2.2 Correct order: number_1 < namber_2. Order check: ~3, 1") << un_3 << _1 << false;
+    QTest::newRow("2.3 Correct order: number_1 < namber_2. Order check: ~3, 1") << un_3 << _1 << true;
 
     // 2.4 Первое число положительное, второе - отрицательное
-    QTest::newRow("2.3. Correct order: number_1 < namber_2. Order check: 1, ~3") << _1 << un_3 << false;
+    QTest::newRow("2.4 Correct order: number_1 < namber_2. Order check: 1, ~3") << _1 << un_3 << false;
 
     // 2.5 Оба числа отрицательные, первое меньше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~3, ~1") << un_3 << un_1 << true;
+    QTest::newRow("2.5 Correct order: number_1 < namber_2. Order check: ~3, ~1") << un_3 << un_1 << true;
 
     // 2.6 Оба числа отрицательные, первое больше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~1, ~3") << un_1 << un_3 << false;
+    QTest::newRow("2.6 Correct order: number_1 < namber_2. Order check: ~1, ~3") << un_1 << un_3 << false;
 
     // 2.7 Чётное кол-во унарных минусов, первое число меньше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~(~1), ~(~3)") << un_un_1 << un_un_3 << true;
+    QTest::newRow("2.7 Correct order: number_1 < namber_2. Order check: ~(~1), ~(~3)") << un_un_1 << un_un_3 << true;
 
     // 2.8 Чётное кол-во унарных минусов, первое число больше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~(~3), ~(~1)") << un_un_3 << un_un_1 << false;
+    QTest::newRow("2.8 Correct order: number_1 < namber_2. Order check: ~(~3), ~(~1)") << un_un_3 << un_un_1 << false;
 
     // 2.9 Нечётное кол-во унарных минусов, первое число меньше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~(~(~3)), ~(~(~1))") << un_un_un_3 << un_un_un_1 << true;
+    QTest::newRow("2.9 Correct order: number_1 < namber_2. Order check: ~(~(~3)), ~(~(~1))") << un_un_un_3 << un_un_un_1 << true;
 
     // 2.10 Нечётное кол-во унарных минусов, первое число больше второго
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: ~(~(~1)), ~(~(~3))") << un_un_un_1 << un_un_un_3 << false;
+    QTest::newRow("2.10 Correct order: number_1 < namber_2. Order check: ~(~(~1)), ~(~(~3))") << un_un_un_1 << un_un_un_3 << false;
 
     // 2.11 Одинаковые цифры в числах, порядок верный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 11, 111") << _11 << _111 << true;
+    QTest::newRow("2.11 Correct order: number_1 < namber_2. Order check: 11, 111") << _11 << _111 << true;
 
     // 2.12 Одинаковые цифры в числах, порядок неверный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 111, 11") << _111 << _11 << false;
+    QTest::newRow("2.12 Correct order: number_1 < namber_2. Order check: 111, 11") << _111 << _11 << false;
 
     // 2.13 Первый множитель с плавающей запятой, порядок верный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 3,1, 31") << _3point1 << _31 << true;
+    QTest::newRow("2.13 Correct order: number_1 < namber_2. Order check: 3,1, 31") << _3point1 << _31 << true;
 
     // 2.14 Первый множитель с плавающей запятой, порядок неверный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 31,2, 31") << _31point2 << _31 << false;
+    QTest::newRow("2.14 Correct order: number_1 < namber_2. Order check: 31,2, 31") << _31point2 << _31 << false;
 
     // 2.15 Оба множителя с плавающей запятой, порядок верный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 3,1, 3,2") << _3point1 << _3point2 << true;
+    QTest::newRow("2.15 Correct order: number_1 < namber_2. Order check: 3,1, 3,2") << _3point1 << _3point2 << true;
 
     // 2.16 Оба множителя с плавающей запятой, порядок неверный
-    QTest::newRow("2. Correct order: number_1 < namber_2. Order check: 3,2, 3,1") << _3point2 << _3point1 << false;
+    QTest::newRow("2.16 Correct order: number_1 < namber_2. Order check: 3,2, 3,1") << _3point2 << _3point1 << false;
 
     // 2.17 Равные множители: целые числа
-    QTest::newRow("2. Equal multipliers: integers. Order check: 1, 1") << _1 << _1 << true;
+    QTest::newRow("2.17 Equal multipliers: integers. Order check: 1, 1") << _1 << _1 << true;
 
     // 2.18 Равные множители: числа с плавающей запятой
-    QTest::newRow("2. Equal multipliers: floating point numbers. Order check: 3,2, 3,2") << _3point2 << _3point2 << true;
+    QTest::newRow("2.18 Equal multipliers: floating point numbers. Order check: 3,2, 3,2") << _3point2 << _3point2 << true;
 
     // 2.19 Равные множители: числа с унарными минусами (у первого один, у второго три «~»)
-    QTest::newRow("2. Equal multipliers: numbers with unary cons (the first has one, the second has three \"~\"). Order check: ~1, ~(~(~1))") << un_1 << un_un_un_1 << true;
+    QTest::newRow("2.19 Equal multipliers: numbers with unary cons (the first has one, the second has three \"~\"). Order check: ~1, ~(~(~1))") << un_1 << un_un_un_1 << true;
 
     // 2.20 Равные множители: числа с унарными минусами (у первого три, у второго один «~»)
-    QTest::newRow("2. Equal multipliers: numbers with unary cons (the first one has three, the second one has one \"~\"). Order check: ~(~(~1)), ~1") << un_un_un_1 << un_1 << true;
+    QTest::newRow("2.20 Equal multipliers: numbers with unary cons (the first one has three, the second one has one \"~\"). Order check: ~(~(~1)), ~1") << un_un_un_1 << un_1 << true;
 
 
     // 3. Проверка на правило: первый множитель меньше второго (для узлов типа переменная)
     OperandOfExpr one = OperandOfExpr{parent, new NodeOfExprTree("one"), false};
     OperandOfExpr un_one = OperandOfExpr{parent, new NodeOfExprTree("~", nullptr, one.operand), false};
     OperandOfExpr un_un_one = OperandOfExpr{parent, new NodeOfExprTree("~", nullptr, un_one.operand), false};
-    OperandOfExpr two = OperandOfExpr{parent, new NodeOfExprTree("one"), false};
+    OperandOfExpr two = OperandOfExpr{parent, new NodeOfExprTree("two"), false};
     OperandOfExpr un_two = OperandOfExpr{parent, new NodeOfExprTree("~", nullptr, two.operand), false};
     OperandOfExpr un_un_two = OperandOfExpr{parent, new NodeOfExprTree("~", nullptr, un_two.operand), false};
     OperandOfExpr aa = OperandOfExpr{parent, new NodeOfExprTree("aa"), false};
@@ -238,11 +238,11 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
 
     // 4.9 Унарный минус у слагаемого, порядок верный
     OperandOfExpr expr_4_9_1 = OperandOfExpr{parent, postfixToTree("a b ~ + c x 1 + * +", errors), false};
-    OperandOfExpr expr_4_9_2 = OperandOfExpr{parent, postfixToTree("a b ~ c 1 + * +", errors), false};
-    QTest::newRow("4.9 The unary minus sign is in the correct order.: (a + (~b) + c * (x + 1)), (a + (~b * (c + 1)))") << expr_4_9_1 << expr_4_9_2 << true;
+    OperandOfExpr expr_4_9_2 = OperandOfExpr{parent, postfixToTree("a b c 1 + * ~ +", errors), false};
+    QTest::newRow("4.9 The unary minus sign is in the correct order.: (a + (~b) + c * (x + 1)), (a + (~b * (c + 1)))") << expr_4_9_1 << expr_4_9_2 << false;
 
     // 4.10 Унарный минус у слагаемого, порядок неверный
-    QTest::newRow("4.10 The unary minus sign has an incorrect order: (a + (~b * (c + 1))), (a + (~b) + c * (x + 1))") << expr_4_9_2 << expr_4_9_1 << false;
+    QTest::newRow("4.10 The unary minus sign has an incorrect order: (a + (~b * (c + 1))), (a + (~b) + c * (x + 1))") << expr_4_9_2 << expr_4_9_1 << true;
 
     // 4.11 Равные множители, различные операторы: «+», «-»
     OperandOfExpr expr_4_11_1 = OperandOfExpr{parent, postfixToTree("a b +", errors), false};

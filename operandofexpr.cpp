@@ -18,42 +18,42 @@ bool OperandOfExpr::isCurrentOrderOfMultipliers(const OperandOfExpr& other) cons
     bool is_current_order = true;
     // Получить первый множитель, пропуская и посчитав все узлы, если они есть, типы которых унарные минусы
     NodeOfExprTree* multiplier_1 = nullptr;
-    int missing_un_minuses_1 = operand->getNodeBySkippingUnaryMinus(multiplier_1);
+    int missing_un_minuses_1 = operand->getNodeBySkippingUnaryMinus(&multiplier_1);
 
     // Получить второй множитель, пропуская и посчитав все узлы, если они есть, типы которых унарные минусы
     NodeOfExprTree* multiplier_2 = nullptr;
-    int missing_un_minuses_2 = other.operand->getNodeBySkippingUnaryMinus(multiplier_2);
+    int missing_un_minuses_2 = other.operand->getNodeBySkippingUnaryMinus(&multiplier_2);
 
     // Определить, соблюдается ли порядок: сначала числа, потом переменные, далее - выражения в скобках
-    if((operand->type == VAR && other.operand->type == NUM)
-        || (isOperator(operand->value) && other.operand->type == VAR)
-        || (isOperator(operand->value) && other.operand->type == NUM))
+    if((multiplier_1->type == VAR && multiplier_2->type == NUM)
+        || (isOperator(multiplier_1->value) && multiplier_2->type == VAR)
+        || (isOperator(multiplier_1->value) && multiplier_2->type == NUM))
     {
         is_current_order = false;
     }
     // Если типы множителей одинаковые
-    else if (operand->type == other.operand->type || (isOperator(operand->value) && isOperator(other.operand->value)))
+    else if (multiplier_1->type == multiplier_2->type || (isOperator(multiplier_1->value) && isOperator(multiplier_2->value)))
     {
         // Определить, меньше ли первый множитель второго с учётом всех минусов, если их тип число
-        if(operand->type == NUM)
+        if(multiplier_1->type == NUM)
         {
             bool is_negative_1 = missing_un_minuses_1 % 2 == 1;
             bool is_negative_2 = missing_un_minuses_2 % 2 == 1;
 
-            if((is_negative_1 && is_negative_2 && operand->value < other.operand->value)
-                ||  (!is_negative_1 && !is_negative_2 && operand->value > other.operand->value)
+            if((is_negative_1 && is_negative_2 && multiplier_1->value < multiplier_2->value)
+                ||  (!is_negative_1 && !is_negative_2 && multiplier_1->value > multiplier_2->value)
                 || (!is_negative_1 && is_negative_2))
             {
                 is_current_order = false;
             }
         }
         // Определить, меньше ли первый множитель второго, если их тип переменная
-        else if(operand->type == VAR)
+        else if(multiplier_1->type == VAR)
         {
-            if(operand->value > other.operand->value) is_current_order = false;
+            if(multiplier_1->value > multiplier_2->value) is_current_order = false;
         }
         // Определить правильность расстановки множителей, если они есть выражения в скобках
-        else if (isOperator(operand->value) && isOperator(other.operand->value))
+        else if (isOperator(multiplier_1->value))
         {
             is_current_order = isCurrentOrderOfParenthesisedExpressions(other);
         }

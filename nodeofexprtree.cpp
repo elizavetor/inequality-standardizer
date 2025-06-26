@@ -131,7 +131,7 @@ void NodeOfExprTree::delTree(NodeOfExprTree* root)
  * \param [in,out] node - искомый узел
  * \return кол-во пропущенных унарных минусов
  */
-int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree* node)
+int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree** node)
 {
     // Считать, что не пропущен ни один узел типа оператора унарный минус
     int count_of_un_minus = 0;
@@ -146,7 +146,7 @@ int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree* node)
     }
 
     // Вернуть кол-во пропущенных унарных минусов
-    node = intended_desire_node;
+    *node = intended_desire_node;
     return count_of_un_minus;
 }
 
