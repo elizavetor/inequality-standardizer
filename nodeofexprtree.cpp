@@ -157,30 +157,55 @@ int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree** node)
 NodeOfExprTree* NodeOfExprTree::sortOperandsAlphabetically()
 {
     // ...Считать корень перестроенного дерева равным заданному узлу
+    NodeOfExprTree* new_root = this;
     // Получить список для сортировки
+    QList<OperandOfExpr> sorted_list = getSortedList();
 
     // Для каждого элемента списка сортировки
+    int sorted_list_len = sorted_list.size();
+    for (int i = 0; i < sorted_list_len; i++)
     {
         // Если текущий сортировочный элемент не является листом дерева
-        // Расставить все элементы в дереве по алфавиту, начиная с текущего элемента сортировки, получив корень этого элемента
-        // Если операнд текущего элемента сортировки отличен от полученного корня
-        // Изменить операнд текущего элемента сортировки на полученный корень
+        if(sorted_list[i].operand->type != VAR && sorted_list[i].operand->type != NUM)
+        {
+            // Расставить все элементы в дереве по алфавиту, начиная с текущего элемента сортировки, получив корень этого элемента
+            NodeOfExprTree* new_root_of_operand = sorted_list[i].operand->sortOperandsAlphabetically();
+            // Если операнд текущего элемента сортировки отличен от полученного корня
+            if(new_root_of_operand != sorted_list[i].operand || *new_root_of_operand != *sorted_list[i].operand)
+            {
+                // Изменить операнд текущего элемента сортировки на полученный корень
+                sorted_list[i].operand = new_root_of_operand;
+            }
+        }
     }
 
     // Расставить элементы сортировочного списка по алфавиту...
     // Если в сортировочном списке больше одного элемента
-    // Для каждой пары соседних элементов списка сортировки и пока не произошло ни одного изменения
+    if(sorted_list_len > 1)
     {
-        // Для всех пар соседних неотсортированных элементов сортировки
+        bool all_sorted = false;
+        // Для каждой пары соседних элементов списка сортировки и пока не произошло ни одного изменения
+        for(int i = 0; i < sorted_list_len && !all_sorted; i++)
         {
-            // Поменять местами элементы пары, если они нарушают порядок сортировки
+            // Для всех пар соседних неотсортированных элементов сортировки
+            for(int j = 0; j < sorted_list_len - i - 1; j++)
+            {
+                // Поменять местами элементы пары, если они нарушают порядок сортировки
+                if(sorted_list[j] > sorted_list[j + 1])
+                {
+                    sorted_list.swapItemsAt(j, j + 1);
+                    all_sorted = true;
+                }
+            }
+            all_sorted = false;
         }
+
+        // Перестроить дерево по отсортированным элементам в списке и получить корень перестроенного дерева
+        new_root = listToTree(sorted_list);
     }
-    // Перестроить дерево по отсортированным элементам в списке и получить корень перестроенного дерева
 
     // Вернуть корень дерева
-    NodeOfExprTree* left_operand = new NodeOfExprTree("1");
-    return left_operand;
+    return new_root;
 }
 
 /*!

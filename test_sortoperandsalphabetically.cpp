@@ -46,7 +46,7 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     // 2.1 Проверка на первое правило: сначала числа, потом переменные, далее - выражения в скобках
     NodeOfExprTree* start_tree_2_1 = postfixToTree("a 1 *", errors);
     NodeOfExprTree* final_tree_2_1 = postfixToTree("1 a *", errors);
-    QTest::newRow("2.1 Checking for a rule for miltipliers: numbers first, then variables, then expressions in parentheses. ( a * b -> 1 * a )") << start_tree_2_1 << final_tree_2_1;
+    QTest::newRow("2.1 Checking for a rule for miltipliers: numbers first, then variables, then expressions in parentheses. ( a * 1 -> 1 * a )") << start_tree_2_1 << final_tree_2_1;
 
     // 2.2 Проверка на второе правило: первый множитель меньше второго с учётом знака (для узлов типа число)
     NodeOfExprTree* start_tree_2 = postfixToTree("2 1 *", errors);
