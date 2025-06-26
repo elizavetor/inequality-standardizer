@@ -184,6 +184,13 @@ public:
      */
     QList<NodeOfExprTree*> getLeavesOfTree();
 
+    /*!
+     * \brief Получить список имён переменных из списка листов дерева
+     * \param [in] leaves - список элементов
+     * \return спосок переменных
+     */
+    QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves);
+
 };
 
 /*!
