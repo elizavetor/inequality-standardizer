@@ -10,6 +10,7 @@ SOURCES += \
         error.cpp \
         main.cpp \
         nodeofexprtree.cpp \
+        operandofexpr.cpp \
         test_getdegreeofexpr.cpp \
         test_getlistofnodesofsameprecedencelevel.cpp \
         test_getnodesofsameprecedencewithparenthesesopening.cpp \
