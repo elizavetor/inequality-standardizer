@@ -71,33 +71,98 @@ bool OperandOfExpr::isCurrentOrderOfMultipliers(const OperandOfExpr& other) cons
 bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
 {
     // Получить первое слагаемое, пропуская и посчитав все узлы, если они есть, типы которых унарные минусы
+    NodeOfExprTree* summand_1 = nullptr;
+    int missing_un_minuses_1 = operand->getNodeBySkippingUnaryMinus(&summand_1);
+
     // Получить второе слагаемое, пропуская и посчитав все узлы, если они есть, типы которых унарные минусы
+    NodeOfExprTree* summand_2 = nullptr;
+    int missing_un_minuses_2 = other.operand->getNodeBySkippingUnaryMinus(&summand_2);
 
     // Получить список элементов каждого слагаемого
+    QList<NodeOfExprTree*> elems_1 = summand_1->getLeavesOfTree();
+    QList<NodeOfExprTree*> elems_2 = summand_2->getLeavesOfTree();
 
-    // Определить, соблюдается ли порядок: сначала слагаемое с одинаковыми внутри себя именами переменных, потом - с различными
-    // Вернуть результат, если порядок определился
+    // Определить, соблюдается ли порядок: сначала слагаемое с одинаковыми внутри себя именами переменных, потом - с различными, и вернуть результат, если порядок определился
+    QList<NodeOfExprTree*> vars_1 = operand->getListOfVariableIDs(elems_1);
+    QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariableIDs(elems_2);
+    bool equal_vars_1 = areEqualVariableIDs(vars_1);
+    bool equal_vars_2 = areEqualVariableIDs(vars_2);
+    if(equal_vars_1 && !equal_vars_2)
+    {
+        return true;
+    }
+    else if (!equal_vars_1 && equal_vars_2)
+    {
+        return false;
+    }
 
     // Получить степень каждого слагаемого
-    // Определить, соблюдается ли порядок: сначала слагаемое с большей степенью переменных
-    // Вернуть результат, если порядок определился
+    int degree_of_summand_1 = summand_1->getDegreeOfExpr();
+    int degree_of_summand_2 = summand_2->getDegreeOfExpr();
+    // Определить, соблюдается ли порядок: сначала слагаемое с большей степенью переменных, и вернуть результат, если порядок определился
+    if(degree_of_summand_1 > degree_of_summand_2)
+    {
+        return true;
+    }
+    if(degree_of_summand_1 < degree_of_summand_2)
+    {
+        return false;
+    }
 
-    // Определить, соблюдается ли порядок: по алфавиту, учитывая только имена переменные
-    // Вернуть результат, если порядок определился
 
-    // Определить, соблюдается ли порядок: от большего количества элементов слагаемого к меньшему
-    // Вернуть результат, если порядок определился
+    // Определить, соблюдается ли порядок: по алфавиту, учитывая только имена переменные, и вернуть результат, если порядок определился
+    int result = isCurentOrderOfListOfVariableIDs(vars_1, vars_2);
+    if (result == 1 || result == 0)
+    {
+        return result;
+    }
 
-    // Определить, соблюдается ли порядок: от большего количества выражений в скобках в слагаемом к меньшему
-    // Вернуть результат, если порядок определился
+    // Определить, соблюдается ли порядок: от большего количества элементов слагаемого к меньшему, и вернуть результат, если порядок определился
+    if(elems_1.size() > elems_2.size())
+    {
+        return true;
+    }
+    else if(elems_1.size() < elems_2.size())
+    {
+        return false;
+    }
+
+    // Определить, соблюдается ли порядок: от большего количества выражений в скобках в слагаемом к меньшему, и вернуть результат, если порядок определился
+    int num_of_expr_in_parentheses_1 = summand_1->getNumOfParentheses();
+    int num_of_expr_in_parentheses_2 = summand_2->getNumOfParentheses();
+    if (num_of_expr_in_parentheses_1 > num_of_expr_in_parentheses_2)
+    {
+        return true;
+    }
+    else if (num_of_expr_in_parentheses_1 < num_of_expr_in_parentheses_2)
+    {
+        return false;
+    }
 
     // Если слагаемые типа число
-    // Определить, соблюдается ли порядок: от большего числа к меньшему
-    // Вернуть результат, если порядок определился
+    if(summand_1->type == NUM && summand_2->type == NUM)
+    {
+        // Определить, соблюдается ли порядок: от большего числа к меньшему, и вернуть результат, если порядок определился
+        bool is_negative_1 = missing_un_minuses_1 % 2 == 1;
+        bool is_negative_2 = missing_un_minuses_2 % 2 == 1;
+
+        if((is_negative_1 && is_negative_2 && summand_1->value < summand_2->value)
+            ||  (!is_negative_1 && !is_negative_2 && summand_1->value > summand_2->value)
+            || (!is_negative_1 && is_negative_2))
+        {
+            return true;
+        }
+        else if((is_negative_1 && is_negative_2 && summand_1->value > summand_2->value)
+            ||  (!is_negative_1 && !is_negative_2 && summand_1->value < summand_2->value)
+            || (!is_negative_1 && is_negative_2))
+        {
+            return false;
+        }
+
+    }
 
     // Вернуть, что порядок верный
-
-    return false;
+    return true;
 }
 
 /*!
