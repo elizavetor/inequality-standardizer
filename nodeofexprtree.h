@@ -247,4 +247,11 @@ void runTests();
  */
 int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOfExprTree*> vars_2);
 
+/*!
+ * \brief Определить, равны ли имена переменные в списке
+ * \param [in] var - список переменных
+ * \return true, если в списке одинаковые имена переменных, falst - иначе
+ */
+bool areEqualVariableIDs(QList<NodeOfExprTree*> vars);
+
 #endif // NODEOFEXPRTREE_H

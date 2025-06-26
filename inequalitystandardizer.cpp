@@ -304,3 +304,27 @@ int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOf
 
     return -1;
 }
+
+/*!
+ * \brief Определить, равны ли имена переменные в списке
+ * \param [in] var - список переменных
+ * \return true, если в списке одинаковые имена переменных, falst - иначе
+ */
+bool areEqualVariableIDs(QList<NodeOfExprTree*> vars)
+{
+    //...Считать, что имена переменных в списке одинаковы
+    bool is_equal = true;
+    int count_vars = vars.size();
+    for(int i = 0; i < count_vars && is_equal; i++) // Для каждого элемента в списке переменных, начиная со второго, пока они одинаковы
+    {
+        // Если текущее имя переменной не равно с первым
+        if(vars[0]->getValue() != vars[i]->getValue())
+        {
+            // Считать, что имена переменныч в списке различны
+            is_equal = false;
+        }
+    }
+
+    // Вернуть получившийся результат
+    return is_equal;
+}
