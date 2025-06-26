@@ -275,3 +275,32 @@ bool isComparisonOperator(QString token)
 
     return false;
 }
+
+/*!
+ * \brief Определить правильность расстановки двух списков имён переменных по алфавиту
+ * \param [in] var_1 - первый список имён переменных
+ * \param [in] var_2 - второй список имён переменных
+ * \return 1 - порядок верный, 0 - порядок неверный, -1 - списки одинаковы или порядок определить невозможно
+ */
+int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOfExprTree*> vars_2)
+{
+    // Для каждой пары n-ых переменных списков
+    int count_pairs = 0;
+    int count_vars_1 = vars_1.size();
+    int count_vars_2 = vars_2.size();
+    count_vars_1 >= count_vars_2 ? count_pairs = count_vars_2 : count_pairs = count_vars_1;
+    for(int i = 0; i < count_pairs; i++)
+    {
+        // Определить порядок: первая переменная меньше второй, и вернуть результат, если порядок определился
+        if(vars_1[i]->getValue() < vars_2[i]->getValue())
+        {
+            return 1;
+        }
+        else if(vars_1[i]->getValue() > vars_2[i]->getValue())
+        {
+            return 0;
+        }
+    }
+
+    return -1;
+}

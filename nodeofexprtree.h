@@ -190,7 +190,6 @@ public:
      * \return спосок переменных
      */
     QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves);
-
 };
 
 /*!
@@ -239,5 +238,13 @@ void clearStackNodes(QStack<NodeOfExprTree*>& stack);
  * \brief Запустить все тесты
  */
 void runTests();
+
+/*!
+ * \brief Определить правильность расстановки двух списков имён переменных по алфавиту
+ * \param [in] var_1 - первый список имён переменных
+ * \param [in] var_2 - второй список имён переменных
+ * \return 1 - порядок верный, 0 - порядок неверный, -1 - списки одинаковы или порядок определить невозможно
+ */
+int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOfExprTree*> vars_2);
 
 #endif // NODEOFEXPRTREE_H
