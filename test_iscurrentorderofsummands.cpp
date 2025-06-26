@@ -93,7 +93,7 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("2.3 Correct order: first comes the term with a higher degree of variables.\nSecond term without variables") << elem_2_1_2 << elem_2_3_1 << true;
 
     // 2.4 Первое слагаемое  без переменных
-    QTest::newRow("2.4 Correct order: first comes the term with a higher degree of variables.\First term without variables") << elem_2_3_1 << elem_2_1_2 << false;
+    QTest::newRow("2.4 Correct order: first comes the term with a higher degree of variables.\nFirst term without variables") << elem_2_3_1 << elem_2_1_2 << false;
 
     // 2.5 Первое слагаемое имеет выражение в скобках, порядок верный
     OperandOfExpr elem_2_5_1 = OperandOfExpr{parent_plus, postfixToTree("a b c * 1 + *", errors), false};
@@ -164,18 +164,19 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("3.6 Correct order: alphabetically, considering only the names of the variables.\nThe last variables are different, the order is incorrect") << elem_3_5_1 << elem_2_1_1 << false;
 
     // 3.7 Первое слагаемое имеет выражение в скобках, порядок верный
-    OperandOfExpr elem_3_7_1 = OperandOfExpr{parent_plus, postfixToTree("a b c + *", errors), false};
+    OperandOfExpr elem_3_7_1 = OperandOfExpr{parent_plus, postfixToTree("a b c * 1 + *", errors), false};
     QTest::newRow("3.7 Correct order: alphabetically, considering only the names of the variables.\nFirst term has expression in parentheses, the order is correct") << elem_3_7_1 << elem_3_5_1 << true;
 
     // 3.8 Первое слагаемое имеет выражение в скобках, порядок неверный
-    QTest::newRow("3.8 Correct order: alphabetically, considering only the names of the variables.\nFirst term has expression in parentheses, the order is incorrect") << elem_3_5_1 << elem_3_7_1 << false;
+    OperandOfExpr elem_3_8_1 = OperandOfExpr{parent_plus, postfixToTree("a b x * 1 + *", errors), false};
+    QTest::newRow("3.8 Correct order: alphabetically, considering only the names of the variables.\nFirst term has expression in parentheses, the order is incorrect") << elem_3_8_1 << elem_3_7_1 << false;
 
     // 3.9 Второе слагаемое имеет выражение в скобках, порядок верный
     OperandOfExpr elem_3_9_1 = OperandOfExpr{parent_plus, postfixToTree("a b x + *", errors), false};
-    QTest::newRow("3.9 Correct order: alphabetically, considering only the names of the variables.\nSecond term has expression in parentheses, the order is correct") << elem_2_6_2 << elem_3_9_1 << true;
+    QTest::newRow("3.9 Correct order: alphabetically, considering only the names of the variables.\nSecond term has expression in parentheses, the order is correct") << elem_2_6_2 << elem_3_8_1 << true;
 
     // 3.10 Второе слагаемое имеет выражение в скобках, порядок неверный
-    QTest::newRow("3.10 Correct order: alphabetically, considering only the names of the variables.\nSecond term has expression in parentheses, the order is incorrect") << elem_3_9_1 << elem_2_6_2 << false;
+    QTest::newRow("3.10 Correct order: alphabetically, considering only the names of the variables.\nSecond term has expression in parentheses, the order is incorrect") << elem_3_5_1 << elem_3_7_1 << false;
 
     // 3.11 Оба слагаемых имеют выражение в скобках, порядок верный
     OperandOfExpr elem_3_11_1 = OperandOfExpr{parent_plus, postfixToTree("a b c + *", errors), false};
@@ -226,7 +227,7 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("4.8 Correct order: from more elements of the summand to fewer.\nBoth terms have expression in parentheses, the order is incorrect") << expr_4_4_1 << expr_4_3_1 << false;
 
     // 4.9 Вложенные выражения в скобках, порядок верный
-    OperandOfExpr expr_4_9_1 = OperandOfExpr{parent_plus, postfixToTree("4 a c d + * b + *", errors), false};
+    OperandOfExpr expr_4_9_1 = OperandOfExpr{parent_plus, postfixToTree("4 a b 2 + * 1 + *", errors), false};
     QTest::newRow("4.9 Correct order: from more elements of the summand to fewer.\nNested expressions in parentheses, the order is correct") << expr_4_9_1 << expr_4_3_1 << true;
 
     // 4.10 Вложенные выражения в скобках, порядок неверный
@@ -324,22 +325,22 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("6.10 Correct order: number_1 > number_2.\nNot even number of unary minuses, first > second") << p_un_un_un_1 << p_un_un_un_3 << true;
 
     // 6.11 Перед первым числом унарный минус
-    QTest::newRow("6.11 Correct order: number_1 > number_2.\nUnary minus before first number") << m_3 << p_1 << true;
+    QTest::newRow("6.11 Correct order: number_1 > number_2.\nUnary minus before first number") << m_3 << p_1 << false;
 
     // 6.12 Перед вторым числом унарный минус
-    QTest::newRow("6.12 Correct order: number_1 > number_2.\nUnary minus before second number") << p_1 << m_3 << false;
+    QTest::newRow("6.12 Correct order: number_1 > number_2.\nUnary minus before second number") << p_1 << m_3 << true;
 
     // 6.13 Перед обоими числами бинарный минус, порядок верный
-    QTest::newRow("6.13 Correct order: number_1 > number_2.\nUnary minus before both numbers, the order is correct") << m_3 << m_1 << true;
+    QTest::newRow("6.13 Correct order: number_1 > number_2.\nUnary minus before both numbers, the order is correct") << m_3 << m_1 << false;
 
     // 6.14 Перед обоими числами бинарный минус, порядок неверный
-    QTest::newRow("6.14 Correct order: number_1 > number_2.\nUnary minus before both numbers, the order is incorrect") << m_1 << m_3 << false;
+    QTest::newRow("6.14 Correct order: number_1 > number_2.\nUnary minus before both numbers, the order is incorrect") << m_1 << m_3 << true;
 
     // 6.15 Бинарный минус с унарным, порядок верный
-    QTest::newRow("6.15 Correct order: number_1 > number_2.\nBinary minus with unary minus, the order is correct") << m_un_un_3 << m_un_un_1 << true;
+    QTest::newRow("6.15 Correct order: number_1 > number_2.\nBinary minus with unary minus, the order is correct") << m_un_un_3 << m_un_un_1 << false;
 
     // 6.16 Бинарный минус с унарным, порядок неверный
-    QTest::newRow("6.16 Correct order: number_1 > number_2.\nBinary minus with unary minus, the order is incorrect") << m_un_un_1 << m_un_un_3 << false;
+    QTest::newRow("6.16 Correct order: number_1 > number_2.\nBinary minus with unary minus, the order is incorrect") << m_un_un_1 << m_un_un_3 << true;
 
     // 6.17 Одинаковые цифры в числах, порядок верный
     QTest::newRow("6.17 Correct order: number_1 > number_2.\nEqual digits in numbers, the order is correct") << p_11 << p_111 << false;
@@ -348,16 +349,16 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("6.18 Correct order: number_1 > number_2.\nEqual digits in numbers, the order is incorrect") << p_111 << p_11 << true;
 
     // 6.19 Первый множитель с плавающей запятой, порядок верный
-    QTest::newRow("6.19 Correct order: number_1 > number_2.\nFirst float multiplier, the order is correct") << p_3p1 << p_31 << true;
+    QTest::newRow("6.19 Correct order: number_1 > number_2.\nFirst float multiplier, the order is correct") << p_3p1 << p_31 << false;
 
     // 6.20 Первый множитель с плавающей запятой, порядок неверный
-    QTest::newRow("6.20 Correct order: number_1 > number_2.\nFirst float multiplier, the order is incorrect") << p_31p2 << p_31 << false;
+    QTest::newRow("6.20 Correct order: number_1 > number_2.\nFirst float multiplier, the order is incorrect") << p_31p2 << p_31 << true;
 
     // 6.21 Оба множителя с плавающей запятой, порядок верный
-    QTest::newRow("6.21 Correct order: number_1 > number_2.\nBoth float multipliers, the order is correct") << p_3p1 << p_3p2 << true;
+    QTest::newRow("6.21 Correct order: number_1 > number_2.\nBoth float multipliers, the order is correct") << p_3p1 << p_3p2 << false;
 
     // 6.22 Оба множителя с плавающей запятой, порядок неверный
-    QTest::newRow("6.22 Correct order: number_1 > number_2.\nBoth float multipliers, the order is incorrect") << p_3p2 << p_3p1 << false;
+    QTest::newRow("6.22 Correct order: number_1 > number_2.\nBoth float multipliers, the order is incorrect") << p_3p2 << p_3p1 << true;
 
     // 6.23 Равные слагаемые: целые числа
     QTest::newRow("6.23 Correct order: number_1 > number_2.\nEqual terms: integers") << p_1 << p_1 << true;
@@ -372,10 +373,10 @@ void Test_isCurrentOrderOfSummands::testIsCurrentOrderOfSummands_data()
     QTest::newRow("6.26 Correct order: number_1 > number_2.\nEqual terms: unary minus numbers (first has 3, second has 1)") << p_un_un_un_1 << p_un_1 << true;
 
     // 6.27 Равные слагаемые, различные родители: «-», «+»
-    QTest::newRow("6.27 Correct order: number_1 > number_2.\nEqual terms, different parents: «-», «+»") << m_1 << p_un_1 << true;
+    QTest::newRow("6.27 Correct order: number_1 > number_2.\nEqual terms, different parents: \"-\", \"+\"") << m_1 << p_un_1 << true;
 
     // 6.28 Равные слагаемые, различные родители: «+», «-»
-    QTest::newRow("6.28 Correct order: number_1 > number_2.\nEqual terms, different parents: «+», «-»") << p_un_1 << m_1 << true;
+    QTest::newRow("6.28 Correct order: number_1 > number_2.\nEqual terms, different parents: \"+\", \"-\"") << p_un_1 << m_1 << true;
 
     // 6.29 Равные слагаемые, различные родители: у первого слагаемого нет родителя
     QTest::newRow("6.29 Correct order: number_1 > number_2.\nEqual terms, different parents: first has no parent") << n_1 << p_1 << true;
