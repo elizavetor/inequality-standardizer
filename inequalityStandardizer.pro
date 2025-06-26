@@ -8,6 +8,7 @@ QT += testlib
 
 SOURCES += \
         error.cpp \
+        inequalitystandardizer.cpp \
         main.cpp \
         nodeofexprtree.cpp \
         operandofexpr.cpp \
