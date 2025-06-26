@@ -12,7 +12,7 @@ void Test_isCurrentOrderOfParenthesisedExpressions::testIsCurrentOrderOfParenthe
     QFETCH(bool, exp_result);
 
     // Получить результат сравнения
-    bool real_result = elem_1.isCurrentOrderOfMultipliers(elem_2);
+    bool real_result = elem_1.isCurrentOrderOfParenthesisedExpressions(elem_2);
 
     // Сравнить полученный результат с ожидаемым
     QCOMPARE(real_result, exp_result);
@@ -159,7 +159,7 @@ void Test_isCurrentOrderOfParenthesisedExpressions::testIsCurrentOrderOfParenthe
     OperandOfExpr expr_4_1_2 = OperandOfExpr{parent, postfixToTree("a b + c +", errors), false};
     QTest::newRow("4.1 Correct order: from more terms to fewer.\nThere are more terms in the first expression than in the second") << expr_4_1_1 << expr_4_1_2 << true;
 
-    // 4.2 Во втором выражении больше слагаемых, чем в первом
+    // 4.2 Во втором выражении меньше слагаемых, чем в первом
     QTest::newRow("4.2 Correct order: from more terms to fewer.\nThere are more terms in the second expression than in the first") << expr_4_1_2 << expr_4_1_1 << false;
 
     // 4.3 Первое выражение имеет выражение в скобках, порядок верный
@@ -188,11 +188,11 @@ void Test_isCurrentOrderOfParenthesisedExpressions::testIsCurrentOrderOfParenthe
 
     // 5.1 Унарный минус у слагаемого, порядок верный
     OperandOfExpr expr_5_1_1 = OperandOfExpr{parent, postfixToTree("a b ~ + c x 1 + * +", errors), false};
-    OperandOfExpr expr_5_1_2 = OperandOfExpr{parent, postfixToTree("a b ~ c 1 + * +", errors), false};
-    QTest::newRow("5.1 Unary cons that do not affect the order.\nSummand has unary minus, the order is correct") << expr_5_1_1 << expr_5_1_2 << true;
+    OperandOfExpr expr_5_1_2 = OperandOfExpr{parent, postfixToTree("a b c 1 + * ~ +", errors), false};
+    QTest::newRow("5.1 Unary cons that do not affect the order.\nSummand has unary minus, the order is correct") << expr_5_1_1 << expr_5_1_2 << false;
 
     // 5.2 Унарный минус у слагаемого, порядок неверный
-    QTest::newRow("5.2 Unary cons that do not affect the order.\nSummand has unary minus, the order is incorrect") << expr_5_1_2 << expr_5_1_1 << false;
+    QTest::newRow("5.2 Unary cons that do not affect the order.\nSummand has unary minus, the order is incorrect") << expr_5_1_2 << expr_5_1_1 << true;
 
     // 5.3 Унарный минус у множителя, порядок верный
     OperandOfExpr expr_5_3_1 = OperandOfExpr{parent, postfixToTree("a b c + + x 1 + ~ *", errors), false};
