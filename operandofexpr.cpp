@@ -143,8 +143,8 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
     if(summand_1->type == NUM && summand_2->type == NUM)
     {
         // Определить, соблюдается ли порядок: от большего числа к меньшему, и вернуть результат, если порядок определился
-        bool is_negative_1 = missing_un_minuses_1 % 2 == 1;
-        bool is_negative_2 = missing_un_minuses_2 % 2 == 1;
+        bool is_negative_1 = (missing_un_minuses_1 + (parent->type == BIN_MINUS ? 1 : 0)) % 2 == 1;
+        bool is_negative_2 = (missing_un_minuses_2 + (other.parent->type == BIN_MINUS ? 1 : 0)) % 2 == 1;
 
         if((is_negative_1 && is_negative_2 && summand_1->value < summand_2->value)
             ||  (!is_negative_1 && !is_negative_2 && summand_1->value > summand_2->value)
@@ -154,7 +154,7 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
         }
         else if((is_negative_1 && is_negative_2 && summand_1->value > summand_2->value)
             ||  (!is_negative_1 && !is_negative_2 && summand_1->value < summand_2->value)
-            || (!is_negative_1 && is_negative_2))
+            || (is_negative_1 && !is_negative_2))
         {
             return false;
         }
