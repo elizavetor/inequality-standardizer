@@ -79,7 +79,7 @@ void Test_operatorGt::testOperatorGt_data()
     QTest::newRow("12.The first node is the subtractible, the first node is greater than the second") << minus_2 << plus_1 << true;
 
     // 13. Первый узел есть вычитаемое, второй узел больше первого
-    OperandOfExpr plus_un_2 = {minus, un_2, false};
+    OperandOfExpr plus_un_2 = {plus, un_2, false};
     QTest::newRow("13.The first node is the subtractible, the second node is greater than the first") << minus_1 << plus_un_2 << false;
 
     // 14. Второй узел есть вычитаемое, первый узел больше второго
@@ -122,7 +122,7 @@ void Test_operatorGt::testOperatorGt_data()
     QTest::newRow("25.The second node is the first element of the expression tree, the first has a parent \"*\", the second is larger than the first") << multiply_1 << only_1 << false;
 
     // 26. Первый узел есть первый элемент дерева выражения, второй имеет родителя «/»
-    QTest::newRow("26.The first node is the first element of the expression tree, the second has a parent \"/\"") << only_1 << division_2 << true;
+    QTest::newRow("26.The first node is the first element of the expression tree, the second has a parent \"/\"") << only_1 << division_2 << false;
 
     // 27. Второй узел есть первый элемент дерева выражения, первый имеет родителя «/»
     QTest::newRow("27.The second node is the first element of the expression tree, the first has a parent \"/\"") << division_2 << only_1 << false;

@@ -12,13 +12,6 @@ bool OperandOfExpr::operator>(const OperandOfExpr& other) const
         // Получить результат сравнения слагаемых
         return !isCurrentOrderOfSummands(other);
     }
-    // ИначеЕсли сравниваются множители
-    else if((parent != nullptr && parent->type == MULTIPLICATION)
-             || (other.parent != nullptr && other.parent->type == MULTIPLICATION))
-    {
-        // Получить список множителей
-        return !isCurrentOrderOfMultipliers(other);
-    }
     // ИначеЕсли сравниваются элементы с делителями
     else if((parent != nullptr && parent->type == DIVISION)
              || (other.parent != nullptr && other.parent->type == DIVISION))
@@ -31,6 +24,13 @@ bool OperandOfExpr::operator>(const OperandOfExpr& other) const
             }
         }
         else return false;
+    }
+    // ИначеЕсли сравниваются множители
+    else if((parent != nullptr && parent->type == MULTIPLICATION)
+             || (other.parent != nullptr && other.parent->type == MULTIPLICATION))
+    {
+        // Получить список множителей
+        return !isCurrentOrderOfMultipliers(other);
     }
 
     return false;
