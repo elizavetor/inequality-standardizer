@@ -556,3 +556,35 @@ int NodeOfExprTree::getDegreeOfExpr()
     // Вернуть степень выражения
     return degree;
 }
+
+/*!
+ * \brief Получить список листьев дерева, корнем которого является заданный узел
+ * \return список листьев дерева
+ */
+QList<NodeOfExprTree*> NodeOfExprTree::getLeavesOfTree()
+{
+    // ... Считать список листьев пустым
+    QList<NodeOfExprTree*> leaves;
+
+    // Если заданный узел лист дерева
+    if (type == VAR || type == NUM)
+    {
+        // Добавить заданный узел в список листьев деревьев
+        leaves.append(this);
+        // Вернуть список листьев
+        return leaves;
+    }
+
+    // Получить список листьев операндов заданного листа
+    if(left_operand != nullptr)
+    {
+        leaves += left_operand->getLeavesOfTree();
+    }
+    if(right_operand != nullptr)
+    {
+        leaves += right_operand->getLeavesOfTree();
+    }
+
+    // Вернуть список листьев
+    return leaves;
+}

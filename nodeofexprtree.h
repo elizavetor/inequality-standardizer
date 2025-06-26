@@ -178,6 +178,12 @@ public:
      */
     static void delTree(NodeOfExprTree* root);
 
+    /*!
+     * \brief Получить список листьев дерева, корнем которого является заданный узел
+     * \return список листьев дерева
+     */
+    QList<NodeOfExprTree*> getLeavesOfTree();
+
 };
 
 /*!
