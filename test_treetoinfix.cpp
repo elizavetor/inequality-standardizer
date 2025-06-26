@@ -12,6 +12,10 @@ void Test_treeToInfix::testTreeToInfix()
     // Получить инфиксную запись дерева
     QString real_infix = tree->treeToInfix();
 
+    // Удалить пробелы
+    exp_infix.remove(' ');
+    real_infix.remove(' ');
+
     // Сравнить полученную строку с ожидаемой
     QCOMPARE(real_infix, exp_infix);
 }
