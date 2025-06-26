@@ -107,24 +107,62 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
  */
 bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr& other) const
 {
+    QList<OperandOfExpr> summands_1 = operand->getListOfNodesOfSamePrecedenceLevel();
+    QList<OperandOfExpr> summands_2 = other.operand->getListOfNodesOfSamePrecedenceLevel();
+
     // Для каждой пары слагаемых выражений и повторять по минимальному кол-ву слагаемых из этих выражений
+    int degree_of_current_summand_1 = 0;
+    int degree_of_current_summand_2 = 0;
+    int num_pairs = 0;
+    summands_1.size() >= summands_2.size() ? num_pairs = summands_2.size() : num_pairs = summands_1.size();
+    for(int i = 0; i < num_pairs; i++)
     {
         // Получить степень обоих слагаемых
+        degree_of_current_summand_1 = summands_1[i].operand->getDegreeOfExpr();
+        degree_of_current_summand_2 = summands_2[i].operand->getDegreeOfExpr();
 
-        // Определить, соблюдается ли порядок: от большей степени переменной слагаемого к меньшей
-        // Вернуть результат, если порядок определился
+        // Определить, соблюдается ли порядок: от большей степени переменной слагаемого к меньшей, и вернуть результат, если порядок определился
+        if(degree_of_current_summand_1 > degree_of_current_summand_2)
+            return true;
+        else if (degree_of_current_summand_1 < degree_of_current_summand_2)
+            return false;
     }
 
     // Получить списки элементов каждого выражения
+    QList<NodeOfExprTree*> elems_1 = operand->getLeavesOfTree();
+    QList<NodeOfExprTree*> elems_2 = other.operand->getLeavesOfTree();
+
     // Определить, соблюдается ли порядок: по алфавиту, учитывая только переменные
-    // Вернуть результат, если порядок определился
+    QList<NodeOfExprTree*> vars_1 = operand->getListOfVariableIDs(elems_1);
+    QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariableIDs(elems_2);
+    int result = isCurentOrderOfListOfVariableIDs(vars_1, vars_2);
 
-    // Определить, соблюдается ли порядок: от большего количества переменных в выражении к меньшему
     // Вернуть результат, если порядок определился
+    if (result == 1 || result == 0)
+    {
+        return result;
+    }
 
-    // Определить, соблюдается ли порядок: от большего количества слагаемых к меньшему
-    // Вернуть результат, если порядок определился
+    // Определить, соблюдается ли порядок: от большего количества переменных в выражении к меньшему, и вернуть результат, если порядок определился
+    if(vars_1.size() > vars_2.size())
+    {
+        return true;
+    }
+    else if(vars_1.size() < vars_2.size())
+    {
+        return false;
+    }
+
+    // Определить, соблюдается ли порядок: от большего количества слагаемых к меньшему, и вернуть результат, если порядок определился
+    if(summands_1.size() > summands_2.size())
+    {
+        return true;
+    }
+    else if(summands_1.size() < summands_2.size())
+    {
+        return false;
+    }
 
     // Вернуть, что порядок верный
-    return false;
+    return true;
 }
