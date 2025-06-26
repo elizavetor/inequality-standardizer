@@ -190,6 +190,12 @@ public:
      * \return спосок переменных
      */
     QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves);
+
+    /*!
+     * \brief Определить кол-во выражений в скобках в текущем выражении
+     * \return кол-во выражений в скобках
+     */
+    int getNumOfParentheses();
 };
 
 /*!

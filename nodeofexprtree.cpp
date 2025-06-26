@@ -614,3 +614,34 @@ QList<NodeOfExprTree*> NodeOfExprTree::getListOfVariableIDs(QList<NodeOfExprTree
     // Вернуть список переменных
     return vars;
 }
+
+/*!
+ * \brief Определить кол-во выражений в скобках в текущем выражении
+ * \return кол-во выражений в скобках
+ */
+int NodeOfExprTree::getNumOfParentheses()
+{
+    // Считать, что кол-во найденных выражений в скобках равно 0
+    int count_of_expr = 0;
+
+    // Получить список элементов на одном уровне заданного узла
+    QList<OperandOfExpr> list = getListOfNodesOfSamePrecedenceLevel();
+
+    int list_len = list.size();
+    for(int i = 0; i < list_len; i++) // Для каждого элемента полученного списка
+    {
+        // Пропутить унарные минусы текущего элемента
+        NodeOfExprTree* elem = nullptr;
+        list[i].operand->getNodeBySkippingUnaryMinus(&elem);
+        // Если текущий элемент оператор
+        if(isOperator(elem->value))
+        {
+            // Считать, что найдено новое выражение в скобках
+            count_of_expr++;
+        }
+    }
+
+    // Вернуть кол-во найденных выражений в скобках
+    return count_of_expr;
+
+}
