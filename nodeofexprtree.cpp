@@ -243,7 +243,6 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
     // Считать заданный узел родителем первого элемента списка элементов правого операнда
     list_of_right_operand[0].parent = this;
     list_of_right_operand[0].is_first_elem = false;
-    list_of_right_operand[0].parent->right_operand = list_of_right_operand[0].operand;
 
     // Добавить в список операндов списки левого и правого операндов заданного узла
     list += list_of_left_operand + list_of_right_operand;
@@ -347,7 +346,6 @@ QList<OperandOfExpr> NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpen
     // Считать заданный узел родителем первого элемента списка элементов правого операнда
     list_of_right_operand[0].parent = this;
     list_of_right_operand[0].is_first_elem = false;
-    list_of_right_operand[0].parent->right_operand = list_of_right_operand[0].operand;
 
     // Добавить в список операндов списки левого и правого операндов заданного узла
     list += list_of_left_operand + list_of_right_operand;
@@ -401,6 +399,9 @@ NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
                 list[i].parent = multiply;
             }
         }
+
+        // Считать правым операндом родителя текущего элемента операнд текущего элемента
+        list[i].parent->right_operand = list[i].operand;
 
         // Установить left_operand как левый операнд родителя текущего элемента списка
         list[i].parent->left_operand = _left_operand;
