@@ -50,7 +50,7 @@ void Test_getListOfNodesOfSamePrecedenceLevel::testGetListOfNodesOfSamePrecedenc
     // 4. Одинаковые операторы «-»
     QList<OperandOfExpr> list_4 = {OperandOfExpr{nullptr, new NodeOfExprTree("1"), true},
                                    OperandOfExpr{new NodeOfExprTree("-"), new NodeOfExprTree("a"), false},
-                                   OperandOfExpr{new NodeOfExprTree("-"), postfixToTree("2 b /", errors), false}};
+                                   OperandOfExpr{new NodeOfExprTree("-"), postfixToTree("2 b -", errors), false}};
     QTest::newRow("4. Identical operators: \"-\"") << postfixToTree("1 a - 2 b - -", errors) << list_4;
 
     // 5. Операторы «+» и «*»
@@ -136,5 +136,5 @@ void Test_getListOfNodesOfSamePrecedenceLevel::testGetListOfNodesOfSamePrecedenc
                                     OperandOfExpr{new NodeOfExprTree("+"), new NodeOfExprTree("b"), false},
                                     OperandOfExpr{new NodeOfExprTree("-"), postfixToTree("c d e - -", errors), false},
                                     OperandOfExpr{new NodeOfExprTree("+"), postfixToTree("1 2 + 3 *", errors), false}};
-    QTest::newRow("19. Complex text") << postfixToTree("a ~ b + c d - - 1 2 + 3 * +", errors) << list_19;
+    QTest::newRow("19. Complex text") << postfixToTree("a ~ b + c d e - - - 1 2 + 3 * +", errors) << list_19;
 }
