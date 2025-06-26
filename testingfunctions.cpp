@@ -151,13 +151,13 @@ QString compareListsOfNodes(QList<OperandOfExpr>& exp_list, QList<OperandOfExpr>
 
         }
         // ИначеЕсли операнд текущего элемента не равен ожидаемому
-        else if(!compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
+        if(!compareTrees(exp_list[i].operand, real_list[i].operand, path, error_message))
         {
             // Считать, что ошибка найдена
             error = "\nWhen comparing the operands of the received and expected elements " + QString::number(i + 1) + ", the following error was found:" + error_message;
         }
         // ИначеЕсли значение флага первого элемента списка не равен ожидаемому
-        else if (real_list[i].is_first_elem != exp_list[i].is_first_elem)
+        if (real_list[i].is_first_elem != exp_list[i].is_first_elem)
         {
             // Считать, что ошибка найдена
             error = "\nThe values of the flags of the first element of the received and expected element " + QString::number(i + 1) + " do not match\n";
