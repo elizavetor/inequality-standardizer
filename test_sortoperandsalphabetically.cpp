@@ -49,38 +49,43 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     QTest::newRow("2.1 Checking for a rule for miltipliers: numbers first, then variables, then expressions in parentheses. ( a * b -> 1 * a )") << start_tree_2_1 << final_tree_2_1;
 
     // 2.2 Проверка на второе правило: первый множитель меньше второго с учётом знака (для узлов типа число)
-    NodeOfExprTree* start_tree_2_2 = postfixToTree("1 2 ~ *", errors);
-    NodeOfExprTree* final_tree_2_2 = postfixToTree("2 ~ 1 *", errors);
-    QTest::newRow("2.2 Checking for the rule for miltipliers: the first multiplier is less than the second, taking into account the sign. ( 1 * (~2) -> (~2) * 1 )") << start_tree_2_2 << final_tree_2_2;
+    NodeOfExprTree* start_tree_2 = postfixToTree("2 1 *", errors);
+    NodeOfExprTree* final_tree_2 = postfixToTree("1 2 *", errors);
+    QTest::newRow("2.2 Checking for the rule for miltipliers: the first multiplier is less than the second, taking into account the sign. ( 2 * 1 -> 1 * 2 )") << start_tree_2 << final_tree_2;
 
-    // 2.3 Проверка на третье правило: первый множитель меньше второго (для узлов типа переменная)
+    // 2.3 Проверка на второе правило: первый множитель меньше второго с учётом знака (для узлов типа число), с унарными минусами
+    NodeOfExprTree* start_tree_2_2 = postfixToTree("1 ~ 2 ~ *", errors);
+    NodeOfExprTree* final_tree_2_2 = postfixToTree("2 ~ 1 ~ *", errors);
+    QTest::newRow("2.3 Checking for the rule for miltipliers: the first multiplier is less than the second, taking into account the sign, with unary minus. ( ~1 * (~2) -> ~2 * (~1) )") << start_tree_2_2 << final_tree_2_2;
+
+    // 2.4 Проверка на третье правило: первый множитель меньше второго (для узлов типа переменная)
     NodeOfExprTree* start_tree_2_3 = postfixToTree("b a *", errors);
     NodeOfExprTree* final_tree_2_3 = postfixToTree("a b *", errors);
-    QTest::newRow("2.3 Checking for the rule for miltipliers: the first multiplier is less than the second. ( b * a -> a * b )") << start_tree_2_3 << final_tree_2_3;
+    QTest::newRow("2.4 Checking for the rule for miltipliers: the first multiplier is less than the second. ( b * a -> a * b )") << start_tree_2_3 << final_tree_2_3;
 
-    // 2.4 Проверка на четвёртое правило: верный порядок выражений в скобках
+    // 2.5 Проверка на четвёртое правило: верный порядок выражений в скобках
     NodeOfExprTree* start_tree_2_4 = postfixToTree("b 1 + a 2 + *", errors);
     NodeOfExprTree* final_tree_2_4 = postfixToTree("a 2 + b 1 + *", errors);
-    QTest::newRow("2.4 Checking for the rule for miltipliers: correct order of expressions in parentheses. ( (b + 1) * (a + 2) -> (a + 2) * (b + 1) )") << start_tree_2_4 << final_tree_2_4;
+    QTest::newRow("2.5 Checking for the rule for miltipliers: correct order of expressions in parentheses. ( (b + 1) * (a + 2) -> (a + 2) * (b + 1) )") << start_tree_2_4 << final_tree_2_4;
 
-    // 2.5 Унарный минус
+    // 2.6 Унарный минус
     NodeOfExprTree* start_tree_2_5 = postfixToTree("b a ~ *", errors);
     NodeOfExprTree* final_tree_2_5 = postfixToTree("a ~ b *", errors);
-    QTest::newRow("2.5 For miltipliers: unary minus. ( b * (~a) -> (~a) * b )") << start_tree_2_5 << final_tree_2_5;
+    QTest::newRow("2.6 For miltipliers: unary minus. ( b * (~a) -> (~a) * b )") << start_tree_2_5 << final_tree_2_5;
 
-    // 2.6 Знак деления
+    // 2.7 Знак деления
     NodeOfExprTree* start_tree_2_6 = postfixToTree("b a /", errors);
-    QTest::newRow("2.6 For miltipliers: division. ( b / a )") << start_tree_2_6 << start_tree_2_6;
+    QTest::newRow("2.7 For miltipliers: division. ( b / a )") << start_tree_2_6 << start_tree_2_6;
 
-    // 2.7 Выражение в скобке от знака деления
+    // 2.8 Выражение в скобке от знака деления
     NodeOfExprTree* start_tree_2_7 = postfixToTree("b a 2 * /", errors);
     NodeOfExprTree* final_tree_2_7 = postfixToTree("b 2 a * /", errors);
-    QTest::newRow("2.7 For miltipliers: expression in parenthesis from the division sign. ( b / (a * 2) -> b / (2 * a) )") << start_tree_2_7 << final_tree_2_7;
+    QTest::newRow("2.8 For miltipliers: expression in parenthesis from the division sign. ( b / (a * 2) -> b / (2 * a) )") << start_tree_2_7 << final_tree_2_7;
 
-    // 2.8 Все правила
+    // 2.9 Все правила
     NodeOfExprTree* start_tree_2_8 = postfixToTree("b c / 4 5 + 2 ~ * * 1 2 3 - + a * * 1 *", errors);
     NodeOfExprTree* final_tree_2_8 = postfixToTree("2 ~ 1 * a * b * 1 2 + 3 - * 4 5 + * c /", errors);
-    QTest::newRow("2.8 For miltipliers: all rules. ( b / c * (4 + 5) * (~2) * (1 + 2 - 3) * a * 1  -> ~2 * 1 * a * b * (1 + 2 - 3) * (4 + 5) / c )") << start_tree_2_8 << final_tree_2_8;
+    QTest::newRow("2.9 For miltipliers: all rules. ( b / c * (4 + 5) * (~2) * (1 + 2 - 3) * a * 1  -> ~2 * 1 * a * b * (1 + 2 - 3) * (4 + 5) / c )") << start_tree_2_8 << final_tree_2_8;
 
     // 3. Тесты для слагаемых
 
@@ -114,10 +119,19 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     NodeOfExprTree* final_tree_3_6 = postfixToTree("1 2 ~ +", errors);
     QTest::newRow("3.6 Checking for the rule for terms: from more to less. ( (~2) + 1  -> 1 + (~2) )") << start_tree_3_6 << final_tree_3_6;
 
-    // 3.7 Все правила
-    NodeOfExprTree* start_tree_3_7 = postfixToTree("b c * 1 2 + 3 * 1 + + a b * 1 2 + 3 4 + * + + x y z * * 2 a a * + + +", errors);
-    NodeOfExprTree* final_tree_3_7 = postfixToTree("a a * x y * z * + a b * + b c * + 1 2 + 3 4 + * + 1 2 + 3 * + 2 + 1 +", errors);
-    QTest::newRow("3.6 Checking for the rule for terms: all rules.") << start_tree_3_7 << final_tree_3_7;
+    // 3.7 Бинарный минус
+    NodeOfExprTree* start_tree_3_7 = postfixToTree("a b b * -", errors);
+    NodeOfExprTree* final_tree_3_7 = postfixToTree("b b * ~ a +", errors);
+    QTest::newRow("3.7 Bin minus. ( a - b * b  -> ~(b * b) + a )") << start_tree_3_7 << final_tree_3_7;
+
+    // 3.8 Унарный минус
+    NodeOfExprTree* start_tree_3_8 = postfixToTree("a b b * ~ +", errors);
+    QTest::newRow("3.8 Un minus. ( a - b * b  -> ~(b * b) + a )") << start_tree_3_8 << final_tree_3_7;
+
+    // 3.9 Все правила
+    NodeOfExprTree* start_tree_3_9 = postfixToTree("b c * 1 2 + 2 * 3 * 1 + + a b * 1 2 + 3 4 + * + + z x y * * 2 a a * + + +", errors);
+    NodeOfExprTree* final_tree_3_9 = postfixToTree("a a * x y * z * + a b * + b c * + 2 1 + 4 3 + * + 2 3 * 2 1 + * + 2 + 1 +", errors);
+    QTest::newRow("3.6 Checking for the rule for terms: all rules.") << start_tree_3_9 << final_tree_3_9;
 
     // 4. Тесты на составление и построение дерева
 
