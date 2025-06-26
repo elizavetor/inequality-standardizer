@@ -207,10 +207,10 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
     // 4.1 От большей степени переменной n-ого слагаемого к меньшей, порядок верный
     OperandOfExpr expr_4_1_1 = OperandOfExpr{parent, postfixToTree("a x * c d + +", errors), false};
     OperandOfExpr expr_4_1_2 = OperandOfExpr{parent, postfixToTree("a b + c d + +", errors), false};
-    QTest::newRow("4.1 From a higher degree of the nth term variable to a lower one, the order is correct: (a * x + с + d), (a + b + c + d)") << expr_4_1_1 << expr_4_1_2 << true;
+    QTest::newRow("4.1 From a higher degree of the nth term variable to a lower one, the order is correct: (a * x + c + d), (a + b + c + d)") << expr_4_1_1 << expr_4_1_2 << true;
 
     // 4.2 От большей степени переменной n-ого слагаемого к меньшей, порядок верный
-    QTest::newRow("4.2 From a higher degree of the nth term variable to a lower one, the order is uncorrect: (a + b + c + d), (a * x + с + d)") << expr_4_1_2 << expr_4_1_1 << false;
+    QTest::newRow("4.2 From a higher degree of the nth term variable to a lower one, the order is uncorrect: (a + b + c + d), (a * x + c + d)") << expr_4_1_2 << expr_4_1_1 << false;
 
     // 4.3 Отличны средние переменные, порядок верный
     OperandOfExpr expr_4_3_1 = OperandOfExpr{parent, postfixToTree("a b + c a + +", errors), false};
@@ -239,10 +239,10 @@ void Test_isCurrentOrderOfMultipliers::testIsCurrentOrderOfMultipliers_data()
     // 4.9 Унарный минус у слагаемого, порядок верный
     OperandOfExpr expr_4_9_1 = OperandOfExpr{parent, postfixToTree("a b ~ + c x 1 + * +", errors), false};
     OperandOfExpr expr_4_9_2 = OperandOfExpr{parent, postfixToTree("a b ~ c 1 + * +", errors), false};
-    QTest::newRow("4.9 The unary minus sign is in the correct order.: (a + (~b) + с * (x + 1)), (a + (~b * (c + 1)))") << expr_4_9_1 << expr_4_9_2 << true;
+    QTest::newRow("4.9 The unary minus sign is in the correct order.: (a + (~b) + c * (x + 1)), (a + (~b * (c + 1)))") << expr_4_9_1 << expr_4_9_2 << true;
 
     // 4.10 Унарный минус у слагаемого, порядок неверный
-    QTest::newRow("4.10 The unary minus sign has an incorrect order: (a + (~b * (c + 1))), (a + (~b) + с * (x + 1))") << expr_4_9_2 << expr_4_9_1 << false;
+    QTest::newRow("4.10 The unary minus sign has an incorrect order: (a + (~b * (c + 1))), (a + (~b) + c * (x + 1))") << expr_4_9_2 << expr_4_9_1 << false;
 
     // 4.11 Равные множители, различные операторы: «+», «-»
     OperandOfExpr expr_4_11_1 = OperandOfExpr{parent, postfixToTree("a b +", errors), false};
