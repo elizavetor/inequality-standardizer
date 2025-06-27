@@ -5,6 +5,7 @@
 #include "error.h"
 #include <QSet>
 #include <QList>
+#include <QStack>
 
 class NodeOfExprTree;
 
