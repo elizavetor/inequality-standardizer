@@ -400,6 +400,10 @@ NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
         {
             list.prepend(OperandOfExpr{nullptr, new NodeOfExprTree("1"), true});
         }
+        else if(list[0].parent->type == UN_MINUS)
+        {
+            list[0].parent->right_operand = list[0].operand;
+        }
     }
 
     // Считать операнд первого элемента списка left_operand
@@ -434,6 +438,7 @@ NodeOfExprTree* NodeOfExprTree::listToTree(QList<OperandOfExpr>& list)
     }
 
     // Вернуть родителя последнего элемента
+    if(list.last().parent == nullptr) return list.last().operand;
     return list.last().parent;
 }
 
