@@ -219,7 +219,7 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
     if (type == UN_MINUS)
     {
         // Добавить в список операндов заданный узел и его операнд как родитель и операнд элемента соответственно
-        list += OperandOfExpr{this, right_operand, false};
+        list.append(OperandOfExpr{this, right_operand, false});
         // Вернуть список
         return list;
     }
@@ -228,7 +228,7 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
     if (type == NUM || type == VAR)
     {
         // Добавить в список узлов заданный узел
-        list += OperandOfExpr{nullptr, this, true};
+        list.append(OperandOfExpr{nullptr, this, true});
         // Вернуть список
         return list;
     }
@@ -308,7 +308,7 @@ QList<OperandOfExpr> NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpen
     if (type == UN_MINUS)
     {
         // Добавить в список операндов заданный узел и его операнд как родитель и операнд элемента соответственно
-        list += OperandOfExpr{this, right_operand, false};
+        list.append(OperandOfExpr{this, right_operand, false});
         // Вернуть список
         return list;
     }
@@ -317,7 +317,7 @@ QList<OperandOfExpr> NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpen
     if (type == NUM || type == VAR)
     {
         // Добавить в список узлов заданный узел
-        list += OperandOfExpr{nullptr, this, true};
+        list.append(OperandOfExpr{nullptr, this, true});
         // Вернуть список
         return list;
     }
