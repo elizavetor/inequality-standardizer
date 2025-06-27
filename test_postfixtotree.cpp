@@ -217,6 +217,6 @@ void Test_postfixToTree::testPostfixToTree_data()
     NodeOfExprTree* a_plus_b_multiply_c_div_f = new NodeOfExprTree("/", a_plus_b_multiply_c, f);
     NodeOfExprTree* _2_plus_3 = new NodeOfExprTree("+", _2, _3);
     NodeOfExprTree* _1_minus_expr = new NodeOfExprTree("-", _1, _2_plus_3);
-    NodeOfExprTree* expr_multiply_c_div_f_less_1_minus_expr = new NodeOfExprTree("<", a_plus_b_multiply_c_div_f, _1_minus_expr);
-    QTest::newRow("33. Complex test: ((a + b) * c) / f < 1 - (2 + 3)") << postfix_notation_33 << equal_list_of_errors << equal_list_of_errors << expr_multiply_c_div_f_less_1_minus_expr;
+    NodeOfExprTree* complex_expr = new NodeOfExprTree("<", a_plus_b_multiply_c_div_f, _1_minus_expr);
+    QTest::newRow("33. Complex test: ((a + b) * c) / f < 1 - (2 + 3)") << postfix_notation_33 << equal_list_of_errors << equal_list_of_errors << complex_expr;
 }
