@@ -170,12 +170,8 @@ NodeOfExprTree* NodeOfExprTree::sortOperandsAlphabetically()
         {
             // Расставить все элементы в дереве по алфавиту, начиная с текущего элемента сортировки, получив корень этого элемента
             NodeOfExprTree* new_root_of_operand = sorted_list[i].operand->sortOperandsAlphabetically();
-            // Если операнд текущего элемента сортировки отличен от полученного корня
-            if(new_root_of_operand != sorted_list[i].operand || *new_root_of_operand != *sorted_list[i].operand)
-            {
-                // Изменить операнд текущего элемента сортировки на полученный корень
-                sorted_list[i].operand = new_root_of_operand;
-            }
+            // Изменить операнд текущего элемента сортировки на полученный корень
+            sorted_list[i].operand = new_root_of_operand;
         }
     }
 
@@ -185,8 +181,9 @@ NodeOfExprTree* NodeOfExprTree::sortOperandsAlphabetically()
     {
         bool all_sorted = false;
         // Для каждой пары соседних элементов списка сортировки и пока не произошло ни одного изменения
-        for(int i = 0; i < sorted_list_len && !all_sorted; i++)
+        for(int i = 0; i < sorted_list_len - 1 && !all_sorted; i++)
         {
+            all_sorted = true;
             // Для всех пар соседних неотсортированных элементов сортировки
             for(int j = 0; j < sorted_list_len - i - 1; j++)
             {
@@ -194,15 +191,16 @@ NodeOfExprTree* NodeOfExprTree::sortOperandsAlphabetically()
                 if(sorted_list[j] > sorted_list[j + 1])
                 {
                     sorted_list.swapItemsAt(j, j + 1);
-                    all_sorted = true;
+                    all_sorted = false;
                 }
             }
-            all_sorted = false;
         }
 
-        // Перестроить дерево по отсортированным элементам в списке и получить корень перестроенного дерева
-        new_root = listToTree(sorted_list);
+
     }
+
+    // Перестроить дерево по отсортированным элементам в списке и получить корень перестроенного дерева
+    new_root = listToTree(sorted_list);
 
     // Вернуть корень дерева
     return new_root;
