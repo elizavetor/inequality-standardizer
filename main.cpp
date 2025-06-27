@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     tree->rearrangeForZeroComparison();
 
     // Отсортировать слагаемые и множители (не)равенства по алфавиту, начиная левого операнда корня дерева выражения
-    tree->getRightOperand()->sortOperandsAlphabetically();
+    tree->setLeftOperand(tree->getLeftOperand()->sortOperandsAlphabetically());
 
     // Из дерева выражения получить инфиксную запись этого выражения
     QString infix_output_expr = tree->treeToInfix();
