@@ -84,8 +84,8 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
 
     // 2.9 Все правила
     NodeOfExprTree* start_tree_2_8 = postfixToTree("b c / 4 5 + 2 ~ * * 1 2 3 - + a * * 1 *", errors);
-    NodeOfExprTree* final_tree_2_8 = postfixToTree("2 ~ 1 * a * b * 1 2 + 3 - * 4 5 + * c /", errors);
-    QTest::newRow("2.9 For miltipliers: all rules. ( b / c * (4 + 5) * (~2) * (1 + 2 - 3) * a * 1  -> ~2 * 1 * a * b * (1 + 2 - 3) * (4 + 5) / c )") << start_tree_2_8 << final_tree_2_8;
+    NodeOfExprTree* final_tree_2_8 = postfixToTree("2 ~ 1 * a * b * 2 1 + 3 - * 5 4 + * c /", errors);
+    QTest::newRow("2.9 For miltipliers: all rules. ( b / c * (4 + 5) * (~2) * (1 + 2 - 3) * a * 1  -> ~2 * 1 * a * b * (2 + 1 - 3) * (5 + 4) / c )") << start_tree_2_8 << final_tree_2_8;
 
     // 3. Тесты для слагаемых
 
@@ -146,7 +146,7 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
 
     // 4.3 Одинаковые операторы «+»
     NodeOfExprTree* start_tree_4_3 = postfixToTree("a 1 + 2 b + +", errors);
-    NodeOfExprTree* final_tree_4_3 = postfixToTree("1 2 * a * b *", errors);
+    NodeOfExprTree* final_tree_4_3 = postfixToTree("a b + 2 + 1 +", errors);
     QTest::newRow("4.3 Identical operators: \"+\"") << start_tree_4_3 << final_tree_4_3;
 
     // 4.4 Одинаковые операторы «-»
@@ -234,8 +234,8 @@ void Test_sortOperandsAlphabetically::testSortOperandsAlphabetically_data()
     QTest::newRow("6.2 Nested brackets among multipliers") << start_tree_6_2 << final_tree_6_2;
 
     // 6.3 Вложенные скобки среди слагаемых
-    NodeOfExprTree* start_tree_6_3 = postfixToTree("c b 2 a + / 3 * -", errors);
-    NodeOfExprTree* final_tree_6_3 = postfixToTree("3 b * a 2 + / ~ c +", errors);
+    NodeOfExprTree* start_tree_6_3 = postfixToTree("b 2 a + / 3 * c -", errors);
+    NodeOfExprTree* final_tree_6_3 = postfixToTree("c ~ 3 b * a 2 + / +", errors);
     QTest::newRow("6.3 Terms -> multipliers -> terms") << start_tree_6_3 << final_tree_6_3;
 
     // 6.4 Вложенные скобки среди слагаемых
