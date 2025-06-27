@@ -27,7 +27,7 @@ public:
      * \brief Получить сообщение об ошибке известного типа
      * \return строка, содержащая сообщение об ошибке
     */
-    QString getErrorMessageFor();
+    QString getErrorMessageFor() const;
 
     /*!
      * \brief Метод для вывода информации об ошибке (для тестирования)

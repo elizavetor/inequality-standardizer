@@ -28,7 +28,7 @@ Error::Error(ErrorType _type, int _pos, QStringList _error_strings)
  * \brief Получить сообщение об ошибке известного типа
  * \return строка, содержащая сообщение об ошибке
  */
-QString Error::getErrorMessageFor()
+QString Error::getErrorMessageFor() const
 {
     QString message;
     switch (type) {
@@ -60,7 +60,7 @@ QString Error::getErrorMessageFor()
         message = "Найдено несколько операций сравнения: «" + error_strings.join("», «") + "». Во входном (не)равенстве должна быть только одна из операций сравнения «==», «>=», «<=». «>», «<», «!=».";
         break;
     case NO_DEFINED:
-        message = "";
+        message = "Неизвестная ошибка.";
         break;
     default:
         break;
