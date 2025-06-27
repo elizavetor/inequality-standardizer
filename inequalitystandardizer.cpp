@@ -218,7 +218,7 @@ bool isNum(QString token)
  */
 bool isVar(QString token)
 {
-    QString latin_alphabet("ABCDIFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxywz");
+    QString latin_alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxywz");
     // Считать, что заданный токен является именем переменной
     bool is_var = true;
 
