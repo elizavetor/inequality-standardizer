@@ -315,7 +315,7 @@ bool areEqualVariableIDs(QList<NodeOfExprTree*> vars)
     //...Считать, что имена переменных в списке одинаковы
     bool is_equal = true;
     int count_vars = vars.size();
-    if (count_vars == 0) is_equal = false;
+    if (count_vars < 2) is_equal = false;
     for(int i = 0; i < count_vars && is_equal; i++) // Для каждого элемента в списке переменных, начиная со второго, пока они одинаковы
     {
         // Если текущее имя переменной не равно с первым
