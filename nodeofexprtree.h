@@ -265,4 +265,10 @@ int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOf
  */
 bool areEqualVariableIDs(QList<NodeOfExprTree*> vars);
 
+/*!
+ * \brief Получить список операторов сравнения строки
+ * \return список операторов сравнения
+ */
+QStringList getListOfComparisonOperator(QString expr);
+
 #endif // NODEOFEXPRTREE_H
