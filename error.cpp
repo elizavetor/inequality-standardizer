@@ -20,7 +20,7 @@ Error::Error(ErrorType _type, int _pos, QStringList _error_strings)
             error_strings.append("==");
         else if(_error_strings[i] == "~")
             error_strings.append("-");
-        else error_strings = _error_strings;
+        else error_strings[i] = _error_strings[i];
     }
 }
 
