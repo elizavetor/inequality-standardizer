@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_listToTree для тестирования метода NodeOfExprTree::listToTree программы nequalityStandardizer.
+*/
+
 #include "test_listtotree.h"
 
 Test_listToTree::Test_listToTree(QObject *parent)

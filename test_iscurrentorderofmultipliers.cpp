@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfMultipliers для тестирования метода NodeOfExprTree::isCurrentOrderOfMultipliers программы nequalityStandardizer.
+*/
+
 #include "test_iscurrentorderofmultipliers.h"
 
 Test_isCurrentOrderOfMultipliers::Test_isCurrentOrderOfMultipliers(QObject *parent)

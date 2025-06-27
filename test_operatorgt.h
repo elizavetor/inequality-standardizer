@@ -1,8 +1,11 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_operatorGt для тестирования метода OperandOfExpr::operatorGt программы nequalityStandardizer.
+*/
+
 #ifndef TEST_OPERATORGT_H
 #define TEST_OPERATORGT_H
-
 #include "nodeofexprtree.h"
-
 #include <QObject>
 #include <QtTest/QtTest>
 

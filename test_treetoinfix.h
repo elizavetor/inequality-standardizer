@@ -1,8 +1,11 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_treeToInfix для тестирования метода NodeOfExprTree::treeToInfix программы nequalityStandardizer.
+*/
+
 #ifndef TEST_TREETOINFIX_H
 #define TEST_TREETOINFIX_H
-
 #include "nodeofexprtree.h"
-
 #include <QObject>
 #include <QtTest/QtTest>
 

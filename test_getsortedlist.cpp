@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_getSortedList для тестирования метода NodeOfExprTree::getSortedList программы nequalityStandardizer.
+*/
+
 #include "test_getsortedlist.h"
 
 Test_getSortedList::Test_getSortedList(QObject *parent)

@@ -1,6 +1,10 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_postfixToTree для тестирования функции postfixToTree программы nequalityStandardizer.
+*/
+
 #ifndef TEST_POSTFIXTOTREE_H
 #define TEST_POSTFIXTOTREE_H
-
 #include "testingfunctions.h"
 #include <QObject>
 #include <QtTest/QtTest>

@@ -1,9 +1,12 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_isCurrentOrderOfMultipliers для тестирования метода OperandOfExpr::isCurrentOrderOfMultipliers программы nequalityStandardizer.
+*/
+
 #ifndef TEST_ISCURRENTORDEROFMULTIPLIERS_H
 #define TEST_ISCURRENTORDEROFMULTIPLIERS_H
-
 #include "nodeofexprtree.h"
 #include <QtTest/QtTest>
-
 #include <QObject>
 
 class Test_isCurrentOrderOfMultipliers : public QObject

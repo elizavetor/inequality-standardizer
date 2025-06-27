@@ -1,9 +1,12 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_listToTree для тестирования метода NodeOfExprTree::listToTree программы nequalityStandardizer.
+*/
+
 #ifndef TEST_LISTTOTREE_H
 #define TEST_LISTTOTREE_H
-
 #include "testingfunctions.h"
 #include <QtTest/QtTest>
-
 #include <QObject>
 
 class Test_listToTree : public QObject

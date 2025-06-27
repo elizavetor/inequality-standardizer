@@ -1,8 +1,12 @@
+/*!
+* \file
+* \brief Заголовочный файл функций для тестирования программы nequalityStandardizer.
+*/
+
 #ifndef TESTINGFUNCTIONS_H
 #define TESTINGFUNCTIONS_H
 #include "nodeofexprtree.h"
 #include "error.h"
-
 #include <QObject>
 #include <QSet>
 

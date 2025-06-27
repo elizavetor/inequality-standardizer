@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_operatorGt для тестирования метода NodeOfExprTree::operatorGt программы nequalityStandardizer.
+*/
+
 #include "test_operatorgt.h"
 
 Test_operatorGt::Test_operatorGt(QObject *parent)

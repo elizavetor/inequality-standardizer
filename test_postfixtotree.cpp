@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_postfixToTree для тестирования функции postfixToTree программы nequalityStandardizer.
+*/
+
 #include "test_postfixtotree.h"
 
 Test_postfixToTree::Test_postfixToTree(QObject *parent)

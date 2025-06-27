@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов структура OperandOfExpr, использующихся в ходе работы программы nequalityStandardizer.
+*/
+
 #include "nodeofexprtree.h"
 
 /*!

@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_getDegreeOfExpr для тестирования метода NodeOfExprTree::getDegreeOfExpr программы nequalityStandardizer.
+*/
+
 #include "test_getdegreeofexpr.h"
 
 Test_getDegreeOfExpr::Test_getDegreeOfExpr(QObject *parent)

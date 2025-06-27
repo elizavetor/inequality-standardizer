@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Error, использующихся в ходе работы программы nequalityStandardizer.
+*/
+
 #include "error.h"
 
 Error::Error()

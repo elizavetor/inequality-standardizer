@@ -1,6 +1,10 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_getSortedList для тестирования метода NodeOfExprTree::getSortedList программы nequalityStandardizer.
+*/
+
 #ifndef TEST_GETSORTEDLIST_H
 #define TEST_GETSORTEDLIST_H
-
 #include "testingfunctions.h"
 #include <QObject>
 #include <QtTest/QtTest>

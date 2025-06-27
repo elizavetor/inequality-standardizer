@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfSummands для тестирования метода NodeOfExprTree::isCurrentOrderOfSummands программы nequalityStandardizer.
+*/
+
 #include "test_iscurrentorderofsummands.h"
 
 Test_isCurrentOrderOfSummands::Test_isCurrentOrderOfSummands(QObject *parent)

@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_sortOperandsAlphabetically для тестирования метода NodeOfExprTree::sortOperandsAlphabetically программы nequalityStandardizer.
+*/
+
 #include "test_sortoperandsalphabetically.h"
 
 Test_sortOperandsAlphabetically::Test_sortOperandsAlphabetically(QObject *parent)

@@ -1,6 +1,10 @@
+/*!
+ * \file
+ * \brief Заголовочный файл для класса узла дерева NodeOfExprTree, струкруры OperandOfExpr и функций программы inequalityStandardizer
+ */
+
 #ifndef NODEOFEXPRTREE_H
 #define NODEOFEXPRTREE_H
-
 #include <QObject>
 #include "error.h"
 #include <QSet>
@@ -9,20 +13,34 @@
 
 class NodeOfExprTree;
 
+/*!
+ * \brief Перечисление типов узла
+ */
 enum OperatorType{
-    UNDEFINED,
-    UN_MINUS,
-    MULTIPLICATION, DIVISION,
-    PLUS, BIN_MINUS,
-    EQUAL, NOT_EQUAL, GREATER, LESS, GREATER_OR_EQUAL, LESS_OR_EQUAL,
-    NUM, VAR
+    UNDEFINED,              //!< Неопределённый тип
+    UN_MINUS,               //!< Унарный минус
+    MULTIPLICATION,         //!< Умножение
+    DIVISION,               //!< Деление
+    PLUS,                   //!< Плюс
+    BIN_MINUS,              //!< Бинарный минус
+    EQUAL,                  //!< Знак равенства
+    NOT_EQUAL,              //!< Знак неравенства
+    GREATER,                //!< Больше
+    LESS,                   //!< Меньше
+    GREATER_OR_EQUAL,       //!< Больше или равно
+    LESS_OR_EQUAL,          //!< Меньше или равно
+    NUM,                    //!< Число
+    VAR                     //!< Переменная
 };
 
+/*!
+ * \brief Структура для хранения информации об операнде
+ */
 struct OperandOfExpr
 {
-    NodeOfExprTree* parent;     // родитель операнда
-    NodeOfExprTree* operand;    // операнд
-    bool is_first_elem;         // флаг: true - операнд есть первый элемент выражения (нет знака перед собой), false - иначе
+    NodeOfExprTree* parent;     //!< родитель операнда
+    NodeOfExprTree* operand;    //!< операнд
+    bool is_first_elem;         //!< флаг: true - операнд есть первый элемент выражения (нет знака перед собой), false - иначе
 
     /*!
      * \brief Определить правильность расстановки двух множителей по алфавиту
@@ -51,16 +69,27 @@ struct OperandOfExpr
     bool operator>(const OperandOfExpr& other) const;
 };
 
+/*!
+ * \brief Класс для хранения информации об узле дерева
+ */
 class NodeOfExprTree
 {
 private:
-    OperatorType type;                 // тип узла
-    QString value;                     // значение узла
-    NodeOfExprTree* left_operand;      // левый операнд узла
-    NodeOfExprTree* right_operand;     // правый операнд узла
+    OperatorType type;                 //!< тип узла
+    QString value;                     //!< значение узла
+    NodeOfExprTree* left_operand;      //!< левый операнд узла
+    NodeOfExprTree* right_operand;     //!< правый операнд узла
 
 public:
+
+    /*!
+     * \brief Конструктор по умолчанию для класса NodeOfExprTree
+     */
     NodeOfExprTree();
+
+    /*!
+     * \brief Конструктор с параметрами для класса NodeOfExprTree
+     */
     NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand = nullptr, NodeOfExprTree* _right_operand = nullptr);
 
     friend struct OperandOfExpr;

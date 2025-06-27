@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса функций, использующихся в ходе работы программы nequalityStandardizer.
+*/
+
 #include "nodeofexprtree.h"
 #include "test_iscurrentorderofmultipliers.h"
 #include "test_postfixtotree.h"

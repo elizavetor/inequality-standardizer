@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию методов класса Test_getListOfNodesOfSamePrecedenceLevel для тестирования метода NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel программы nequalityStandardizer.
+*/
+
 #include "test_getlistofnodesofsameprecedencelevel.h"
 
 Test_getListOfNodesOfSamePrecedenceLevel::Test_getListOfNodesOfSamePrecedenceLevel(QObject *parent)

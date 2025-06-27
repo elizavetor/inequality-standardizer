@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Файл содержит реализацию функций для тестирования программы nequalityStandardizer.
+*/
+
 #include "testingfunctions.h"
 
 /*!

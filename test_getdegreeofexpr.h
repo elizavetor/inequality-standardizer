@@ -1,3 +1,8 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_getDegreeOfExpr для тестирования метода NodeOfExprTree::getDegreeOfExpr программы nequalityStandardizer.
+*/
+
 #ifndef TEST_GETDEGREEOFEXPR_H
 #define TEST_GETDEGREEOFEXPR_H
 #include "nodeofexprtree.h"

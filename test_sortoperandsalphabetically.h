@@ -1,6 +1,10 @@
+/*!
+* \file
+* \brief Заголовочный файл класса Test_sortOperandsAlphabetically для тестирования метода NodeOfExprTree::sortOperandsAlphabetically программы nequalityStandardizer.
+*/
+
 #ifndef TEST_SORTOPERANDSALPHABETICALLY_H
 #define TEST_SORTOPERANDSALPHABETICALLY_H
-
 #include "testingfunctions.h"
 #include <QObject>
 #include <QtTest/QtTest>
