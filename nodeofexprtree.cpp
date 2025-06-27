@@ -275,6 +275,26 @@ QList<OperandOfExpr> NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel()
 }
 
 /*!
+ * \brief Перестроить дерево (не)равенства, перенеся все слагаемые после знака сравнения в левую часть (не)равенства (до знака сравнения)
+ */
+void NodeOfExprTree::rearrangeForZeroComparison()
+{
+    // Завершить работу программы, если текущий узел не является оператором сравнения или имеет правый операнд с значение "0"
+    if(!isComparisonOperator(value) || right_operand->value == "0")
+        return;
+
+    // Создать узел типа оператора бинарный минус и переместить левый и правый операнды корня в операнды созданного узла
+    NodeOfExprTree* bin_minus = new NodeOfExprTree("-", left_operand, right_operand);
+
+    // Считать созданный узел левым операндом корня
+    left_operand = bin_minus;
+
+    // Создать узел типа число с значением "0" и сделать его правым операндом корня дерева
+    NodeOfExprTree* zero = new NodeOfExprTree("0");
+    right_operand = zero;
+}
+
+/*!
  * \brief Получить список операндов, родители которых одного приоритета, начиная с заданного узла, раскрывая скобки
  * \param [in] is_invert - флаг: true - значение заданного узла необходимо поменять на противоположный операнд, false - иначе
  * \return список операндов
