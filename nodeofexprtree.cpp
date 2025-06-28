@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса NodeOfExprTree, использующихся в ходе работы программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса NodeOfExprTree, использующихся в ходе работы программы inequalityStandardizer.
 */
 
 #include "nodeofexprtree.h"

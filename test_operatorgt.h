@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_operatorGt для тестирования метода OperandOfExpr::operatorGt программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_operatorGt для тестирования метода OperandOfExpr::operator> программы inequalityStandardizer.
 */
 
 #ifndef TEST_OPERATORGT_H
@@ -10,7 +10,7 @@
 #include <QtTest/QtTest>
 
 /*!
- * \brief Класс для тестирования метода OperandOfExpr::operatorGt
+ * \brief Класс для тестирования метода OperandOfExpr::operator>
  */
 class Test_operatorGt : public QObject
 {

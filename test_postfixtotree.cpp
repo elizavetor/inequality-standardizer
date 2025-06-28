@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_postfixToTree для тестирования функции postfixToTree программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_postfixToTree для тестирования функции postfixToTree программы inequalityStandardizer.
 */
 
 #include "test_postfixtotree.h"

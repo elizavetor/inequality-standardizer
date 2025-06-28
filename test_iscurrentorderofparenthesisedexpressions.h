@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_isCurrentOrderOfParenthesisedExpressions для тестирования метода OperandOfExpr::isCurrentOrderOfParenthesisedExpressions программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_isCurrentOrderOfParenthesisedExpressions для тестирования метода OperandOfExpr::isCurrentOrderOfParenthesisedExpressions программы inequalityStandardizer.
 */
 
 #ifndef TEST_ISCURRENTORDEROFPARENTHESISEDEXPRESSIONS_H

@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfSummands для тестирования метода NodeOfExprTree::isCurrentOrderOfSummands программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfSummands для тестирования метода OperandOfExpr::isCurrentOrderOfSummands программы inequalityStandardizer.
 */
 
 #include "test_iscurrentorderofsummands.h"

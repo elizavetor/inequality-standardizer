@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_getDegreeOfExpr для тестирования метода NodeOfExprTree::getDegreeOfExpr программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_getDegreeOfExpr для тестирования метода NodeOfExprTree::getDegreeOfExpr программы inequalityStandardizer.
 */
 
 #include "test_getdegreeofexpr.h"

@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_getListOfNodesOfSamePrecedenceLevel для тестирования метода NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_getListOfNodesOfSamePrecedenceLevel для тестирования метода NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel программы inequalityStandardizer.
 */
 
 #ifndef TEST_GETLISTOFNODESOFSAMEPRECEDENCELEVEL_H

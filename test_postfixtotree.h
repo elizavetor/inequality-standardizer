@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_postfixToTree для тестирования функции postfixToTree программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_postfixToTree для тестирования функции postfixToTree программы inequalityStandardizer.
 */
 
 #ifndef TEST_POSTFIXTOTREE_H

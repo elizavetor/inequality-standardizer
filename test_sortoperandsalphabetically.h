@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_sortOperandsAlphabetically для тестирования метода NodeOfExprTree::sortOperandsAlphabetically программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_sortOperandsAlphabetically для тестирования метода NodeOfExprTree::sortOperandsAlphabetically программы inequalityStandardizer.
 */
 
 #ifndef TEST_SORTOPERANDSALPHABETICALLY_H

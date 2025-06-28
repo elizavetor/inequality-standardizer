@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию функций для тестирования программы nequalityStandardizer.
+* \brief Файл содержит реализацию функций для тестирования программы inequalityStandardizer.
 */
 
 #include "testingfunctions.h"

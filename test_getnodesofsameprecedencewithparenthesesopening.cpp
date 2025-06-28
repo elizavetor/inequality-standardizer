@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_getNodesOfSamePrecedenceWithParenthesesOpening для тестирования метода NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpening программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_getNodesOfSamePrecedenceWithParenthesesOpening для тестирования метода NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpening программы inequalityStandardizer.
 */
 
 #include "test_getnodesofsameprecedencewithparenthesesopening.h"

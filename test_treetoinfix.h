@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_treeToInfix для тестирования метода NodeOfExprTree::treeToInfix программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_treeToInfix для тестирования метода NodeOfExprTree::treeToInfix программы inequalityStandardizer.
 */
 
 #ifndef TEST_TREETOINFIX_H

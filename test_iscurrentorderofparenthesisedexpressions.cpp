@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfParenthesisedExpressions для тестирования метода NodeOfExprTree::isCurrentOrderOfParenthesisedExpressions программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfParenthesisedExpressions для тестирования метода OperandOfExpr::isCurrentOrderOfParenthesisedExpressions программы inequalityStandardizer.
 */
 
 #include "test_iscurrentorderofparenthesisedexpressions.h"

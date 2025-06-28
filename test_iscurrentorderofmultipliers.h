@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_isCurrentOrderOfMultipliers для тестирования метода OperandOfExpr::isCurrentOrderOfMultipliers программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_isCurrentOrderOfMultipliers для тестирования метода OperandOfExpr::isCurrentOrderOfMultipliers программы inequalityStandardizer.
 */
 
 #ifndef TEST_ISCURRENTORDEROFMULTIPLIERS_H

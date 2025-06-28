@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_getSortedList для тестирования метода NodeOfExprTree::getSortedList программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_getSortedList для тестирования метода NodeOfExprTree::getSortedList программы inequalityStandardizer.
 */
 
 #include "test_getsortedlist.h"

@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_listToTree для тестирования метода NodeOfExprTree::listToTree программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_listToTree для тестирования метода NodeOfExprTree::listToTree программы inequalityStandardizer.
 */
 
 #include "test_listtotree.h"

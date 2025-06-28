@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл класса Test_isCurrentOrderOfSummands для тестирования метода OperandOfExpr::isCurrentOrderOfSummands программы nequalityStandardizer.
+* \brief Заголовочный файл класса Test_isCurrentOrderOfSummands для тестирования метода OperandOfExpr::isCurrentOrderOfSummands программы inequalityStandardizer.
 */
 
 #ifndef TEST_ISCURRENTORDEROFSUMMANDS_H

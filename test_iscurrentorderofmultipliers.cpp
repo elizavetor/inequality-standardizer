@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfMultipliers для тестирования метода NodeOfExprTree::isCurrentOrderOfMultipliers программы nequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_isCurrentOrderOfMultipliers для тестирования метода OperandOfExpr::isCurrentOrderOfMultipliers программы inequalityStandardizer.
 */
 
 #include "test_iscurrentorderofmultipliers.h"

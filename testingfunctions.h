@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Заголовочный файл функций для тестирования программы nequalityStandardizer.
+* \brief Заголовочный файл функций для тестирования программы inequalityStandardizer.
 */
 
 #ifndef TESTINGFUNCTIONS_H
