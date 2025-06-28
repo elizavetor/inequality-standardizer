@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::sortOperandsAlphabetically
+ */
 class Test_sortOperandsAlphabetically : public QObject
 {
     Q_OBJECT

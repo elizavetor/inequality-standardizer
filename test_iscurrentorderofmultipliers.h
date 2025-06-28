@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода OperandOfExpr::isCurrentOrderOfMultipliers
+ */
 class Test_isCurrentOrderOfMultipliers : public QObject
 {
     Q_OBJECT

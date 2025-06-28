@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования функции postfixToTree
+ */
 class Test_postfixToTree : public QObject
 {
     Q_OBJECT

@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::getNodesOfSamePrecedenceWithParenthesesOpening
+ */
 class Test_getNodesOfSamePrecedenceWithParenthesesOpening : public QObject
 {
     Q_OBJECT

@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::listToTree
+ */
 class Test_listToTree : public QObject
 {
     Q_OBJECT

@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования метода OperandOfExpr::operatorGt
+ */
 class Test_operatorGt : public QObject
 {
     Q_OBJECT

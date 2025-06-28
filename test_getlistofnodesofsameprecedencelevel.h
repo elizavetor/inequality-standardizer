@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::getListOfNodesOfSamePrecedenceLevel
+ */
 class Test_getListOfNodesOfSamePrecedenceLevel : public QObject
 {
     Q_OBJECT

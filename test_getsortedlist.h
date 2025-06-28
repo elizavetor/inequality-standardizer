@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::getSortedList
+ */
 class Test_getSortedList : public QObject
 {
     Q_OBJECT

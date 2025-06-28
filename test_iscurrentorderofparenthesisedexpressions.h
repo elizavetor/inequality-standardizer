@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода OperandOfExpr::isCurrentOrderOfParenthesisedExpressions
+ */
 class Test_isCurrentOrderOfParenthesisedExpressions : public QObject
 {
     Q_OBJECT

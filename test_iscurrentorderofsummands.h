@@ -9,6 +9,9 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+/*!
+ * \brief Класс для тестирования метода OperandOfExpr::isCurrentOrderOfSummands
+ */
 class Test_isCurrentOrderOfSummands : public QObject
 {
     Q_OBJECT

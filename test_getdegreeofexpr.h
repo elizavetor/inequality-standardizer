@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::getDegreeOfExpr
+ */
 class Test_getDegreeOfExpr : public QObject
 {
     Q_OBJECT

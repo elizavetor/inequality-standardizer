@@ -9,6 +9,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/*!
+ * \brief Класс для тестирования метода NodeOfExprTree::treeToInfix
+ */
 class Test_treeToInfix : public QObject
 {
     Q_OBJECT
