@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов класса Test_operatorGt для тестирования метода NodeOfExprTree::operator> программы inequalityStandardizer.
+* \brief Файл содержит реализацию методов класса Test_operatorGt для тестирования метода OperandOfExpr::operator> программы inequalityStandardizer.
 */
 
 #include "test_operatorgt.h"
