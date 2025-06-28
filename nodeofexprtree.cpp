@@ -162,7 +162,7 @@ int NodeOfExprTree::getNodeBySkippingUnaryMinus(NodeOfExprTree** node)
 NodeOfExprTree* NodeOfExprTree::sortOperandsAlphabetically()
 {
     // ...Считать корень перестроенного дерева равным заданному узлу
-    NodeOfExprTree* new_root = this;
+    NodeOfExprTree* new_root = nullptr;
     // Получить список для сортировки
     QList<OperandOfExpr> sorted_list = getSortedList();
 
