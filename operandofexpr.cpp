@@ -116,8 +116,8 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
     QList<NodeOfExprTree*> elems_2 = summand_2->getLeavesOfTree();
 
     // Определить, соблюдается ли порядок: сначала слагаемое с одинаковыми внутри себя именами переменных, потом - с различными, и вернуть результат, если порядок определился
-    QList<NodeOfExprTree*> vars_1 = operand->getListOfVariableIDs(elems_1);
-    QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariableIDs(elems_2);
+    QList<NodeOfExprTree*> vars_1 = getListOfVariableIDs(elems_1);
+    QList<NodeOfExprTree*> vars_2 = getListOfVariableIDs(elems_2);
     bool equal_vars_1 = areEqualVariableIDs(vars_1);
     bool equal_vars_2 = areEqualVariableIDs(vars_2);
     if(equal_vars_1 && !equal_vars_2)
@@ -231,8 +231,8 @@ bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr
     QList<NodeOfExprTree*> elems_2 = other.operand->getLeavesOfTree();
 
     // Определить, соблюдается ли порядок: по алфавиту, учитывая только переменные
-    QList<NodeOfExprTree*> vars_1 = operand->getListOfVariableIDs(elems_1);
-    QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariableIDs(elems_2);
+    QList<NodeOfExprTree*> vars_1 = getListOfVariableIDs(elems_1);
+    QList<NodeOfExprTree*> vars_2 = getListOfVariableIDs(elems_2);
     int result = isCurentOrderOfListOfVariableIDs(vars_1, vars_2);
 
     // Вернуть результат, если порядок определился

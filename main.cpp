@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     setlocale(LC_ALL, "Russian");
 
     QCoreApplication a(argc, argv);
+
     // Проверка аргументов командной строки
     if (argc == 2 && QString(argv[1]) == "--test") // Если передан запрос запуска тестов
     {

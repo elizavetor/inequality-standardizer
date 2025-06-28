@@ -220,13 +220,6 @@ public:
     QList<NodeOfExprTree*> getLeavesOfTree();
 
     /*!
-     * \brief Получить список имён переменных из списка листов дерева
-     * \param [in] leaves - список элементов
-     * \return спосок переменных
-     */
-    QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves);
-
-    /*!
      * \brief Определить кол-во выражений в скобках в текущем выражении
      * \return кол-во выражений в скобках
      */
@@ -300,5 +293,12 @@ bool areEqualVariableIDs(QList<NodeOfExprTree*> vars);
  * \return список операторов сравнения
  */
 QStringList getListOfComparisonOperator(QString expr);
+
+/*!
+ * \brief Получить список имён переменных из списка листов дерева
+ * \param [in] leaves - список элементов
+ * \return спосок переменных
+ */
+QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves);
 
 #endif // NODEOFEXPRTREE_H
