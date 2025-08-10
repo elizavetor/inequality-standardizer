@@ -336,27 +336,29 @@ bool areEqualVariableIDs(QList<NodeOfExprTree*> vars)
 }
 
 /*!
- * \brief Получить список операторов сравнения строки
+ * \brief Получить список операторов сравнения строки с разделителя (пробел, табуляция, перевод строки)
  * \return список операторов сравнения
  */
 QStringList getListOfComparisonOperator(QString expr)
 {
-    int count_greater_equal = expr.count(">=");
-    int count_less_equal = expr.count("<=") ;
-    int count_less = expr.count("<") - count_less_equal;
-    int count_greater = expr.count(">") - count_greater_equal;
-    int count_not_equal = expr.count("!=");
-    int count_equal = expr.count("=") - count_greater_equal - count_less_equal - count_not_equal;
-
+    // ...Считать список операторов пустым
     QStringList comparison_operator_list;
-    for(int i = 0; i < count_greater_equal; i++){ comparison_operator_list.append(">="); }
-    for(int i = 0; i < count_less_equal; i++){ comparison_operator_list.append("<="); }
-    for(int i = 0; i < count_less; i++){ comparison_operator_list.append("<"); }
-    for(int i = 0; i < count_greater; i++){ comparison_operator_list.append(">"); }
-    for(int i = 0; i < count_not_equal; i++){ comparison_operator_list.append("!="); }
-    for(int i = 0; i < count_equal; i++){ comparison_operator_list.append("="); }
 
-    return  comparison_operator_list;
+    // Разбить строку на токены
+    QStringList tokens = expr.split(QRegularExpression("[ \\n\\t]"), Qt::SkipEmptyParts);
+
+    // Для каждого токена
+    int tokens_count = tokens.size();
+    for(int i = 0; i < tokens_count; i++)
+    {
+        // Добавить в список текущий токен, если этот токен является оператором сравнения
+        if(isComparisonOperator(tokens[i]))
+        {
+            comparison_operator_list.append(tokens[i]);
+        }
+    }
+
+    return comparison_operator_list;
 }
 
 /*!
