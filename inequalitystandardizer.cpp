@@ -84,7 +84,8 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
 
     // ...Считать, что не было найдено ошибок
     bool errors_found = false;
-    for(int i = 0; i < tokens.size(); i++) // Для каждого токена
+    int count_of_tokens = tokens.size();
+    for(int i = 0; i < count_of_tokens; i++) // Для каждого токена
     {
         // Если текущий токен некорректен
         if (!isVar(tokens[i]) && !isNum(tokens[i]) && !isOperator(tokens[i]))
@@ -98,8 +99,11 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
     // Вернуть пустой корень дерева, eсли были найдены ошибки
     if (errors_found) { return nullptr; }
 
-    int count_of_tokens = tokens.size();
-    for(int i = 0; i < count_of_tokens; i++) // Для каждого токена
+    // Построить дерево...
+    // ...Считать, что постоено полноценное дерево
+    bool tree_is_correct = true;
+    // Для каждого токена
+    for(int i = 0; i < count_of_tokens; i++)
     {
         // Создать узел для текущего токена
         NodeOfExprTree* new_node = new NodeOfExprTree(tokens[i]);
@@ -133,42 +137,39 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
                     errors.insert(Error(COMPARISON_OPERATOR_IN_PARENTHESES, i + 1, QStringList(tokens[i])));
                 }
             }
+
+            // Считать, что найдена ошибка NOT_ENOUGH_OPERANDS, если в стеке нет необходимого кол-ва узлов для текущего типа узла
+            if(!(tokens[i] == "~" && nodes.size() >= 1 || tokens[i] != "~" && nodes.size() >= 2))
             {
+                errors.insert(Error(NOT_ENOUGH_OPERANDS, i + 1, QStringList(tokens[i])));
+                tree_is_correct = false;
             }
 
-            // Если в стеке есть необходимое кол-во узлов для текущего типа узла
-            if(tokens[i] == "~" && nodes.size() >= 1 || tokens[i] != "~" && nodes.size() >= 2)
+            // Вытащить необходимое кол-во узлов из стека и считать их операндами созданного узла
+            if(!nodes.isEmpty())
             {
-                // Вытащить необходимое кол-во узлов из стека и считать их операндами созданного узла
                 new_node->setRightOperand(nodes.pop());
                 nodes_pos_in_expr.pop();
-                if(tokens[i] != "~")
+                if(tokens[i] != "~" && !nodes.isEmpty())
                 {
                     new_node->setLeftOperand(nodes.pop());
                     nodes_pos_in_expr.pop();
                 }
-                // Добавить созданный узел в стек
-                nodes.push(new_node);
-                nodes_pos_in_expr.push(i + 1);
-            }
-            // Иначе считать, что найдена ошибка NOT_ENOUGH_OPERANDS, добавить её в список ошибок и вернуть пустой корень дерева
-            else
-            {
-                errors.insert(Error(NOT_ENOUGH_OPERANDS, i + 1, QStringList(tokens[i])));
-                delete new_node;
-                clearStackNodes(nodes);
-                return nullptr;
             }
         }
     }
 
-    // Если в стеке больше одного узла
-    if(nodes.size() > 1)
+    // Если в стеке больше одного узла или дерево некорректно
+    if(nodes.size() > 1 || !tree_is_correct)
     {
-        for(int i = 0; i < nodes.size() - 1; i++)
+        // Если в стеке больше одного узла
+        if (nodes.size() > 1)
         {
-            // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок и вернуть пустой корень дерева
-            errors.insert(Error(MISSING_OPERATOR, nodes_pos_in_expr[i], QStringList(tokens[nodes_pos_in_expr[i] - 1])));
+            for(int i = 0; i < nodes.size() - 1; i++)
+            {
+                // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок
+                errors.insert(Error(MISSING_OPERATOR, nodes_pos_in_expr[i], QStringList(tokens[nodes_pos_in_expr[i] - 1])));
+            }
         }
         clearStackNodes(nodes);
         return nullptr;
