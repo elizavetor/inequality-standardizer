@@ -108,15 +108,8 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
         // Создать узел для текущего токена
         NodeOfExprTree* new_node = new NodeOfExprTree(tokens[i]);
 
-        // Добавить узел в стек узлов, eсли тип созданного узла есть переменная или число
-        if (isVar(tokens[i]) || isNum(tokens[i]))
-        {
-            nodes.push(new_node);
-            nodes_pos_in_expr.push(i + 1);
-        }
-
         // ИначеЕсли тип созданного узла есть оператор
-        else
+        if(isOperator(tokens[i]))
         {
             // Если текущий токен есть оператор сравнения
             if(isComparisonOperator(tokens[i]))
@@ -157,6 +150,10 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
                 }
             }
         }
+
+        // Добавить созданный узел в стек
+        nodes.push(new_node);
+        nodes_pos_in_expr.push(i + 1);
     }
 
     // Если в стеке больше одного узла или дерево некорректно
