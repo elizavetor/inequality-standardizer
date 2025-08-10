@@ -114,11 +114,26 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
         // ИначеЕсли тип созданного узла есть оператор
         else
         {
-            // Если созданный узел типа оператора сравнения и текущий токен не яляется последним
-            if (isComparisonOperator(tokens[i]) && i != count_of_tokens - 1)
+            // Если текущий токен есть оператор сравнения
+            if(isComparisonOperator(tokens[i]))
             {
-                // Считать, что найдена ошибка COMPARISON_OPERATOR_IN_PARENTHESES, добавить её в список ошибок
-                errors.insert(Error(COMPARISON_OPERATOR_IN_PARENTHESES, i + 1, QStringList(tokens[i])));
+                // Для каждого токена после текущего
+                bool current_token_is_last_operator = true;
+                for(int j = i + 1; j < count_of_tokens && current_token_is_last_operator; j++)
+                {
+                    // Считать, что текущий токен не последний оператор, если токен после него еть оператор
+                    if(isOperator(tokens[j]))
+                    {
+                        current_token_is_last_operator = false;
+                    }
+                }
+                // Считать, что найдена ошибка COMPARISON_OPERATOR_IN_PARENTHESES, если текущий оператор не последний
+                if (!current_token_is_last_operator)
+                {
+                    errors.insert(Error(COMPARISON_OPERATOR_IN_PARENTHESES, i + 1, QStringList(tokens[i])));
+                }
+            }
+            {
             }
 
             // Если в стеке есть необходимое кол-во узлов для текущего типа узла
