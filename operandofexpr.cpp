@@ -111,13 +111,9 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
     NodeOfExprTree* summand_2 = nullptr;
     int missing_un_minuses_2 = other.operand->getNodeBySkippingUnaryMinus(&summand_2);
 
-    // Получить список элементов каждого слагаемого
-    QList<NodeOfExprTree*> elems_1 = summand_1->getLeavesOfTree();
-    QList<NodeOfExprTree*> elems_2 = summand_2->getLeavesOfTree();
-
     // Определить, соблюдается ли порядок: сначала слагаемое с одинаковыми внутри себя именами переменных, потом - с различными, и вернуть результат, если порядок определился
-    QList<NodeOfExprTree*> vars_1 = getListOfVariableIDs(elems_1);
-    QList<NodeOfExprTree*> vars_2 = getListOfVariableIDs(elems_2);
+    QList<NodeOfExprTree*> vars_1 = summand_1->getListOfVariable();
+    QList<NodeOfExprTree*> vars_2 = summand_2->getListOfVariable();
     bool equal_vars_1 = areEqualVariableIDs(vars_1);
     bool equal_vars_2 = areEqualVariableIDs(vars_2);
     if(equal_vars_1 && !equal_vars_2)
@@ -151,6 +147,8 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
     }
 
     // Определить, соблюдается ли порядок: от большего количества элементов слагаемого к меньшему, и вернуть результат, если порядок определился
+    QList<NodeOfExprTree*> elems_1 = summand_1->getLeavesOfTree();
+    QList<NodeOfExprTree*> elems_2 = summand_2->getLeavesOfTree();
     if(elems_1.size() > elems_2.size())
     {
         return true;
@@ -226,13 +224,9 @@ bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr
             return false;
     }
 
-    // Получить списки элементов каждого выражения
-    QList<NodeOfExprTree*> elems_1 = operand->getLeavesOfTree();
-    QList<NodeOfExprTree*> elems_2 = other.operand->getLeavesOfTree();
-
     // Определить, соблюдается ли порядок: по алфавиту, учитывая только переменные
-    QList<NodeOfExprTree*> vars_1 = getListOfVariableIDs(elems_1);
-    QList<NodeOfExprTree*> vars_2 = getListOfVariableIDs(elems_2);
+    QList<NodeOfExprTree*> vars_1 = operand->getListOfVariable();
+    QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariable();
     int result = isCurentOrderOfListOfVariableIDs(vars_1, vars_2);
 
     // Вернуть результат, если порядок определился

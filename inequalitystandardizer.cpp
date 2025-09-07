@@ -373,28 +373,3 @@ QStringList getListOfComparisonOperator(QString expr)
 
     return comparison_operator_list;
 }
-
-/*!
- * \brief Получить список имён переменных из списка листов дерева
- * \param [in] leaves - список элементов
- * \return спосок переменных
- */
-QList<NodeOfExprTree*> getListOfVariableIDs(QList<NodeOfExprTree*> leaves)
-{
-    //...Считать список переменных пустым
-    QList<NodeOfExprTree*> vars;
-
-    // Для кожного элемента списка
-    int count_leaves = leaves.size();
-    for(int i = 0; i < count_leaves; i++)
-    {
-        // Если текущий элемент есть переменная - добавить его в список
-        if (isVar(leaves[i]->getValue()))
-        {
-            vars.append(leaves[i]);
-        }
-    }
-
-    // Вернуть список переменных
-    return vars;
-}

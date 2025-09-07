@@ -644,6 +644,38 @@ QList<NodeOfExprTree*> NodeOfExprTree::getLeavesOfTree()
 }
 
 /*!
+ * \brief Получить список переменных дерева, корнем которого является заданный узел
+ * \return список переменных
+ */
+QList<NodeOfExprTree*> NodeOfExprTree::getListOfVariable()
+{
+    // ... Считать список переменных пустым
+    QList<NodeOfExprTree*> vars;
+
+    // Если заданный узел переменная дерева
+    if (type == VAR)
+    {
+        // Добавить заданный узел в список переменных дерева
+        vars.append(this);
+        // Вернуть список листьев
+        return vars;
+    }
+
+    // Получить список листьев операндов заданного листа
+    if(left_operand != nullptr)
+    {
+        vars += left_operand->getLeavesOfTree();
+    }
+    if(right_operand != nullptr)
+    {
+        vars += right_operand->getLeavesOfTree();
+    }
+
+    // Вернуть список листьев
+    return vars;
+}
+
+/*!
  * \brief Определить кол-во выражений в скобках в текущем выражении
  * \return кол-во выражений в скобках
  */
