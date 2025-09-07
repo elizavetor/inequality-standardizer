@@ -159,8 +159,8 @@ bool OperandOfExpr::isCurrentOrderOfSummands(const OperandOfExpr& other) const
     }
 
     // Определить, соблюдается ли порядок: от большего количества выражений в скобках в слагаемом к меньшему, и вернуть результат, если порядок определился
-    int num_of_expr_in_parentheses_1 = summand_1->getNumOfParentheses();
-    int num_of_expr_in_parentheses_2 = summand_2->getNumOfParentheses();
+    int num_of_expr_in_parentheses_1 = summand_1->getNumOfParenthesesPairs();
+    int num_of_expr_in_parentheses_2 = summand_2->getNumOfParenthesesPairs();
     if (num_of_expr_in_parentheses_1 > num_of_expr_in_parentheses_2)
     {
         return true;

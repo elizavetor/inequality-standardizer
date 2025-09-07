@@ -679,7 +679,7 @@ QList<NodeOfExprTree*> NodeOfExprTree::getListOfVariable()
  * \brief Определить кол-во выражений в скобках в текущем выражении
  * \return кол-во выражений в скобках
  */
-int NodeOfExprTree::getNumOfParentheses()
+int NodeOfExprTree::getNumOfParenthesesPairs()
 {
     // Считать, что кол-во найденных выражений в скобках равно 0
     int count_of_expr = 0;
