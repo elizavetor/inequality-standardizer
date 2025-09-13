@@ -20,33 +20,61 @@ NodeOfExprTree::NodeOfExprTree(QString _value, NodeOfExprTree* _left_operand, No
 
     // Установить тип узла
     if (value == "~")
+    {
         type = UN_MINUS;
+    }
     else if (value == "*")
+    {
         type = MULTIPLICATION;
+    }
     else if (value == "/")
+    {
         type = DIVISION;
+    }
     else if (value == "+")
+    {
         type = PLUS;
+    }
     else if (value == "-")
+    {
         type = BIN_MINUS;
+    }
     else if (value == ">")
+    {
         type = GREATER;
+    }
     else if (value == "<")
+    {
         type = LESS;
+    }
     else if (value == ">=")
+    {
         type = GREATER_OR_EQUAL;
+    }
     else if (value == "<=")
+    {
         type = LESS_OR_EQUAL;
+    }
     else if (value == "=")
+    {
         type = EQUAL;
+    }
     else if (value == "!=")
+    {
         type = NOT_EQUAL;
+    }
     else if (isVar(value))
+    {
         type = VAR;
+    }
     else if (isNum(value))
+    {
         type = NUM;
+    }
     else
+    {
         type = UNDEFINED;
+    }
 
     // Установить левый операнд
     left_operand = _left_operand;
@@ -94,8 +122,8 @@ int NodeOfExprTree::getPrecedenceType()
 }
 
 /*!
- * \brief Получить строку значения узла для инфикной записи
- * \return строка для инфикной записи
+ * \brief Получить строку значения узла для инфиксной записи
+ * \return строка для инфиксной записи
  */
 QString NodeOfExprTree::valueToStr()
 {
@@ -108,8 +136,8 @@ QString NodeOfExprTree::valueToStr()
 }
 
 /*!
-     * \brief Перегрузка оператора равенства для NodeOfExprTree
-     */
+ * \brief Перегрузка оператора равенства для NodeOfExprTree
+ */
 bool NodeOfExprTree::operator==(const NodeOfExprTree& other) const
 {
     if (value == other.value && type == other.type)

@@ -73,7 +73,7 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
     QStack<NodeOfExprTree*> nodes;
     QStack<int> nodes_pos_in_expr;
 
-    // Проверяем наличие некорректных разделителей
+    // Проверить наличие некорректных разделителей
     if (expr.contains('\t') || expr.contains('\n'))
     {
         errors.insert(Error(INCORRECT_DELIMITER));
@@ -97,28 +97,30 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
     }
 
     // Вернуть пустой корень дерева, eсли были найдены ошибки
-    if (errors_found) { return nullptr; }
+    if (errors_found)
+    {
+        return nullptr;
+    }
 
     // Построить дерево...
-    // ...Считать, что постоено полноценное дерево
+    // ...Считать, что дерево построено корректно
     bool tree_is_correct = true;
-    // Для каждого токена
-    for(int i = 0; i < count_of_tokens; i++)
+    for(int i = 0; i < count_of_tokens; i++) // Для каждого токена
     {
         // Создать узел для текущего токена
         NodeOfExprTree* new_node = new NodeOfExprTree(tokens[i]);
 
-        // ИначеЕсли тип созданного узла есть оператор
+        // Если тип созданного узла есть оператор
         if(isOperator(tokens[i]))
         {
             // Если текущий токен есть оператор сравнения
             if(isComparisonOperator(tokens[i]))
             {
-                // Для каждого токена после текущего
+                // Для каждого токена после текущего и пока текущий токен есть последний оператор выражения
                 bool current_token_is_last_operator = true;
                 for(int j = i + 1; j < count_of_tokens && current_token_is_last_operator; j++)
                 {
-                    // Считать, что текущий токен не последний оператор, если токен после него еть оператор
+                    // Считать, что текущий токен не последний оператор, если найден оператор после него
                     if(isOperator(tokens[j]))
                     {
                         current_token_is_last_operator = false;
@@ -193,14 +195,14 @@ void clearStackNodes(QStack<NodeOfExprTree*>& stack)
  * \param [in] token - проверяемый токен
  * \return true, если токен есть число, иначе - false
  */
-bool isNum(QString token)
+bool isNum(const QString token)
 {
     // ...Считать, что заданный токен есть число
     bool is_num = true;
 
-    /* Если первый символ заданного токена есть цифра 0 и второй символ - не есть плавающая запятая
-     или первый символ есть НЕцифра */
-    if (token[0] == '0' && token.length() > 1 &&token[1] != ',' || !token[0].isNumber())
+    /* Если первый символ заданного токена есть цифра 0 и второй символ - НЕ есть плавающая запятая
+     или первый символ есть НЕ цифра */
+    if (token[0] == '0' && token.length() > 1 && token[1] != ',' || !token[0].isNumber())
     {
         // Считать, что заданный токен не число, и завершить работу функции
         is_num = false;
@@ -225,7 +227,7 @@ bool isNum(QString token)
         }
     }
 
-    // Вернуть результат - заданный токен число или нет
+    // Вернуть результат
     return is_num;
 }
 
@@ -234,9 +236,9 @@ bool isNum(QString token)
  * \param [in] token - проверяемый токен
  * \return true, если токен есть переменная, иначе - false
  */
-bool isVar(QString token)
+bool isVar(const QString token)
 {
-    QString latin_alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxywz");
+    QString latin_alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
     // Считать, что заданный токен является именем переменной
     bool is_var = true;
 
@@ -251,13 +253,14 @@ bool isVar(QString token)
     for(int i = 1; i < num_of_symbol && is_var; i++)// Для каждого символа токена, начиная со второго, и пока заданный токен является переменной
     {
         // Если символ не является буквой латинского алфавита, цифрой и символом нижнего подчёркивания
-        if (!token[i].isNumber() && token[0] != '_' && latin_alphabet.indexOf(token[i]) == -1)
+        if (!token[i].isNumber() && token[i] != '_' && latin_alphabet.indexOf(token[i]) == -1)
         {
             // Считать, что заданный токен не является именем переменной
             is_var = false;
         }
     }
 
+    // Вернуть результат
     return is_var;
 }
 
@@ -266,14 +269,15 @@ bool isVar(QString token)
  * \param [in] token - проверяемый токен
  * \return true, если токен есть оператор, иначе - false
  */
-bool isOperator(QString token)
+bool isOperator(const QString token)
 {
-    // Если токен является
     if (token == "~" || token == "*" || token == "/"
         || token == "+" || token == "-" || token == ">"
         || token == "<" || token == ">=" || token == "<="
         || token == "=" || token == "!=")
+    {
         return true;
+    }
 
     return false;
 }
@@ -283,13 +287,14 @@ bool isOperator(QString token)
  * \param [in] token - проверяемый токен
  * \return true, если токен есть оператор, иначе - false
  */
-bool isComparisonOperator(QString token)
+bool isComparisonOperator(const QString token)
 {
-    // Если токен является
     if (token == ">" || token == "<"
         || token == ">=" || token == "<="
         || token == "=" || token == "!=")
+    {
         return true;
+    }
 
     return false;
 }
@@ -302,12 +307,12 @@ bool isComparisonOperator(QString token)
  */
 int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOfExprTree*> vars_2)
 {
-    // Для каждой пары n-ых переменных списков
+    // Определить кол-во пар
     int count_pairs = 0;
     int count_vars_1 = vars_1.size();
     int count_vars_2 = vars_2.size();
     count_vars_1 >= count_vars_2 ? count_pairs = count_vars_2 : count_pairs = count_vars_1;
-    for(int i = 0; i < count_pairs; i++)
+    for(int i = 0; i < count_pairs; i++) // Для каждой пары n-ых переменных списков
     {
         // Определить порядок: первая переменная меньше второй, и вернуть результат, если порядок определился
         if(vars_1[i]->getValue() < vars_2[i]->getValue())
@@ -324,17 +329,21 @@ int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOf
 }
 
 /*!
- * \brief Определить, равны ли имена переменные в списке
+ * \brief Определить, равны ли имена переменных в списке
  * \param [in] var - список переменных
- * \return true, если в списке одинаковые имена переменных, falst - иначе
+ * \return true, если в списке одинаковые имена переменных, false - иначе
  */
 bool areEqualVariableIDs(QList<NodeOfExprTree*> vars)
 {
     //...Считать, что имена переменных в списке одинаковы
     bool is_equal = true;
     int count_vars = vars.size();
-    if (count_vars < 2) is_equal = false;
-    for(int i = 0; i < count_vars && is_equal; i++) // Для каждого элемента в списке переменных, начиная со второго, пока они одинаковы
+    // Считать, что имена переменных различны, если в списке одна или ни одной переменной
+    if (count_vars < 2)
+    {
+        is_equal = false;
+    }
+    for(int i = 1; i < count_vars && is_equal; i++) // Для каждого элемента в списке переменных, начиная со второго, пока они одинаковы
     {
         // Если текущее имя переменной не равно с первым
         if(vars[0]->getValue() != vars[i]->getValue())
@@ -344,12 +353,12 @@ bool areEqualVariableIDs(QList<NodeOfExprTree*> vars)
         }
     }
 
-    // Вернуть получившийся результат
+    // Вернуть результат
     return is_equal;
 }
 
 /*!
- * \brief Получить список операторов сравнения строки с разделителя (пробел, табуляция, перевод строки)
+ * \brief Получить список операторов сравнения строки с разделителями (пробел, табуляция, перевод строки)
  * \return список операторов сравнения
  */
 QStringList getListOfComparisonOperator(QString expr)
@@ -360,9 +369,8 @@ QStringList getListOfComparisonOperator(QString expr)
     // Разбить строку на токены
     QStringList tokens = expr.split(QRegularExpression("[ \\n\\t]"), Qt::SkipEmptyParts);
 
-    // Для каждого токена
     int tokens_count = tokens.size();
-    for(int i = 0; i < tokens_count; i++)
+    for(int i = 0; i < tokens_count; i++) // Для каждого токена
     {
         // Добавить в список текущий токен, если этот токен является оператором сравнения
         if(isComparisonOperator(tokens[i]))
@@ -371,5 +379,6 @@ QStringList getListOfComparisonOperator(QString expr)
         }
     }
 
+    // Вернуть список операторов сравнения
     return comparison_operator_list;
 }

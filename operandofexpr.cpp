@@ -1,6 +1,6 @@
 /*!
 * \file
-* \brief Файл содержит реализацию методов структура OperandOfExpr, использующихся в ходе работы программы inequalityStandardizer.
+* \brief Файл содержит реализацию методов структуры OperandOfExpr, использующихся в ходе работы программы inequalityStandardizer.
 */
 
 #include "nodeofexprtree.h"
@@ -21,20 +21,23 @@ bool OperandOfExpr::operator>(const OperandOfExpr& other) const
     else if((parent != nullptr && parent->type == DIVISION)
              || (other.parent != nullptr && other.parent->type == DIVISION))
     {
-        if (parent != nullptr)
+        // Если делитель есть первый сравниваемый элемент и второй таковым не является
+        if (parent != nullptr && parent->type == DIVISION && (other.parent != nullptr && other.parent->type != DIVISION))
         {
-            if (parent->type == DIVISION && (other.parent != nullptr && other.parent->type != DIVISION))
-            {
-                return true;
-            }
+            // Считать, что порядок верный
+            return true;
         }
-        else return false;
+        // Иначе считать, что порядок неверный
+        else
+        {
+            return false;
+        }
     }
     // ИначеЕсли сравниваются множители
     else if((parent != nullptr && parent->type == MULTIPLICATION)
              || (other.parent != nullptr && other.parent->type == MULTIPLICATION))
     {
-        // Получить список множителей
+        // Получить результат сравнения множителей
         return !isCurrentOrderOfMultipliers(other);
     }
 
@@ -64,7 +67,7 @@ bool OperandOfExpr::isCurrentOrderOfMultipliers(const OperandOfExpr& other) cons
     {
         is_current_order = false;
     }
-    // Если типы множителей одинаковые
+    // ИначеЕсли типы множителей одинаковые
     else if (multiplier_1->type == multiplier_2->type || (isOperator(multiplier_1->value) && isOperator(multiplier_2->value)))
     {
         // Определить, меньше ли первый множитель второго с учётом всех минусов, если их тип число
@@ -83,7 +86,10 @@ bool OperandOfExpr::isCurrentOrderOfMultipliers(const OperandOfExpr& other) cons
         // Определить, меньше ли первый множитель второго, если их тип переменная
         else if(multiplier_1->type == VAR)
         {
-            if(multiplier_1->value > multiplier_2->value) is_current_order = false;
+            if(multiplier_1->value > multiplier_2->value)
+            {
+                is_current_order = false;
+            }
         }
         // Определить правильность расстановки множителей, если они есть выражения в скобках
         else if (isOperator(multiplier_1->value))
@@ -92,7 +98,7 @@ bool OperandOfExpr::isCurrentOrderOfMultipliers(const OperandOfExpr& other) cons
         }
     }
 
-    // Вернуть получившийся результат
+    // Вернуть результат
     return is_current_order;
 }
 
@@ -219,12 +225,16 @@ bool OperandOfExpr::isCurrentOrderOfParenthesisedExpressions(const OperandOfExpr
 
         // Определить, соблюдается ли порядок: от большей степени переменной слагаемого к меньшей, и вернуть результат, если порядок определился
         if(degree_of_current_summand_1 > degree_of_current_summand_2)
+        {
             return true;
+        }
         else if (degree_of_current_summand_1 < degree_of_current_summand_2)
+        {
             return false;
+        }
     }
 
-    // Определить, соблюдается ли порядок: по алфавиту, учитывая только переменные
+    // Определить, соблюдается ли порядок: по алфавиту, учитывая только имена переменные
     QList<NodeOfExprTree*> vars_1 = operand->getListOfVariable();
     QList<NodeOfExprTree*> vars_2 = other.operand->getListOfVariable();
     int result = isCurentOrderOfListOfVariableIDs(vars_1, vars_2);

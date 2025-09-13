@@ -16,7 +16,7 @@
 
 * \author Гусева Елизавета
 * \date 28 Июля 2025
-* \version 1.0
+* \version 1.1
 */
 
 #include <QCoreApplication>
@@ -39,9 +39,8 @@ int main(int argc, char *argv[])
     setlocale(LC_ALL, "Russian");
 
     QCoreApplication a(argc, argv);
-
     // Проверка аргументов командной строки
-    if (argc == 2 && QString(argv[1]) == "--test") // Если передан запрос запуска тестов
+    if (argc == 2 && QString(argv[1]) == "--test")
     {
         runTests();
         return 0;
@@ -52,7 +51,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Получить строку постфиксной записи выражения из исходного файла
+    // Получить строку постфиксной записи выражения из исходного файла...
     QFile input_file(argv[1]);
     // Если найдена ошибка чтения
     if (!input_file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -98,7 +97,7 @@ int main(int argc, char *argv[])
     // Получить инфиксную запись выражения из дерева этого выражения
     QString infix_input_expr = tree->treeToInfix();
 
-    // Вывести в выходной файл инфиксную запись выражения
+    // Вывести в выходной файл инфиксную запись выражения...
     QFile output_file(argv[2]);
     // Если найдена ошибка записи
     if (!output_file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -115,7 +114,7 @@ int main(int argc, char *argv[])
     // Перестроить дерево выражения, перенеся все слагаемые после знака сравнения в левую часть (не)равенства (до знака сравнения)
     tree->rearrangeForZeroComparison();
 
-    // Отсортировать слагаемые и множители (не)равенства по алфавиту, начиная левого операнда корня дерева выражения
+    // Отсортировать слагаемые и множители (не)равенства по алфавиту, то есть отсортировать левую часть (не)равенства
     tree->setLeftOperand(tree->getLeftOperand()->sortOperandsAlphabetically());
 
     // Из дерева выражения получить инфиксную запись этого выражения

@@ -98,35 +98,53 @@ public:
      * \brief Вернуть значение узла
      * \return значение узла
      */
-    QString getValue() const { return value; }
+    QString getValue() const
+    {
+        return value;
+    }
 
     /*!
      * \brief Вернуть левый операнд
      * \return указатель на левый операнд
      */
-    NodeOfExprTree* getLeftOperand() const { return left_operand; }
+    NodeOfExprTree* getLeftOperand() const
+    {
+        return left_operand;
+    }
 
     /*!
      * \brief Вернуть правый операнд
      * \return указатель на правый операнд
      */
-    NodeOfExprTree* getRightOperand() const { return right_operand; }
+    NodeOfExprTree* getRightOperand() const
+    {
+        return right_operand;
+    }
 
     /*!
      * \brief Установить левый операнд
      */
-    void setLeftOperand(NodeOfExprTree* _left_operand) { left_operand = _left_operand; }
+    void setLeftOperand(NodeOfExprTree* _left_operand)
+    {
+        left_operand = _left_operand;
+    }
 
     /*!
      * \brief Установить правый операнд
      */
-    void setRightOperand(NodeOfExprTree* _right_operand) { right_operand = _right_operand; }
+    void setRightOperand(NodeOfExprTree* _right_operand)
+    {
+        right_operand = _right_operand;
+    }
 
     /*!
      * \brief Определить, является ли текущий оператор симметричным
-     * \return результат
+     * \return true - оператор является симметричным, false - иначе
      */
-    bool isSymmetricOperator() {return (type == MULTIPLICATION || type == PLUS); }
+    bool isSymmetricOperator()
+    {
+        return (type == MULTIPLICATION || type == PLUS);
+    }
 
     /*!
      * \brief Вернуть приоритетность оператора
@@ -135,8 +153,8 @@ public:
     int getPrecedenceType();
 
     /*!
-     * \brief Получить строку значения узла для инфикной записи
-     * \return строка для инфикной записи
+     * \brief Получить строку значения узла для инфиксной записи
+     * \return строка для инфиксной записи
      */
     QString valueToStr();
 
@@ -148,7 +166,10 @@ public:
     /*!
      * \brief Перегрузка оператора неравенства для NodeOfExprTree
      */
-    bool operator!=(const NodeOfExprTree& other) const { return !(*this == other); };
+    bool operator!=(const NodeOfExprTree& other) const
+    {
+        return !(*this == other);
+    };
 
     /*!
      * \brief Получить узел, пропустив все унарные минусы и посчитав их кол-во
@@ -245,28 +266,28 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors);
  * \param [in] token - проверяемый токен
  * \return true, если токен есть число, иначе - false
  */
-bool isNum(QString token);
+bool isNum(const QString token);
 
 /*!
  * \brief Определить является ли токен переменной
  * \param [in] token - проверяемый токен
  * \return true, если токен есть переменная, иначе - false
  */
-bool isVar(QString token);
+bool isVar(const QString token);
 
 /*!
  * \brief Определить является ли токен оператором
  * \param [in] token - проверяемый токен
  * \return true, если токен есть оператор, иначе - false
  */
-bool isOperator(QString token);
+bool isOperator(const QString token);
 
 /*!
  * \brief Определить является ли токен оператором сравнения
  * \param [in] token - проверяемый токен
  * \return true, если токен есть оператор, иначе - false
  */
-bool isComparisonOperator(QString token);
+bool isComparisonOperator(const QString token);
 
 /*!
  * \brief Удалить узлы стека
@@ -290,7 +311,7 @@ int isCurentOrderOfListOfVariableIDs(QList<NodeOfExprTree*> vars_1, QList<NodeOf
 /*!
  * \brief Определить, равны ли имена переменные в списке
  * \param [in] var - список переменных
- * \return true, если в списке одинаковые имена переменных, falst - иначе
+ * \return true, если в списке одинаковые имена переменных, false - иначе
  */
 bool areEqualVariableIDs(QList<NodeOfExprTree*> vars);
 

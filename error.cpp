@@ -18,14 +18,21 @@ Error::Error(ErrorType _type, int _pos, QStringList _error_strings)
     type = _type;
     pos = _pos;
 
-    int len__error_strings = _error_strings.size();
-    for(int i = 0; i < len__error_strings; i++)
+    int len_error_strings = _error_strings.size();
+    for(int i = 0; i < len_error_strings; i++)
     {
         if(_error_strings[i] == "=")
+        {
             error_strings.append("==");
+        }
         else if(_error_strings[i] == "~")
+        {
             error_strings.append("-");
-        else error_strings.append(_error_strings[i]);
+        }
+        else
+        {
+            error_strings.append(_error_strings[i]);
+        }
     }
 }
 
