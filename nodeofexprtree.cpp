@@ -664,11 +664,11 @@ QList<NodeOfExprTree*> NodeOfExprTree::getListOfVariable()
     // Получить список листьев операндов заданного листа
     if(left_operand != nullptr)
     {
-        vars += left_operand->getLeavesOfTree();
+        vars += left_operand->getListOfVariable();
     }
     if(right_operand != nullptr)
     {
-        vars += right_operand->getLeavesOfTree();
+        vars += right_operand->getListOfVariable();
     }
 
     // Вернуть список листьев
