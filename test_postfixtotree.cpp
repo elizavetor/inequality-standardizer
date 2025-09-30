@@ -146,7 +146,7 @@ void Test_postfixToTree::testPostfixToTree_data()
 
     // 18. Отсутствует оператор
     QString postfix_notation_18 = "a b";
-    QSet<Error> its_missing_operator = {{Error(MISSING_OPERATOR, 1, QStringList() = {"a"}) }};
+    QSet<Error> its_missing_operator = {{Error(MISSING_OPERATOR, 1, QStringList() = {"a"}), Error(MISSING_OPERATOR, 2, QStringList() = {"b"})}};
     QTest::newRow("18. The operator is missing: a b") << postfix_notation_18 << equal_list_of_errors << its_missing_operator << equal_node;
 
     // 19. Отсутствует операнд

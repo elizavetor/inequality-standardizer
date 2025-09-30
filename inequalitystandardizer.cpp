@@ -159,15 +159,19 @@ NodeOfExprTree* postfixToTree(QString expr, QSet<Error>& errors)
     }
 
     // Если в стеке больше одного узла или дерево некорректно
-    if(nodes.size() > 1 || !tree_is_correct)
+    int count_of_remaining_elems = nodes.size();
+    if(count_of_remaining_elems > 1 || !tree_is_correct)
     {
         // Если в стеке больше одного узла
-        if (nodes.size() > 1)
+        if (count_of_remaining_elems > 1)
         {
-            for(int i = 0; i < nodes.size() - 1; i++)
+            for(int i = 0; i < count_of_remaining_elems; i++) // для каждого элемента стека
             {
-                // Считать, что найдена ошибка MISSING_OPERATOR, добавить её в список ошибок
-                errors.insert(Error(MISSING_OPERATOR, nodes_pos_in_expr[i], QStringList(tokens[nodes_pos_in_expr[i] - 1])));
+                // Считать, что найдена ошибка MISSING_OPERATOR, если найден опернад, добавить её в список ошибок
+                if(isNum(nodes[i]->getValue()) || isVar(nodes[i]->getValue()))
+                {
+                    errors.insert(Error(MISSING_OPERATOR, nodes_pos_in_expr[i], QStringList(tokens[nodes_pos_in_expr[i] - 1])));
+                }
             }
         }
         clearStackNodes(nodes);
